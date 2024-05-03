@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker
+package com.dimonkiv.savingstracker.core
 
 import android.os.Bundle
 import android.view.LayoutInflater
