@@ -22,9 +22,6 @@ class ExpenseRepositoryImpl: ExpenseRepository {
         items.add(Expense("Expense", 1000, "April 28, 1:00", 2, true))
         items.add(Expense("Savings", 2000, "April 27, 1:00", 2, false))
 
-        items.add(Expense("Savings", 300, "Today, 12:00", 3, false))
-        items.add(Expense("Expense", 200, "April 27, 1:00", 3, true))
-
         return items
     }
 }

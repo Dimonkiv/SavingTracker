@@ -1,6 +1,5 @@
 package com.dimonkiv.savingstracker.di
 
-import com.dimonkiv.savingstracker.core.utils.ResourceManager
 import com.dimonkiv.savingstracker.domain.AccountRepository
 import com.dimonkiv.savingstracker.use_case.GetTotalBalanceUseCase
 import com.dimonkiv.savingstracker.use_case.GetTotalBalanceUseCaseImpl
@@ -17,9 +16,8 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetTotalBalanceUseCase(
-        accountRepository: AccountRepository,
-        resourceManager: ResourceManager
+        accountRepository: AccountRepository
     ): GetTotalBalanceUseCase {
-        return GetTotalBalanceUseCaseImpl(accountRepository, resourceManager)
+        return GetTotalBalanceUseCaseImpl(accountRepository)
     }
 }

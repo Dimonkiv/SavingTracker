@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.dimonkiv.savingstracker.core.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
@@ -18,12 +20,30 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     private val cardAdapter by lazy { CardAdapter() }
     private var expenseAdapter: ExpenseAdapter? = null
+    private val behavior by lazy { BottomSheetBehavior.from(binding.bottomSheet) }
 
 
     override fun initUI() {
         initViewPager()
         initExpenseAdapter()
+        measureHeight()
     }
+
+    private fun measureHeight() {
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener {
+            val screenHeight = binding.root.measuredHeight
+            val mainViewHeight = binding.mainView.measuredHeight
+
+            viewModel.onScreenHeightAvailable(screenHeight, mainViewHeight)
+        }
+    }
+
+    private fun initBottomSheetView(height: Int) {
+        val behavior = BottomSheetBehavior.from(binding.bottomSheet)
+        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        behavior.peekHeight = height
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,25 +55,37 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
 
         lifecycleScope.launch {
-            viewModel.totalBalance.collect{
-                binding.totalTv.text = it
+            viewModel.totalBalance.collect {
+                binding.balanceTv.text = it
             }
         }
 
         lifecycleScope.launch {
-            viewModel.totalBalance.collect{
-                binding.totalTv.text = it
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.expenses.collect{
+            viewModel.expenses.collect {
                 expenseAdapter?.updateItems(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.bottomSheetHeight.collect {
+                initBottomSheetView(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.emptyExpenses.collect {
+                showExpensesView(it)
             }
         }
 
 
         viewModel.fetchData()
+    }
+
+    private fun showExpensesView(isEmpty: Boolean) {
+        binding.recyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        binding.emptyGroup.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        behavior.isDraggable = !isEmpty
     }
 
     override fun onDestroyView() {
@@ -69,8 +101,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private fun initExpenseAdapter() {
         context?.let { ctx ->
             expenseAdapter = ExpenseAdapter(ctx)
-            binding.expenseRecycler.layoutManager = LinearLayoutManager(ctx)
-            binding.expenseRecycler.adapter = expenseAdapter
+            binding.recyclerView.layoutManager = LinearLayoutManager(ctx)
+            binding.recyclerView.adapter = expenseAdapter
         }
     }
 

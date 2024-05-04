@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Savings Tracker</string>
-    <string name="total_balance">Total balance: %d$</string>
+    <string name="total_balance">Total balance:</string>
+    <string name="empty_expense_msg">You don\'t have any operation yet</string>
 </resources>

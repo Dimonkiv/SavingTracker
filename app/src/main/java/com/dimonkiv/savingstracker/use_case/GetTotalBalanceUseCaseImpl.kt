@@ -1,13 +1,10 @@
 package com.dimonkiv.savingstracker.use_case
 
-import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.core.utils.ResourceManager
 import com.dimonkiv.savingstracker.domain.AccountRepository
 import javax.inject.Inject
 
 class GetTotalBalanceUseCaseImpl @Inject constructor(
-    private val accountRepository: AccountRepository,
-    private val resourceManager: ResourceManager
+    private val accountRepository: AccountRepository
 ) : GetTotalBalanceUseCase{
 
     override fun execute(): String {
@@ -18,6 +15,6 @@ class GetTotalBalanceUseCaseImpl @Inject constructor(
             totalBalance += it.balance
         }
 
-        return resourceManager.getString(R.string.total_balance, totalBalance)
+        return totalBalance.toString()
     }
 }
