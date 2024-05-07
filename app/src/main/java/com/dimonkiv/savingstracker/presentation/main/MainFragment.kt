@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.dimonkiv.savingstracker.core.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -96,6 +97,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private fun initViewPager() {
         binding.viewPager.adapter = cardAdapter
         binding.viewPager.registerOnPageChangeCallback(pageChangeCallback)
+        TabLayoutMediator(binding.intoTabLayout,  binding.viewPager) { tab, position -> }.attach()
+
     }
 
     private fun initExpenseAdapter() {
