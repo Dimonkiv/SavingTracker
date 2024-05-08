@@ -4,29 +4,65 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dimonkiv.savingstracker.databinding.ItemBalanceAddBinding
 import com.dimonkiv.savingstracker.databinding.ItemBalanceCardBinding
 import com.dimonkiv.savingstracker.domain.model.Account
+import com.dimonkiv.savingstracker.domain.model.AccountType
 
-class CardAdapter: RecyclerView.Adapter<CardAdapter.ViewHolder>() {
+class CardAdapter(
+    private val listeners: CardAdapterListeners
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = mutableListOf<Account>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemBalanceCardBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-
-        return ViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == DEFAULT_VIEW) {
+            DefaultViewHolder(
+                ItemBalanceAddBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        } else {
+            CreatedViewHolder(
+                ItemBalanceCardBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
 
-        with(holder.binding) {
+        when(holder) {
+            is DefaultViewHolder -> bindDefaultItem(holder.binding)
+            is CreatedViewHolder -> bindCreatedItem(holder.binding, item)
+        }
+    }
+
+    private fun bindDefaultItem(binding: ItemBalanceAddBinding) {
+        binding.root.setOnClickListener {
+            listeners.onAddCardClicked()
+        }
+    }
+
+    private fun bindCreatedItem(binding: ItemBalanceCardBinding, item: Account) {
+        with(binding) {
             titleTv.text = item.name
             balanceTv.text = item.balance.toString()
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val item = items[position]
+
+        return when (item.type) {
+            AccountType.DEFAULT -> DEFAULT_VIEW
+            AccountType.CREATED -> CREATED_VIEW
         }
     }
 
@@ -41,5 +77,18 @@ class CardAdapter: RecyclerView.Adapter<CardAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: ItemBalanceCardBinding): RecyclerView.ViewHolder(binding.root)
+    class DefaultViewHolder(val binding: ItemBalanceAddBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    class CreatedViewHolder(val binding: ItemBalanceCardBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    companion object {
+        private const val DEFAULT_VIEW = 0
+        private const val CREATED_VIEW = 1
+    }
+
+    fun interface CardAdapterListeners {
+        fun onAddCardClicked()
+    }
 }

@@ -2,24 +2,30 @@ package com.dimonkiv.savingstracker.presentation.main
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.core.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
+import com.dimonkiv.savingstracker.presentation.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
+class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
+CardAdapter.CardAdapterListeners {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private val cardAdapter by lazy { CardAdapter() }
+    private val cardAdapter by lazy { CardAdapter(this) }
     private var expenseAdapter: ExpenseAdapter? = null
     private val behavior by lazy { BottomSheetBehavior.from(binding.bottomSheet) }
 
@@ -27,16 +33,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     override fun initUI() {
         initViewPager()
         initExpenseAdapter()
-        measureHeight()
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
     }
 
     private fun measureHeight() {
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener {
-            val screenHeight = binding.root.measuredHeight
-            val mainViewHeight = binding.mainView.measuredHeight
+        val screenHeight = binding.root.measuredHeight
+        val mainViewHeight = binding.mainView.measuredHeight
 
-            viewModel.onScreenHeightAvailable(screenHeight, mainViewHeight)
-        }
+        viewModel.onScreenHeightAvailable(screenHeight, mainViewHeight)
+    }
+
+    private val globalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
+        viewModel.onLayoutChanged()
     }
 
     private fun initBottomSheetView(height: Int) {
@@ -79,6 +87,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.measureHeightAction.collect {
+                measureHeight()
+            }
+        }
+
 
         viewModel.fetchData()
     }
@@ -91,6 +105,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     override fun onDestroyView() {
         binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
+        binding.root.viewTreeObserver.removeOnGlobalLayoutListener(globalLayoutListener)
         super.onDestroyView()
     }
 
@@ -114,6 +129,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             super.onPageSelected(position)
             viewModel.onPageChanged(position)
         }
+    }
+
+    override fun onAddCardClicked() {
+        (activity as MainActivity).navController.navigate(R.id.action_mainFragment_to_addAccountFragment)
     }
 
 }

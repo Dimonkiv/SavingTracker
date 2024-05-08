@@ -9,5 +9,14 @@
         android:id="@+id/mainFragment"
         android:name="com.dimonkiv.savingstracker.presentation.main.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_addAccountFragment"
+            app:destination="@id/addAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAccountFragment"
+        android:name="com.dimonkiv.savingstracker.presentation.AddAccountFragment"
+        android:label="AddAccountFragment"
+        tools:layout="@layout/fragmant_add_account"/>
 </navigation>
