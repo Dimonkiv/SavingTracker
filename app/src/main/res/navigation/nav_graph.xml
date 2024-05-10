@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
-        android:name="com.dimonkiv.savingstracker.presentation.AddAccountFragment"
+        android:name="com.dimonkiv.savingstracker.presentation.add_account.AddAccountFragment"
         android:label="AddAccountFragment"
         tools:layout="@layout/fragmant_add_account"/>
 </navigation>

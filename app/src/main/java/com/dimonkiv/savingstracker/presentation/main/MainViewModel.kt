@@ -8,13 +8,11 @@ import com.dimonkiv.savingstracker.domain.model.Expense
 import com.dimonkiv.savingstracker.use_case.GetAccountsUseCase
 import com.dimonkiv.savingstracker.use_case.GetTotalBalanceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,19 +23,19 @@ class MainViewModel @Inject constructor(
     private val getTotalBalanceUseCase: GetTotalBalanceUseCase
 ): ViewModel() {
 
-    private val _accounts: MutableStateFlow<List<Account>> = MutableStateFlow(emptyList())
-    private val _totalBalance: MutableStateFlow<String> = MutableStateFlow("")
-    private val _expenses: MutableStateFlow<List<Expense>> = MutableStateFlow(emptyList())
-    private val _bottomSheetHeight: MutableStateFlow<Int> = MutableStateFlow(0)
-    private val _emptyExpenses: MutableStateFlow<Boolean> = MutableStateFlow(true)
-    private val _measureHeightAction = MutableSharedFlow<Boolean>(replay = 0)
+    private val _accounts = MutableStateFlow(emptyList<Account>())
+    private val _totalBalance = MutableStateFlow("")
+    private val _expenses = MutableStateFlow(emptyList<Expense>())
+    private val _bottomSheetHeight = MutableStateFlow(0)
+    private val _emptyExpenses = MutableStateFlow(true)
+    private val _measureHeightAction = MutableSharedFlow<Boolean>()
 
     val measureHeightAction = _measureHeightAction.asSharedFlow()
-    val accounts: StateFlow<List<Account>> = _accounts
-    val totalBalance: StateFlow<String> = _totalBalance
-    val expenses: StateFlow<List<Expense>> = _expenses
-    val bottomSheetHeight: StateFlow<Int> = _bottomSheetHeight
-    val emptyExpenses: StateFlow<Boolean> = _emptyExpenses
+    val accounts = _accounts.asStateFlow()
+    val totalBalance = _totalBalance.asStateFlow()
+    val expenses = _expenses.asStateFlow()
+    val bottomSheetHeight = _bottomSheetHeight.asStateFlow()
+    val emptyExpenses = _emptyExpenses.asStateFlow()
 
 
 

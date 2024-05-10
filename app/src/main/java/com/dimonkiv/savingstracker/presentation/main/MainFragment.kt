@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.dimonkiv.savingstracker.R
@@ -14,8 +16,6 @@ import com.dimonkiv.savingstracker.presentation.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
 
@@ -57,39 +57,51 @@ CardAdapter.CardAdapterListeners {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            viewModel.accounts.collect {
-                cardAdapter.updateItems(it)
-                viewModel.onPageChanged(0)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.accounts.collect {
+                    cardAdapter.updateItems(it)
+                    viewModel.onPageChanged(0)
+                }
             }
         }
 
         lifecycleScope.launch {
-            viewModel.totalBalance.collect {
-                binding.balanceTv.text = it
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.totalBalance.collect {
+                    binding.balanceTv.text = it
+                }
             }
         }
 
         lifecycleScope.launch {
-            viewModel.expenses.collect {
-                expenseAdapter?.updateItems(it)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.expenses.collect {
+                    expenseAdapter?.updateItems(it)
+                }
             }
         }
 
         lifecycleScope.launch {
-            viewModel.bottomSheetHeight.collect {
-                initBottomSheetView(it)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bottomSheetHeight.collect {
+                    initBottomSheetView(it)
+                }
             }
         }
 
         lifecycleScope.launch {
-            viewModel.emptyExpenses.collect {
-                showExpensesView(it)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.emptyExpenses.collect {
+                    showExpensesView(it)
+                }
             }
         }
 
         lifecycleScope.launch {
-            viewModel.measureHeightAction.collect {
-                measureHeight()
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.measureHeightAction.collect {
+                    measureHeight()
+                }
             }
         }
 
@@ -112,7 +124,7 @@ CardAdapter.CardAdapterListeners {
     private fun initViewPager() {
         binding.viewPager.adapter = cardAdapter
         binding.viewPager.registerOnPageChangeCallback(pageChangeCallback)
-        TabLayoutMediator(binding.intoTabLayout,  binding.viewPager) { tab, position -> }.attach()
+        TabLayoutMediator(binding.intoTabLayout,  binding.viewPager) { _, _ -> }.attach()
 
     }
 
