@@ -13,10 +13,20 @@
         <action
             android:id="@+id/action_mainFragment_to_addAccountFragment"
             app:destination="@id/addAccountFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment"/>
     </fragment>
+
     <fragment
         android:id="@+id/addAccountFragment"
         android:name="com.dimonkiv.savingstracker.presentation.add_account.AddAccountFragment"
         android:label="AddAccountFragment"
-        tools:layout="@layout/fragmant_add_account"/>
+        tools:layout="@layout/fragmant_add_account" />
+
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment"
+        android:label="AddExpenseFragment"
+        tools:layout="@layout/fragmant_add_expense"/>
 </navigation>

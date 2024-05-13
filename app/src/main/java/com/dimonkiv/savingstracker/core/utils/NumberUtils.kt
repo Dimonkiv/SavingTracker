@@ -9,4 +9,12 @@ object NumberUtils {
             0
         }
     }
+
+    fun convertToLong(value: String): Long {
+        return try {
+            value.toLong()
+        } catch (_: NumberFormatException) {
+            0L
+        }
+    }
 }

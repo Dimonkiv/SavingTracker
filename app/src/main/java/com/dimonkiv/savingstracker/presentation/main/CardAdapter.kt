@@ -54,6 +54,9 @@ class CardAdapter(
         with(binding) {
             titleTv.text = item.name
             balanceTv.text = item.balance.toString()
+            addIv.setOnClickListener {
+                listeners.onAddExpenseClicked(item.id)
+            }
         }
     }
 
@@ -88,7 +91,9 @@ class CardAdapter(
         private const val CREATED_VIEW = 1
     }
 
-    fun interface CardAdapterListeners {
+    interface CardAdapterListeners {
         fun onAddCardClicked()
+
+        fun onAddExpenseClicked(id: Long)
     }
 }

@@ -13,6 +13,7 @@ import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.core.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
+import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -147,4 +148,10 @@ CardAdapter.CardAdapterListeners {
         (activity as MainActivity).navController.navigate(R.id.action_mainFragment_to_addAccountFragment)
     }
 
+    override fun onAddExpenseClicked(id: Long) {
+        (activity as MainActivity).navController.navigate(
+            resId = R.id.action_mainFragment_to_addExpenseFragment,
+            args = AddExpenseFragment.createArg(id)
+        )
+    }
 }
