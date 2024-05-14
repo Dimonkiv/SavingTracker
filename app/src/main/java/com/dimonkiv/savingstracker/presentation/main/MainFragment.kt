@@ -35,79 +35,55 @@ CardAdapter.CardAdapterListeners {
         initViewPager()
         initExpenseAdapter()
         binding.root.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
+
+        collectLifecycleFlow(viewModel.uiEvent) { event ->
+            when(event) {
+                is MainUiEvent.InitBottomSheet -> {
+                    initBottomSheetView(event.height)
+                }
+
+                is MainUiEvent.MeasureHeight -> {
+                    measureHeight()
+                }
+
+                is MainUiEvent.Navigate -> {
+                    navigate(event.direction, event.arg)
+                }
+            }
+        }
+
+        collectLatestLifecycleFlow(viewModel.state) {
+            cardAdapter.updateItems(it.accounts)
+            expenseAdapter?.updateItems(it.expenses)
+            binding.balanceTv.text = it.totalBalance
+            showExpensesView(it.expenses.isEmpty())
+        }
+
+        viewModel.onEvent(MainEvent.FetchData)
+    }
+
+    private fun navigate(direction: Int, arg: Bundle?) {
+        (activity as MainActivity).navController.navigate(
+            resId = direction,
+            args = arg
+        )
     }
 
     private fun measureHeight() {
         val screenHeight = binding.root.measuredHeight
         val mainViewHeight = binding.mainView.measuredHeight
 
-        viewModel.onScreenHeightAvailable(screenHeight, mainViewHeight)
+        viewModel.onEvent(MainEvent.OnScreenHeightChange(screenHeight, mainViewHeight))
     }
 
     private val globalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
-        viewModel.onLayoutChanged()
+        viewModel.onEvent(MainEvent.OnLayoutChange)
     }
 
     private fun initBottomSheetView(height: Int) {
         val behavior = BottomSheetBehavior.from(binding.bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         behavior.peekHeight = height
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.accounts.collect {
-                    cardAdapter.updateItems(it)
-                    viewModel.onPageChanged(0)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.totalBalance.collect {
-                    binding.balanceTv.text = it
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.expenses.collect {
-                    expenseAdapter?.updateItems(it)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.bottomSheetHeight.collect {
-                    initBottomSheetView(it)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.emptyExpenses.collect {
-                    showExpensesView(it)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.measureHeightAction.collect {
-                    measureHeight()
-                }
-            }
-        }
-
-
-        viewModel.fetchData()
     }
 
     private fun showExpensesView(isEmpty: Boolean) {

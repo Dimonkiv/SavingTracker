@@ -50,7 +50,7 @@ abstract class BaseFragment<VB: ViewBinding>(
 
     fun <T> Fragment.collectLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit ) {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 flow.collect(collect)
             }
         }
