@@ -3,8 +3,8 @@ package com.dimonkiv.savingstracker.presentation.add_expense
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.presentation.utils.NumberUtils
-import com.dimonkiv.savingstracker.domain.repository.ExpenseRepository
 import com.dimonkiv.savingstracker.domain.model.Expense
+import com.dimonkiv.savingstracker.domain.use_cases.AddExpenseUseCase
 import com.dimonkiv.savingstracker.presentation.utils.DateUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddExpenseViewModel @Inject constructor(
-    private val expenseRepository: ExpenseRepository
+    private val addExpenseUseCase: AddExpenseUseCase
 ): ViewModel() {
 
     private var accountId = 0L
@@ -42,11 +42,11 @@ class AddExpenseViewModel @Inject constructor(
             }
 
             is AddExpenseEvent.OnExpenseSelected -> {
-                updateState(_state.value.copy(isExpense = true))
+                updateState(_state.value.copy(isExpense = event.isChecked))
             }
 
             is AddExpenseEvent.OnIncomeSelected -> {
-                updateState(_state.value.copy(isExpense = false))
+                updateState(_state.value.copy(isIncome = event.isChecked))
             }
 
             is AddExpenseEvent.OnCreateClick -> {
@@ -66,7 +66,7 @@ class AddExpenseViewModel @Inject constructor(
             }
 
             if (state.value.title.isNotBlank() && state.value.expense.isNotBlank()) {
-                expenseRepository.insertExpense(
+                addExpenseUseCase.invoke(
                     Expense(
                         title = state.value.title,
                         value = NumberUtils.convertToInt(_state.value.expense),

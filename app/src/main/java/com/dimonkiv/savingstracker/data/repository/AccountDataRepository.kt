@@ -18,7 +18,7 @@ class AccountDataRepository @Inject constructor(
         accountDao.getAllAccounts().asDomain()
     }
 
-    override suspend fun fetchAccountById(accountId: Long): List<Account> = withContext(dispatcher) {
+    override suspend fun fetchAccountById(accountId: Long): Account = withContext(dispatcher) {
         accountDao.getAccountById(accountId).asDomain()
     }
 

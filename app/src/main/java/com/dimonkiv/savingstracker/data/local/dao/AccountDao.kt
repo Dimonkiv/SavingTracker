@@ -13,11 +13,11 @@ interface AccountDao {
     suspend fun getAllAccounts(): List<AccountDTO>
 
     @Query("SELECT * FROM account WHERE id=:id")
-    suspend fun getAccountById(id: Long): List<AccountDTO>
+    suspend fun getAccountById(id: Long): AccountDTO
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAccount(account: AccountDTO)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAccount(account: AccountDTO)
 }
