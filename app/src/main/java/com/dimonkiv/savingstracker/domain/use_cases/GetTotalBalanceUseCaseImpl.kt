@@ -1,13 +1,13 @@
-package com.dimonkiv.savingstracker.use_case
+package com.dimonkiv.savingstracker.domain.use_cases
 
-import com.dimonkiv.savingstracker.domain.AccountRepository
+import com.dimonkiv.savingstracker.domain.repository.AccountRepository
 import javax.inject.Inject
 
 class GetTotalBalanceUseCaseImpl @Inject constructor(
     private val accountRepository: AccountRepository
-) : GetTotalBalanceUseCase{
+) : GetTotalBalanceUseCase {
 
-    override fun execute(): String {
+    override suspend fun invoke(): String {
         var totalBalance = 0
         val items = accountRepository.fetchAccounts()
 

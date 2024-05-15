@@ -1,7 +1,7 @@
-package com.dimonkiv.savingstracker.use_case
+package com.dimonkiv.savingstracker.domain.use_cases
 
 import com.dimonkiv.savingstracker.domain.model.Account
 
 fun interface GetAccountsUseCase {
-    fun execute(): List<Account>
+    suspend fun invoke(): List<Account>
 }

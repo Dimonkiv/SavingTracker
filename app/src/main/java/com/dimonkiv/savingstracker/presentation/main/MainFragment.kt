@@ -4,20 +4,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.core.BaseFragment
+import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
 import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint

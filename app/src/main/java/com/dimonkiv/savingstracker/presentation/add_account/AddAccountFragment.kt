@@ -2,7 +2,7 @@ package com.dimonkiv.savingstracker.presentation.add_account
 
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import com.dimonkiv.savingstracker.core.BaseFragment
+import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmantAddAccountBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
 import com.google.android.material.snackbar.Snackbar

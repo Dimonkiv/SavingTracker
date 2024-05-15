@@ -3,11 +3,9 @@ package com.dimonkiv.savingstracker.presentation.add_expense
 import android.os.Bundle
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.dimonkiv.savingstracker.core.BaseFragment
+import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmantAddExpenseBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
-import com.dimonkiv.savingstracker.presentation.add_account.AddAccountUiEvent
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 

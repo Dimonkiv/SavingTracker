@@ -1,8 +1,8 @@
 package com.dimonkiv.savingstracker.di
 
 import android.content.Context
-import com.dimonkiv.savingstracker.core.utils.ResourceManager
-import com.dimonkiv.savingstracker.core.utils.ResourceManagerImpl
+import com.dimonkiv.savingstracker.presentation.utils.ResourceManager
+import com.dimonkiv.savingstracker.presentation.utils.ResourceManagerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

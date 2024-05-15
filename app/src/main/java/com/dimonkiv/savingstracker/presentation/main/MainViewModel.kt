@@ -3,11 +3,11 @@ package com.dimonkiv.savingstracker.presentation.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.domain.ExpenseRepository
+import com.dimonkiv.savingstracker.domain.repository.ExpenseRepository
 import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.dimonkiv.savingstracker.presentation.main.MainEvent.*
-import com.dimonkiv.savingstracker.use_case.GetAccountsUseCase
-import com.dimonkiv.savingstracker.use_case.GetTotalBalanceUseCase
+import com.dimonkiv.savingstracker.domain.use_cases.GetAccountsUseCase
+import com.dimonkiv.savingstracker.domain.use_cases.GetTotalBalanceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,23 +71,21 @@ class MainViewModel @Inject constructor(
     }
 
     private fun fetchData() {
-        val accounts = getAccountsUseCase.execute()
-        val total = getTotalBalanceUseCase.execute()
+        viewModelScope.launch {
+            val accounts = getAccountsUseCase.invoke()
+            val total = getTotalBalanceUseCase.invoke()
 
-        updateState(_state.value.copy(accounts = accounts, totalBalance = total))
-        onPageChanged(0)
+            _state.emit(_state.value.copy(accounts = accounts, totalBalance = total))
+            onPageChanged(0)
+        }
     }
 
     fun onPageChanged(pos: Int) {
-        val accountId = _state.value.accounts.getOrNull(pos)?.id ?: 0
-        val items = expenseRepository.fetchExpensesById(accountId)
-
-        updateState(_state.value.copy(expenses = items))
-    }
-
-    private fun updateState(state: MainScreenState) {
         viewModelScope.launch {
-            _state.emit(state)
+            val accountId = _state.value.accounts.getOrNull(pos)?.id ?: 0
+            val items = expenseRepository.getExpenseByAccountId(accountId)
+
+            _state.emit(_state.value.copy(expenses = items))
         }
     }
 

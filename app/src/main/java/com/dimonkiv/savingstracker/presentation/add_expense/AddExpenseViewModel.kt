@@ -2,16 +2,16 @@ package com.dimonkiv.savingstracker.presentation.add_expense
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dimonkiv.savingstracker.core.utils.NumberUtils
-import com.dimonkiv.savingstracker.domain.ExpenseRepository
+import com.dimonkiv.savingstracker.presentation.utils.NumberUtils
+import com.dimonkiv.savingstracker.domain.repository.ExpenseRepository
 import com.dimonkiv.savingstracker.domain.model.Expense
+import com.dimonkiv.savingstracker.presentation.utils.DateUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
@@ -56,27 +56,29 @@ class AddExpenseViewModel @Inject constructor(
     }
 
     private fun createExpense() {
-        if (state.value.title.isBlank()) {
-            updateState(_state.value.copy(titleError = "Expense can't be empty"))
-        }
+        viewModelScope.launch {
+            if (state.value.title.isBlank()) {
+                _state.emit(_state.value.copy(titleError = "Expense can't be empty"))
+            }
 
-        if (state.value.expense.isBlank()) {
-            updateState(_state.value.copy(expenseError = "Expense can't be empty"))
-        }
+            if (state.value.expense.isBlank()) {
+                _state.emit(_state.value.copy(expenseError = "Expense can't be empty"))
+            }
 
-        if (state.value.title.isNotBlank() && state.value.expense.isNotBlank()) {
-            expenseRepository.addExpense(
-                Expense(
-                    title = state.value.title,
-                    value = NumberUtils.convertToInt(_state.value.expense),
-                    isExpense = _state.value.isExpense,
-                    date = Calendar.getInstance().timeInMillis.toString(),
-                    accountId = accountId
+            if (state.value.title.isNotBlank() && state.value.expense.isNotBlank()) {
+                expenseRepository.insertExpense(
+                    Expense(
+                        title = state.value.title,
+                        value = NumberUtils.convertToInt(_state.value.expense),
+                        isExpense = _state.value.isExpense,
+                        date = DateUtils.getCurrentDate(),
+                        accountId = accountId
+                    )
                 )
-            )
 
-            sendUiEvent(AddExpenseUiEvent.ShowMessage("Successfully added!"))
-            sendUiEvent(AddExpenseUiEvent.PopBackStack)
+                _event.emit(AddExpenseUiEvent.ShowMessage("Successfully added!"))
+                _event.emit(AddExpenseUiEvent.PopBackStack)
+            }
         }
     }
 
@@ -84,12 +86,6 @@ class AddExpenseViewModel @Inject constructor(
     private fun updateState(state: AddExpenseState) {
         viewModelScope.launch {
             _state.emit(state)
-        }
-    }
-
-    private fun sendUiEvent(event: AddExpenseUiEvent) {
-        viewModelScope.launch {
-            _event.emit(event)
         }
     }
 }

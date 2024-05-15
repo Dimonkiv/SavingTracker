@@ -2,8 +2,8 @@ package com.dimonkiv.savingstracker.presentation.add_account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dimonkiv.savingstracker.core.utils.NumberUtils
-import com.dimonkiv.savingstracker.domain.AccountRepository
+import com.dimonkiv.savingstracker.presentation.utils.NumberUtils
+import com.dimonkiv.savingstracker.domain.repository.AccountRepository
 import com.dimonkiv.savingstracker.domain.model.Account
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -46,18 +46,20 @@ class AddAccountViewModel @Inject constructor(
     }
 
     private fun createAccount(title: String) {
-        if (title.isNotBlank()) {
-            accountRepository.addAccount(
-                Account(
-                    id = Random.nextLong(),
-                    name = _state.value.title,
-                    balance = NumberUtils.convertToInt(_state.value.balance)
+        viewModelScope.launch {
+            if (title.isNotBlank()) {
+                accountRepository.addAccount(
+                    Account(
+                        id = Random.nextLong(),
+                        name = _state.value.title,
+                        balance = NumberUtils.convertToInt(_state.value.balance)
+                    )
                 )
-            )
-            sendUiEvent(AddAccountUiEvent.ShowMessage("Successfully added!"))
-            sendUiEvent(AddAccountUiEvent.PopBackStack)
-        } else {
-            updateState(_state.value.copy(titleError = "Title is empty"))
+                _event.emit(AddAccountUiEvent.ShowMessage("Successfully added!"))
+                _event.emit(AddAccountUiEvent.PopBackStack)
+            } else {
+                _state.emit(_state.value.copy(titleError = "Title is empty"))
+            }
         }
     }
 

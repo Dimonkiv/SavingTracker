@@ -54,6 +54,7 @@ dependencies {
     kapt(libs.dagger.hilt.android.compiler)
 
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler)
 

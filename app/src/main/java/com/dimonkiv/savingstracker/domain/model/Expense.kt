@@ -4,6 +4,6 @@ data class Expense(
     var title: String = "",
     var value: Int = 0,
     var date: String = "",
-    val accountId: Long = 0L,
-    val isExpense: Boolean = false
+    var accountId: Long = 0L,
+    var isExpense: Boolean = false
 )

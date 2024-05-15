@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.utils
+package com.dimonkiv.savingstracker.presentation.utils
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
