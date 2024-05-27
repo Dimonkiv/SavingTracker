@@ -1,7 +1,9 @@
 package com.dimonkiv.savingstracker.presentation.add_account
 
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmantAddAccountBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
@@ -27,6 +29,18 @@ class AddAccountFragment :
             viewModel.onEvent(AddAccountEvent.OnBackButtonClick)
         }
 
+        binding.bankBtn.setOnClickListener {
+            viewModel.onEvent(AddAccountEvent.OnBankButtonClick)
+        }
+
+        binding.cashBtn.setOnClickListener {
+            viewModel.onEvent(AddAccountEvent.OnCashButtonClick)
+        }
+
+        binding.investBtn.setOnClickListener {
+            viewModel.onEvent(AddAccountEvent.OnInvestButtonClick)
+        }
+
         binding.createBtn.setOnClickListener {
             viewModel.onEvent(AddAccountEvent.OnCreateClick)
         }
@@ -35,10 +49,42 @@ class AddAccountFragment :
         collectLatestLifecycleFlow(viewModel.state) {
             binding.titleTil.isErrorEnabled = it.titleError != null
             binding.titleTil.error = it.titleError
+
+            binding.cardView.titleTv.text = it.title
+            binding.cardView.balanceTv.text = getString(R.string.balance, it.balance)
+            binding.cardView.typeTv.text = getString(it.type.titleRes)
+            binding.cardView.iconIv.setImageResource(it.type.iconResId)
+
+            context?.let { ctx ->
+                val backgroundColor = ContextCompat.getColor(ctx, it.type.colorRes)
+                binding.cardView.root.setCardBackgroundColor(backgroundColor)
+
+                when (it.type.type) {
+                    AccountType.Type.BANK -> {
+                        binding.bankBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_bank_selected)
+                        binding.cashBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_cash)
+                        binding.investBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_invest)
+                    }
+
+                    AccountType.Type.CASH -> {
+                        binding.bankBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_bank)
+                        binding.cashBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_cash_selected)
+                        binding.investBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_invest)
+                    }
+
+                    AccountType.Type.INVEST -> {
+                        binding.bankBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_bank)
+                        binding.cashBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_cash)
+                        binding.investBtn.background = ContextCompat.getDrawable(ctx, R.drawable.bg_invest_selected)
+                    }
+
+                    else -> Unit
+                }
+            }
         }
 
         collectLifecycleFlow(viewModel.event) {
-            when(it) {
+            when (it) {
                 is AddAccountUiEvent.PopBackStack -> {
                     (activity as MainActivity).navController.popBackStack()
                 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.presentation.utils.NumberUtils
 import com.dimonkiv.savingstracker.domain.repository.AccountRepository
 import com.dimonkiv.savingstracker.domain.model.Account
+import com.dimonkiv.savingstracker.domain.use_cases.GetAccountTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import kotlin.random.Random
 
 @HiltViewModel
 class AddAccountViewModel @Inject constructor(
-    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository,
+    private val getAccountTypeUseCase: GetAccountTypeUseCase
 ) : ViewModel() {
 
     private var _state = MutableStateFlow(AddAccountFormState())
@@ -35,6 +37,18 @@ class AddAccountViewModel @Inject constructor(
                 updateState(_state.value.copy(balance = event.balance))
             }
 
+            is AddAccountEvent.OnBankButtonClick -> {
+                updateAccountType(AccountType.Type.BANK)
+            }
+
+            is AddAccountEvent.OnCashButtonClick -> {
+                updateAccountType(AccountType.Type.CASH)
+            }
+
+            is AddAccountEvent.OnInvestButtonClick -> {
+                updateAccountType(AccountType.Type.INVEST)
+            }
+
             is AddAccountEvent.OnBackButtonClick -> {
                sendUiEvent(AddAccountUiEvent.PopBackStack)
             }
@@ -45,6 +59,11 @@ class AddAccountViewModel @Inject constructor(
         }
     }
 
+    private fun updateAccountType(type: AccountType.Type) {
+        val accountType = getAccountTypeUseCase.invoke(type)
+        updateState(_state.value.copy(type = accountType))
+    }
+
     private fun createAccount(title: String) {
         viewModelScope.launch {
             if (title.isNotBlank()) {
@@ -52,7 +71,8 @@ class AddAccountViewModel @Inject constructor(
                     Account(
                         id = Random.nextLong(),
                         name = _state.value.title,
-                        balance = NumberUtils.convertToInt(_state.value.balance)
+                        balance = NumberUtils.convertToInt(_state.value.balance),
+                        type = _state.value.type
                     )
                 )
                 _event.emit(AddAccountUiEvent.ShowMessage("Successfully added!"))

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dimonkiv.savingstracker.domain.model.Account
-import com.dimonkiv.savingstracker.domain.model.AccountType
+import com.dimonkiv.savingstracker.presentation.add_account.AccountType
 
 @Entity(tableName = "account")
 data class AccountDTO(
@@ -13,20 +13,23 @@ data class AccountDTO(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "balance")
-    val balance: Int
+    val balance: Int,
+    @ColumnInfo(name = "type")
+    val type: String
 )
 
 fun AccountDTO.asDomain() = Account(
     id = id,
     name = title,
     balance = balance,
-    type = AccountType.CREATED
+    type = AccountType(type = AccountType.Type.valueOf(type))
 )
 
 fun Account.asDTO() = AccountDTO(
     id = id,
     title = name,
-    balance = balance
+    balance = balance,
+    type = type.type.name
 )
 
 fun List<AccountDTO>.asDomain(): List<Account> {

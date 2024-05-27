@@ -22,26 +22,16 @@ CardAdapter.CardAdapterListeners {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private val cardAdapter by lazy { CardAdapter(this) }
+    private val cardAdapter by lazy { CardAdapter(context, this) }
     private var expenseAdapter: ExpenseAdapter? = null
-    private val behavior by lazy { BottomSheetBehavior.from(binding.bottomSheet) }
 
 
     override fun initUI() {
         initViewPager()
         initExpenseAdapter()
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
 
         collectLifecycleFlow(viewModel.uiEvent) { event ->
             when(event) {
-                is MainUiEvent.InitBottomSheet -> {
-                    initBottomSheetView(event.height)
-                }
-
-                is MainUiEvent.MeasureHeight -> {
-                    measureHeight()
-                }
-
                 is MainUiEvent.Navigate -> {
                     navigate(event.direction, event.arg)
                 }
@@ -65,32 +55,13 @@ CardAdapter.CardAdapterListeners {
         )
     }
 
-    private fun measureHeight() {
-        val screenHeight = binding.root.measuredHeight
-        val mainViewHeight = binding.mainView.measuredHeight
-
-        viewModel.onEvent(MainEvent.OnScreenHeightChange(screenHeight, mainViewHeight))
-    }
-
-    private val globalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
-        viewModel.onEvent(MainEvent.OnLayoutChange)
-    }
-
-    private fun initBottomSheetView(height: Int) {
-        val behavior = BottomSheetBehavior.from(binding.bottomSheet)
-        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        behavior.peekHeight = height
-    }
-
     private fun showExpensesView(isEmpty: Boolean) {
         binding.recyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
         binding.emptyGroup.visibility = if (isEmpty) View.VISIBLE else View.GONE
-        behavior.isDraggable = !isEmpty
     }
 
     override fun onDestroyView() {
         binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
-        binding.root.viewTreeObserver.removeOnGlobalLayoutListener(globalLayoutListener)
         super.onDestroyView()
     }
 

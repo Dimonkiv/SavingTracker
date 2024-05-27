@@ -3,7 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/primary">
+    android:background="@color/main_bg">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/blue"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/card_view"
+        />
 
     <ImageButton
         android:id="@+id/back_btn"
@@ -31,25 +42,15 @@
         app:layout_constraintStart_toEndOf="@id/back_btn"
         app:layout_constraintTop_toTopOf="@id/back_btn" />
 
-    <ImageView
-        android:id="@+id/logo_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_bank_card"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_btn"/>
-    <View
-        android:id="@+id/main_view"
+    <include
+        android:id="@+id/card_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_bottom_sheet"
+        android:layout_height="150dp"
+        android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo_iv" />
+        app:layout_constraintTop_toBottomOf="@id/back_btn"
+        layout="@layout/item_balance_card"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/create_btn"
@@ -59,7 +60,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:text="@string/create"
-        android:background="@android:color/holo_orange_light"
+        android:background="@drawable/bg_button"
         app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,12 +71,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        app:boxStrokeColor="@android:color/holo_orange_light"
+        app:boxStrokeColor="@color/green"
         app:hintAnimationEnabled="true"
-        app:hintTextColor="@android:color/holo_orange_light"
+        app:hintTextColor="@color/green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/main_view">
+        app:layout_constraintTop_toBottomOf="@id/card_view">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title_et"
@@ -93,9 +94,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        app:boxStrokeColor="@android:color/holo_orange_light"
+        app:boxStrokeColor="@color/green"
         app:hintAnimationEnabled="true"
-        app:hintTextColor="@android:color/holo_orange_light"
+        app:hintTextColor="@color/green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_til">
@@ -109,5 +110,42 @@
             android:hint="@string/initial_balance_optional" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bank_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/bank_account"
+        android:background="@drawable/bg_bank_selected"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/balance_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/ic_bank_card"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cash_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/cash"
+        android:background="@drawable/bg_cash"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/bank_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/ic_cash"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/invest_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/investment"
+        android:background="@drawable/bg_invest"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/cash_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/ic_invest"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

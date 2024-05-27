@@ -40,15 +40,6 @@ class MainViewModel @Inject constructor(
                 onPageChanged(event.id)
             }
 
-            is OnScreenHeightChange -> {
-                val measuredHeight = event.screenHeight - event.mainViewHeight
-                sendUiEvent(MainUiEvent.InitBottomSheet(measuredHeight))
-            }
-
-            is OnLayoutChange -> {
-                sendUiEvent(MainUiEvent.MeasureHeight)
-            }
-
             is OnAddCardClick -> {
                 sendUiEvent(
                     MainUiEvent.Navigate(
@@ -76,7 +67,7 @@ class MainViewModel @Inject constructor(
             val total = getTotalBalanceUseCase.invoke()
 
             _state.emit(_state.value.copy(accounts = accounts, totalBalance = total))
-            onPageChanged(0)
+            onPageChanged(_state.value.openedAccount)
         }
     }
 
@@ -85,7 +76,7 @@ class MainViewModel @Inject constructor(
             val accountId = _state.value.accounts.getOrNull(pos)?.id ?: 0
             val items = expenseRepository.getExpenseByAccountId(accountId)
 
-            _state.emit(_state.value.copy(expenses = items))
+            _state.emit(_state.value.copy(expenses = items, openedAccount = pos))
         }
     }
 

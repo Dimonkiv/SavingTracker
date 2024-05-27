@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="@color/secondary"
+    app:cardBackgroundColor="@color/blue"
     app:cardElevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,56 +18,42 @@
             android:id="@+id/title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bank account"/>
-
-        <TextView
-            android:id="@+id/total_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/balance_tv"
-            tools:text="Total balance:"/>
+            tools:text="Bank account"/>
 
         <TextView
             android:id="@+id/balance_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textSize="36sp"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="$4200"/>
 
-        <ImageView
-            android:id="@+id/hide_iv"
+        <TextView
+            android:id="@+id/type_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_eye"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@null"
-            app:tint="@color/black"
-            app:layout_constraintStart_toEndOf="@id/balance_tv"
-            app:layout_constraintTop_toTopOf="@id/balance_tv"
-            app:layout_constraintBottom_toBottomOf="@id/balance_tv"/>
-
-        <ImageView
-            android:id="@+id/add_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@null"
-            app:tint="@color/black"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:text="Account type"
+            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Investment"/>
 
+        <ImageView
+            android:id="@+id/icon_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_invest"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

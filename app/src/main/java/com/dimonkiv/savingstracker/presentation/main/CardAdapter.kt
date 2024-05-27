@@ -1,16 +1,19 @@
 package com.dimonkiv.savingstracker.presentation.main
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dimonkiv.savingstracker.databinding.ItemBalanceAddBinding
 import com.dimonkiv.savingstracker.databinding.ItemBalanceCardBinding
 import com.dimonkiv.savingstracker.domain.model.Account
-import com.dimonkiv.savingstracker.domain.model.AccountType
+import com.dimonkiv.savingstracker.presentation.add_account.AccountType
 
 class CardAdapter(
-    private val listeners: CardAdapterListeners
+    private val context: Context?,
+    private val listeners: CardAdapterListeners,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = mutableListOf<Account>()
@@ -54,8 +57,14 @@ class CardAdapter(
         with(binding) {
             titleTv.text = item.name
             balanceTv.text = item.balance.toString()
-            addIv.setOnClickListener {
-                listeners.onAddExpenseClicked(item.id)
+
+            context?.let { ctx ->
+                typeTv.text = ctx.getString(item.type.titleRes)
+                if (item.type.iconResId != -1) {
+                    iconIv.setImageResource(item.type.iconResId)
+                }
+
+                binding.root.setCardBackgroundColor(ContextCompat.getColor(ctx, item.type.colorRes))
             }
         }
     }
@@ -63,9 +72,9 @@ class CardAdapter(
     override fun getItemViewType(position: Int): Int {
         val item = items[position]
 
-        return when (item.type) {
-            AccountType.DEFAULT -> DEFAULT_VIEW
-            AccountType.CREATED -> CREATED_VIEW
+        return when (item.type.type) {
+            AccountType.Type.DEFAULT -> DEFAULT_VIEW
+            else -> CREATED_VIEW
         }
     }
 

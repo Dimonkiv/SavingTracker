@@ -2,10 +2,15 @@
     <string name="app_name">Savings Tracker</string>
     <string name="total_balance">Total balance:</string>
     <string name="empty_expense_msg">You don\'t have any operation yet</string>
-    <string name="create_new_account">Create new account</string>
+    <string name="create_new_account">New account</string>
     <string name="create">Create</string>
     <string name="title">Title</string>
     <string name="initial_balance_optional">Initial balance (optional)</string>
     <string name="add_expense">Add expense</string>
     <string name="expense">Expense</string>
+    <string name="history">History</string>
+    <string name="bank_account">Bank account</string>
+    <string name="cash">Cash</string>
+    <string name="investment">Investment</string>
+    <string name="balance">$ %s</string>
 </resources>
