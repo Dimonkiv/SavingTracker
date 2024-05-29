@@ -1,5 +1,7 @@
 package com.dimonkiv.savingstracker.presentation.add_account
 
+import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -15,6 +17,13 @@ class AddAccountFragment :
     BaseFragment<FragmantAddAccountBinding>(FragmantAddAccountBinding::inflate) {
 
     private val viewModel: AddAccountViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.run {
+            viewModel.updateAccountId(getLong(ACCOUNT_ID_ARG))
+        }
+    }
 
     override fun initUI() {
         binding.titleEt.addTextChangedListener {
@@ -49,6 +58,12 @@ class AddAccountFragment :
         collectLatestLifecycleFlow(viewModel.state) {
             binding.titleTil.isErrorEnabled = it.titleError != null
             binding.titleTil.error = it.titleError
+
+            binding.titleEt.setText(it.title)
+            binding.titleEt.setSelection(it.title.length)
+
+            binding.balanceEt.setText(it.balance)
+            binding.balanceEt.setSelection(it.balance.length)
 
             binding.cardView.titleTv.text = it.title
             binding.cardView.balanceTv.text = getString(R.string.balance, it.balance)
@@ -93,6 +108,18 @@ class AddAccountFragment :
                     Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.onEvent(AddAccountEvent.LoadAccount)
+    }
+
+    companion object {
+        private const val ACCOUNT_ID_ARG = "ACCOUNT_ID"
+        fun createArg(id: Long): Bundle = Bundle().apply {
+            putLong(ACCOUNT_ID_ARG, id)
         }
     }
 }

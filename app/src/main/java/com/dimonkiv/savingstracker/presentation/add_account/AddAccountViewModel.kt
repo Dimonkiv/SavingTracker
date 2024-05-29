@@ -21,14 +21,24 @@ class AddAccountViewModel @Inject constructor(
     private val getAccountTypeUseCase: GetAccountTypeUseCase
 ) : ViewModel() {
 
+    private var accountId = 0L
+
     private var _state = MutableStateFlow(AddAccountFormState())
     private var _event = MutableSharedFlow<AddAccountUiEvent>()
 
     val state = _state.asStateFlow()
     val event = _event.asSharedFlow()
 
+    fun updateAccountId(accountId: Long) {
+        this.accountId = accountId
+    }
+
     fun onEvent(event: AddAccountEvent) {
         when (event) {
+            is AddAccountEvent.LoadAccount -> {
+                fetchAccount()
+            }
+
             is AddAccountEvent.OnTitleChange -> {
                 updateState(_state.value.copy(title = event.title, titleError = null))
             }
@@ -69,7 +79,7 @@ class AddAccountViewModel @Inject constructor(
             if (title.isNotBlank()) {
                 accountRepository.addAccount(
                     Account(
-                        id = Random.nextLong(),
+                        id = accountId,
                         name = _state.value.title,
                         balance = NumberUtils.convertToInt(_state.value.balance),
                         type = _state.value.type
@@ -79,6 +89,21 @@ class AddAccountViewModel @Inject constructor(
                 _event.emit(AddAccountUiEvent.PopBackStack)
             } else {
                 _state.emit(_state.value.copy(titleError = "Title is empty"))
+            }
+        }
+    }
+
+    private fun fetchAccount() {
+        viewModelScope.launch {
+            if (accountId != 0L) {
+                val account = accountRepository.fetchAccountById(accountId)
+                _state.emit(_state.value.copy(
+                    title = account.name,
+                    balance = account.balance.toString(),
+                    type = account.type
+                ))
+
+                updateAccountType(_state.value.type.type)
             }
         }
     }

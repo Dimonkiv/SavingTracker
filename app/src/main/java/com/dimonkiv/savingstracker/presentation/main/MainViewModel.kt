@@ -39,25 +39,6 @@ class MainViewModel @Inject constructor(
             is OnPageChange -> {
                 onPageChanged(event.id)
             }
-
-            is OnAddCardClick -> {
-                sendUiEvent(
-                    MainUiEvent.Navigate(
-                        direction = R.id.action_mainFragment_to_addAccountFragment,
-                        arg = null
-                    )
-                )
-            }
-
-            is OnAddExpenseClick -> {
-                sendUiEvent(
-                    MainUiEvent.Navigate(
-                        direction = R.id.action_mainFragment_to_addExpenseFragment,
-                        arg = AddExpenseFragment.createArg(event.id)
-                    )
-                )
-
-            }
         }
     }
 

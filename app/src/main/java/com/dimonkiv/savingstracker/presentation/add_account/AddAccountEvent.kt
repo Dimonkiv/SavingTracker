@@ -1,6 +1,8 @@
 package com.dimonkiv.savingstracker.presentation.add_account
 
 sealed class AddAccountEvent {
+
+    data object LoadAccount: AddAccountEvent()
     data class OnTitleChange(val title: String): AddAccountEvent()
     data class OnBalanceChange(val balance: String): AddAccountEvent()
     data object OnBackButtonClick: AddAccountEvent()

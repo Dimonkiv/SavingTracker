@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
+import com.dimonkiv.savingstracker.presentation.add_account.AddAccountFragment
 import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
+import com.dimonkiv.savingstracker.presentation.main.edit_card.CardSettingsDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,13 +91,13 @@ CardAdapter.CardAdapterListeners {
     }
 
     override fun onAddCardClicked() {
-        (activity as MainActivity).navController.navigate(R.id.action_mainFragment_to_addAccountFragment)
+        findNavController().navigate(R.id.action_mainFragment_to_addAccountFragment)
     }
 
-    override fun onAddExpenseClicked(id: Long) {
-        (activity as MainActivity).navController.navigate(
-            resId = R.id.action_mainFragment_to_addExpenseFragment,
-            args = AddExpenseFragment.createArg(id)
+    override fun onCardClicked(id: Long) {
+        findNavController().navigate(
+            resId = R.id.action_mainFragment_to_cardSettingsDialog,
+            args = CardSettingsDialog.createArg(id)
         )
     }
 }

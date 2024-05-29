@@ -66,6 +66,10 @@ class CardAdapter(
 
                 binding.root.setCardBackgroundColor(ContextCompat.getColor(ctx, item.type.colorRes))
             }
+
+            root.setOnClickListener {
+                listeners.onCardClicked(item.id)
+            }
         }
     }
 
@@ -103,6 +107,6 @@ class CardAdapter(
     interface CardAdapterListeners {
         fun onAddCardClicked()
 
-        fun onAddExpenseClicked(id: Long)
+        fun onCardClicked(id: Long)
     }
 }
