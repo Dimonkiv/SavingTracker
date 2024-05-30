@@ -20,4 +20,7 @@ interface AccountDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAccount(account: AccountDTO)
+
+    @Query("DELETE FROM account WHERE id=:id")
+    suspend fun deleteAccount(id: Long)
 }

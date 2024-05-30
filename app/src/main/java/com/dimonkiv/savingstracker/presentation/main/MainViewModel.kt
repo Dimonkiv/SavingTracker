@@ -8,6 +8,7 @@ import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.dimonkiv.savingstracker.presentation.main.MainEvent.*
 import com.dimonkiv.savingstracker.domain.use_cases.GetAccountsUseCase
 import com.dimonkiv.savingstracker.domain.use_cases.GetTotalBalanceUseCase
+import com.dimonkiv.savingstracker.domain.use_cases.RemoveAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getAccountsUseCase: GetAccountsUseCase,
     private val expenseRepository: ExpenseRepository,
-    private val getTotalBalanceUseCase: GetTotalBalanceUseCase
+    private val getTotalBalanceUseCase: GetTotalBalanceUseCase,
+    private val removeAccountUseCase: RemoveAccountUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MainScreenState())
@@ -36,9 +38,20 @@ class MainViewModel @Inject constructor(
                 fetchData()
             }
 
+            is RemoveAccount -> {
+                removeAccount(event.id)
+            }
+
             is OnPageChange -> {
                 onPageChanged(event.id)
             }
+        }
+    }
+
+    private fun removeAccount(id: Long) {
+        viewModelScope.launch {
+            val accounts = removeAccountUseCase.invoke(id)
+            _state.emit(_state.value.copy(accounts = accounts))
         }
     }
 

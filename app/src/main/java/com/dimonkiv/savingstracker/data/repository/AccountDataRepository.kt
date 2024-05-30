@@ -29,4 +29,8 @@ class AccountDataRepository @Inject constructor(
     override suspend fun updateAccount(account: Account) = withContext(dispatcher) {
         accountDao.updateAccount(account.asDTO())
     }
+
+    override suspend fun deleteAccount(id: Long) = withContext(dispatcher) {
+        accountDao.deleteAccount(id)
+    }
 }

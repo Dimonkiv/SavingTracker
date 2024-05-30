@@ -10,6 +10,7 @@ import com.dimonkiv.savingstracker.domain.use_cases.GetAccountsUseCase
 import com.dimonkiv.savingstracker.domain.use_cases.GetAccountsUseCaseImpl
 import com.dimonkiv.savingstracker.domain.use_cases.GetTotalBalanceUseCase
 import com.dimonkiv.savingstracker.domain.use_cases.GetTotalBalanceUseCaseImpl
+import com.dimonkiv.savingstracker.domain.use_cases.RemoveAccountUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,5 +51,14 @@ object UseCaseModule {
     @Singleton
     fun provideGetAccountTypeUseCase(): GetAccountTypeUseCase {
         return GetAccountTypeUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoveAccountUseCase(
+        accountRepository: AccountRepository,
+        getAccountsUseCase: GetAccountsUseCase
+    ): RemoveAccountUseCase {
+        return RemoveAccountUseCase(accountRepository, getAccountsUseCase)
     }
 }

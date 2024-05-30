@@ -11,6 +11,7 @@ import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
+import com.dimonkiv.savingstracker.presentation.add_account.AddAccountEvent
 import com.dimonkiv.savingstracker.presentation.add_account.AddAccountFragment
 import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.dimonkiv.savingstracker.presentation.main.edit_card.CardSettingsDialog
@@ -21,7 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
-CardAdapter.CardAdapterListeners {
+CardAdapter.CardAdapterListeners,
+CardSettingsDialog.CardSettingsDialogListeners{
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -99,5 +101,9 @@ CardAdapter.CardAdapterListeners {
             resId = R.id.action_mainFragment_to_cardSettingsDialog,
             args = CardSettingsDialog.createArg(id)
         )
+    }
+
+    override fun onRemoveButtonClick(id: Long) {
+        viewModel.onEvent(MainEvent.RemoveAccount(id))
     }
 }
