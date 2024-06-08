@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/addExpenseFragment"
-        android:name="com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment"
+        android:name="com.dimonkiv.savingstracker.presentation.transaction.TransactionFragment"
         android:label="AddExpenseFragment"
         tools:layout="@layout/fragmant_add_expense"/>
     <dialog

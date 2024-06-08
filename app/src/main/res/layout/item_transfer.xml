@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <View
+        android:id="@+id/expense_type_view"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_bank_selected"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/expense_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/dark"
+        app:layout_constraintTop_toTopOf="@id/expense_type_view"
+        app:layout_constraintBottom_toBottomOf="@id/expense_type_view"
+        app:layout_constraintStart_toEndOf="@id/expense_type_view"
+        tools:text="Account Type"/>
+
+    <View
+        android:id="@+id/income_type_view"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_cash_selected"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/expense_type_view"/>
+
+    <TextView
+        android:id="@+id/income_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/dark"
+        app:layout_constraintTop_toTopOf="@id/income_type_view"
+        app:layout_constraintBottom_toBottomOf="@id/income_type_view"
+        app:layout_constraintStart_toEndOf="@id/income_type_view"
+        tools:text="Account Type"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/title_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:boxStrokeColor="@color/green"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/icon_iv"
+        app:layout_constraintTop_toBottomOf="@id/income_type_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@id/balance_et"
+            android:hint="@string/title" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/date_view"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_calendar"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_til"/>
+
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/dark"
+        app:layout_constraintTop_toTopOf="@id/date_view"
+        app:layout_constraintBottom_toBottomOf="@id/date_view"
+        app:layout_constraintStart_toEndOf="@id/date_view"
+        tools:text="04.05.2024"/>
+
+    <ImageView
+        android:id="@+id/icon_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_up_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

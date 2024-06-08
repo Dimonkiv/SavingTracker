@@ -2,7 +2,7 @@ package com.dimonkiv.savingstracker.domain.use_cases
 
 import com.dimonkiv.savingstracker.domain.repository.AccountRepository
 import com.dimonkiv.savingstracker.domain.model.Account
-import com.dimonkiv.savingstracker.presentation.add_account.AccountType
+import com.dimonkiv.savingstracker.domain.model.AccountType
 import javax.inject.Inject
 
 class GetAccountsUseCaseImpl @Inject constructor(

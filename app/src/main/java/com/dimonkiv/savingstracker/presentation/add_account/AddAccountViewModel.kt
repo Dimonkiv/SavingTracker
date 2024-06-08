@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.presentation.utils.NumberUtils
 import com.dimonkiv.savingstracker.domain.repository.AccountRepository
 import com.dimonkiv.savingstracker.domain.model.Account
+import com.dimonkiv.savingstracker.domain.model.AccountType
 import com.dimonkiv.savingstracker.domain.use_cases.GetAccountTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,7 +14,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class AddAccountViewModel @Inject constructor(

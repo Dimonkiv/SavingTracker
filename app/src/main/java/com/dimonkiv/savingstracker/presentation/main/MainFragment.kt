@@ -2,7 +2,6 @@ package com.dimonkiv.savingstracker.presentation.main
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,11 +10,7 @@ import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmentMainBinding
 import com.dimonkiv.savingstracker.presentation.MainActivity
-import com.dimonkiv.savingstracker.presentation.add_account.AddAccountEvent
-import com.dimonkiv.savingstracker.presentation.add_account.AddAccountFragment
-import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.dimonkiv.savingstracker.presentation.main.edit_card.CardSettingsDialog
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

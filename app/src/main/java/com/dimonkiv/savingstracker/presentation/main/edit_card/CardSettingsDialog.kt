@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.databinding.DialogCardSettingsBinding
 import com.dimonkiv.savingstracker.presentation.add_account.AddAccountFragment
-import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
+import com.dimonkiv.savingstracker.presentation.transaction.TransactionFragment
 import com.dimonkiv.savingstracker.presentation.main.MainEvent
 import com.dimonkiv.savingstracker.presentation.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -72,21 +72,21 @@ class CardSettingsDialog: BottomSheetDialogFragment() {
             expenseCv.setOnClickListener {
                 findNavController().navigate(
                     resId = R.id.action_cardSettingsDialog_to_addExpenseFragment,
-                    args = AddExpenseFragment.createArg(accountId)
+                    args = TransactionFragment.createArg(accountId)
                 )
             }
 
             incomeCv.setOnClickListener {
                 findNavController().navigate(
                     resId = R.id.action_cardSettingsDialog_to_addExpenseFragment,
-                    args = AddExpenseFragment.createArg(accountId)
+                    args = TransactionFragment.createArg(accountId)
                 )
             }
 
             transferCv.setOnClickListener {
                 findNavController().navigate(
                     resId = R.id.action_cardSettingsDialog_to_addExpenseFragment,
-                    args = AddExpenseFragment.createArg(accountId)
+                    args = TransactionFragment.createArg(accountId)
                 )
             }
         }

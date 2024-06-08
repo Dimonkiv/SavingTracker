@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.presentation.base.BaseFragment
 import com.dimonkiv.savingstracker.databinding.FragmantAddAccountBinding
+import com.dimonkiv.savingstracker.domain.model.AccountType
 import com.dimonkiv.savingstracker.presentation.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

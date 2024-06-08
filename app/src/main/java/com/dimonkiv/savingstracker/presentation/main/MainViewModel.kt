@@ -2,9 +2,7 @@ package com.dimonkiv.savingstracker.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.domain.repository.ExpenseRepository
-import com.dimonkiv.savingstracker.presentation.add_expense.AddExpenseFragment
 import com.dimonkiv.savingstracker.presentation.main.MainEvent.*
 import com.dimonkiv.savingstracker.domain.use_cases.GetAccountsUseCase
 import com.dimonkiv.savingstracker.domain.use_cases.GetTotalBalanceUseCase

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dimonkiv.savingstracker.domain.model.Account
-import com.dimonkiv.savingstracker.presentation.add_account.AccountType
+import com.dimonkiv.savingstracker.domain.model.AccountType
 
 @Entity(tableName = "account")
 data class AccountDTO(

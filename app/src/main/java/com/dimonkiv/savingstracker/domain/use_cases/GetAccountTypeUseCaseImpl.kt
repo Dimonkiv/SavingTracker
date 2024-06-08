@@ -1,9 +1,7 @@
 package com.dimonkiv.savingstracker.domain.use_cases
 
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.presentation.add_account.AccountType
-import com.dimonkiv.savingstracker.presentation.utils.ResourceManager
-import javax.inject.Inject
+import com.dimonkiv.savingstracker.domain.model.AccountType
 
 class GetAccountTypeUseCaseImpl : GetAccountTypeUseCase {
     override fun invoke(type: AccountType.Type): AccountType {

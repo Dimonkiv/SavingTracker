@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dimonkiv.savingstracker.databinding.ItemBalanceAddBinding
 import com.dimonkiv.savingstracker.databinding.ItemBalanceCardBinding
 import com.dimonkiv.savingstracker.domain.model.Account
-import com.dimonkiv.savingstracker.presentation.add_account.AccountType
+import com.dimonkiv.savingstracker.domain.model.AccountType
 
 class CardAdapter(
     private val context: Context?,
