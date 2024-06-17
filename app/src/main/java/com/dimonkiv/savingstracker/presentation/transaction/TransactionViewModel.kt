@@ -35,8 +35,16 @@ class TransactionViewModel @Inject constructor(
     fun onEvent(event: TransactionEvent) {
         when(event) {
             is TransactionEvent.LoadData -> {
-                val item = getTransactionUseCase.invoke()
-                updateState(_state.value.copy(transactions = item.transactions))
+                viewModelScope.launch {
+                    val item = getTransactionUseCase.invoke()
+                    _state.emit(_state.value.copy(transactions = item.transactions))
+                }
+            }
+
+            is TransactionEvent.OnBackClick -> {
+                viewModelScope.launch {
+                    _event.emit(TransactionUiEvent.PopBackStack)
+                }
             }
 
             is TransactionEvent.OnCreateClick -> {

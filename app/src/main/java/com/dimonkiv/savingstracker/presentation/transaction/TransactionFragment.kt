@@ -15,12 +15,7 @@ class TransactionFragment :
     BaseFragment<FragmantAddExpenseBinding>(FragmantAddExpenseBinding::inflate) {
     private val viewModel: TransactionViewModel by viewModels()
 
-    private val adapter by lazy { TransactionAdapter() }
-    private val tabTitles by lazy {
-        arrayOf(
-            "Income", "Expense", "Transfer"
-        )
-    }
+    private val adapter by lazy { TransactionAdapter(context) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +28,7 @@ class TransactionFragment :
         collectLifecycleFlow(viewModel.event) {
             when (it) {
                 is TransactionUiEvent.PopBackStack -> {
-                    (activity as MainActivity).navController.popBackStack()
+                    (activity as MainActivity).navController.navigateUp()
                 }
 
                 is TransactionUiEvent.ShowMessage -> {
@@ -44,15 +39,24 @@ class TransactionFragment :
 
         collectLatestLifecycleFlow(viewModel.state) {
             showItems(it.transactions)
+            initViewPager(it.transactions)
         }
-        initViewPager()
         viewModel.onEvent(TransactionEvent.LoadData)
+        setListeners()
     }
 
-    private fun initViewPager() {
+    private fun setListeners() {
+        with(binding) {
+            backBtn.setOnClickListener {
+                viewModel.onEvent(TransactionEvent.OnBackClick)
+            }
+        }
+    }
+
+    private fun initViewPager(items: List<TransactionTypeState>) {
         binding.viewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, pos ->
-            tab.setText(tabTitles[pos])
+            tab.setText(items.getOrNull(pos)?.typeStr ?: "")
         }.attach()
     }
 

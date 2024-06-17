@@ -8,22 +8,35 @@
 
     <View
         android:id="@+id/account_type_view"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:background="@drawable/bg_bank_selected"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <TextView
         android:id="@+id/account_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/dark"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@id/account_type_view"
         app:layout_constraintBottom_toBottomOf="@id/account_type_view"
-        app:layout_constraintStart_toEndOf="@id/account_type_view"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="Account Type"/>
+
+    <TextView
+        android:id="@+id/balance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/account_type_view"
+        app:layout_constraintBottom_toBottomOf="@id/account_type_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="$ 1000"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_til"
@@ -34,7 +47,7 @@
         app:hintAnimationEnabled="true"
         app:hintTextColor="@color/green"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/icon_iv"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/account_type_view">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -68,14 +81,5 @@
         app:layout_constraintBottom_toBottomOf="@id/date_view"
         app:layout_constraintStart_toEndOf="@id/date_view"
         tools:text="04.05.2024"/>
-
-    <ImageView
-        android:id="@+id/icon_iv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_down_arrow"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

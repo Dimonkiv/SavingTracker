@@ -67,8 +67,9 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetTransactionUseCase(
+        getAccountsUseCase: GetAccountsUseCase,
         resourceManager: ResourceManager
     ): GetTransactionUseCase {
-        return GetTransactionUseCase(resourceManager)
+        return GetTransactionUseCase(getAccountsUseCase, resourceManager)
     }
 }

@@ -13,4 +13,6 @@ sealed class TransactionEvent {
     data class OnIncomeSelected(val isChecked: Boolean): TransactionEvent()
 
     data object OnCreateClick: TransactionEvent()
+
+    data object OnBackClick: TransactionEvent()
 }
