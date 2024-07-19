@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.dimonkiv.savingstracker.presentation.NavigationItem
+import com.dimonkiv.savingstracker.presentation.accounts.AccountsRoute
 import com.dimonkiv.savingstracker.presentation.accounts.AccountsScreen
 import com.dimonkiv.savingstracker.presentation.home.HomeScreen
 import com.dimonkiv.savingstracker.presentation.profile.ProfileScreen
@@ -26,7 +27,7 @@ fun MainNavHost(
             HomeScreen()
         }
         composable(NavigationItem.Accounts.route) {
-            AccountsScreen()
+            AccountsRoute(navController = navController)
         }
         composable(NavigationItem.Statistics.route) {
             StatisticsScreen()

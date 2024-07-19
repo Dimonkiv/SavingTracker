@@ -1,6 +1,7 @@
 package com.dimonkiv.savingstracker.presentation.main2.component
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -40,6 +41,7 @@ fun BottomNavigationBar(
 ) {
     Box(
         modifier = Modifier
+            .background(Dark)
             .fillMaxWidth()
             .height(barHeight + fabSize / 2)
     ) {

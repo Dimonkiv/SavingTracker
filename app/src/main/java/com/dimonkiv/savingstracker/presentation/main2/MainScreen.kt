@@ -1,5 +1,6 @@
 package com.dimonkiv.savingstracker.presentation.main2
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -9,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.dimonkiv.savingstracker.presentation.design_system.Dark
 import com.dimonkiv.savingstracker.presentation.main2.component.BottomNavigationBar
 
 @Composable
