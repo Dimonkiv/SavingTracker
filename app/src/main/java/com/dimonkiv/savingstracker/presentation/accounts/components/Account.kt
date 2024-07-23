@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -21,14 +20,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.presentation.design_system.LightDark
-import com.dimonkiv.savingstracker.presentation.design_system.LightGray
-import com.dimonkiv.savingstracker.presentation.design_system.Purple
-import com.dimonkiv.savingstracker.presentation.design_system.Spacing
+import com.dimonkiv.savingstracker.presentation.accounts.model.AccountModel
+import com.dimonkiv.savingstracker.presentation.core.design_system.LightDark
+import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
+import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @Composable
-fun Account() {
+fun Account(
+    account: AccountModel
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,12 +49,12 @@ fun Account() {
                     modifier = Modifier
                         .size(50.dp)
                         .clip(CircleShape)
-                        .background(Purple),
+                        .background(account.color),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         modifier = Modifier.size(32.dp),
-                        painter = painterResource(id = R.drawable.ic_money_bag),
+                        painter = painterResource(id = account.iconRes),
                         contentDescription = null,
                         tint = LightGray
                     )
@@ -63,7 +63,7 @@ fun Account() {
                 Spacer(modifier = Modifier.size(Spacing.M))
 
                 Text(
-                    text = "Title",
+                    text = account.title,
                     color = LightGray,
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp
@@ -71,7 +71,7 @@ fun Account() {
             }
 
             Text(
-                text = "$1000",
+                text = account.balance,
                 color = LightGray,
                 fontSize = 18.sp
             )

@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.dimonkiv.savingstracker.data.local.dao.AccountDao
 import com.dimonkiv.savingstracker.data.local.AppDatabase
-import com.dimonkiv.savingstracker.data.local.dao.ExpenseDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,13 +30,5 @@ object DatabaseModule {
         appDatabase: AppDatabase
     ): AccountDao {
         return appDatabase.accountDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideExpenseDao(
-        appDatabase: AppDatabase
-    ): ExpenseDao {
-        return appDatabase.expenseDao()
     }
 }

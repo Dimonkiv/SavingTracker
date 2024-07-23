@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.dimonkiv.savingstracker.presentation.design_system.SavingsTrackingTheme
+import com.dimonkiv.savingstracker.presentation.core.design_system.SavingsTrackingTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

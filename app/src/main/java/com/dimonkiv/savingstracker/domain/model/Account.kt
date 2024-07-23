@@ -1,8 +1,9 @@
 package com.dimonkiv.savingstracker.domain.model
 
 data class Account(
-    var id: Long = 0,
-    var name: String = "",
-    var balance: Int = 0,
-    var type: AccountType = AccountType(type = AccountType.Type.DEFAULT)
+    val id: Long = 0,
+    val title: String = "",
+    val balance: Int = 0,
+    val color: String,
+    val icon: String
 )

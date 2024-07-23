@@ -1,11 +1,15 @@
 package com.dimonkiv.savingstracker.presentation.accounts
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun AccountsRoute(
-    navController: NavHostController,
+    viewModel: AccountsViewModel = hiltViewModel()
 ) {
-    AccountsScreen()
+    val state by viewModel.uiState.collectAsState()
+
+    AccountsScreen(state)
 }

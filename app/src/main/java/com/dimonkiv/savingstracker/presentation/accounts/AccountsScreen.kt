@@ -5,10 +5,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -17,16 +18,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.presentation.accounts.components.Accounts
-import com.dimonkiv.savingstracker.presentation.design_system.Dark
-import com.dimonkiv.savingstracker.presentation.design_system.LightGray
-import com.dimonkiv.savingstracker.presentation.design_system.ProgressBar
-import com.dimonkiv.savingstracker.presentation.design_system.Spacing
+import com.dimonkiv.savingstracker.presentation.accounts.components.EmptyAccounts
+import com.dimonkiv.savingstracker.presentation.core.design_system.Dark
+import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
+import com.dimonkiv.savingstracker.presentation.core.design_system.ProgressBar
+import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @Composable
-fun AccountsScreen() {
+fun AccountsScreen(
+    state: AccountContract.State
+) {
     Box(
         modifier = Modifier
             .padding(Spacing.SM)
@@ -39,18 +44,17 @@ fun AccountsScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    modifier = Modifier.weight(1f),
-                    contentAlignment = Alignment.Center
+                Spacer(modifier = Modifier.size(48.dp))
+                Text(
+                    text = "Accounts",
+                    color = LightGray,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                IconButton(
+                    modifier = Modifier.size(48.dp),
+                    onClick = { /*TODO*/ }
                 ) {
-                    Text(
-                        text = "My accounts",
-                        color = LightGray,
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                IconButton(modifier = Modifier.weight(0.1f), onClick = { /*TODO*/ }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_square_add),
                         contentDescription = "Add",
@@ -58,7 +62,12 @@ fun AccountsScreen() {
                     )
                 }
             }
-            Accounts()
+
+            when(state.state) {
+                is AccountContract.AccountState.Idle -> EmptyAccounts()
+                is AccountContract.AccountState.Loading -> ProgressBar()
+                is AccountContract.AccountState.Success -> Accounts(state.state.model)
+            }
         }
     }
 }

@@ -6,9 +6,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.dimonkiv.savingstracker.presentation.design_system.Dark
-import com.dimonkiv.savingstracker.presentation.design_system.LightDark
-import com.dimonkiv.savingstracker.presentation.main2.MainRoute
+import com.dimonkiv.savingstracker.presentation.core.design_system.Dark
+import com.dimonkiv.savingstracker.presentation.main.MainRoute
 
 @Composable
 fun AppNavHost(
@@ -22,7 +21,7 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(NavigationItem.Main.route) {
-            MainRoute(navController)
+            MainRoute()
         }
     }
 }

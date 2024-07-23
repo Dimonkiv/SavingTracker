@@ -16,9 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.presentation.design_system.LightGray
-import com.dimonkiv.savingstracker.presentation.design_system.Purple
-import com.dimonkiv.savingstracker.presentation.design_system.Spacing
+import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
+import com.dimonkiv.savingstracker.presentation.core.design_system.Purple
+import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @Composable
 fun EmptyAccounts() {

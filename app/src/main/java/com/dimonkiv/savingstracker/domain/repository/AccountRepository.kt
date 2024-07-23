@@ -8,9 +8,5 @@ interface AccountRepository {
 
     suspend fun fetchAccountById(accountId: Long): Account
 
-    suspend fun addAccount(account: Account)
-
-    suspend fun updateAccount(account: Account)
-
     suspend fun deleteAccount(id: Long)
 }

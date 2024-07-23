@@ -14,11 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.presentation.design_system.LightGray
-import com.dimonkiv.savingstracker.presentation.design_system.Spacing
+import com.dimonkiv.savingstracker.presentation.accounts.model.AccountsModel
+import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
+import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @Composable
-fun Accounts() {
+fun Accounts(
+    accounts: AccountsModel
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -26,7 +29,7 @@ fun Accounts() {
         Text(text = "Total balance")
         Spacer(modifier = Modifier.size(Spacing.S))
         Text(
-            text = "$2000",
+            text = accounts.totalBalance,
             color = LightGray,
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold
@@ -35,8 +38,8 @@ fun Accounts() {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(Spacing.SM)
         ) {
-            items(5) {
-                Account()
+            items(accounts.accounts.size) { pos ->
+                Account(accounts.accounts[pos])
             }
         }
     }
