@@ -14,6 +14,7 @@ import com.dimonkiv.savingstracker.presentation.main.model.BottomItemModel
 
 @Composable
 fun MainScreen(
+    mainNavController: NavHostController,
     navController: NavHostController,
     items: List<BottomItemModel>
 ) {
@@ -46,7 +47,8 @@ fun MainScreen(
     ) { innerPadding ->
         MainNavHost(
             modifier = Modifier.padding(innerPadding),
-            navController = navController
+            navController = navController,
+            mainNavController = mainNavController
         )
     }
 }

@@ -21,7 +21,11 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(NavigationItem.Main.route) {
-            MainRoute()
+            MainRoute(navController)
         }
+        composable(NavigationItem.Add.route) {
+            AddAccountScreen()
+        }
+
     }
 }

@@ -9,6 +9,7 @@ class AccountContract {
 
     sealed class Event: UiEvent {
         data object LoadAccounts: Event()
+        data object OnErrorDialogClick: Event()
     }
 
     data class State(
@@ -21,5 +22,6 @@ class AccountContract {
         data object Idle: AccountState()
         data object Loading: AccountState()
         data class Success(val model: AccountsModel): AccountState()
+        data class Error(val message: String): AccountState()
     }
 }

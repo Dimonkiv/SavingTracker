@@ -15,6 +15,7 @@ import com.dimonkiv.savingstracker.presentation.statistics.StatisticsScreen
 fun MainNavHost(
     modifier: Modifier,
     navController: NavHostController,
+    mainNavController: NavHostController,
     startDestination: String = NavigationItem.Home.route
 ) {
     NavHost(
@@ -26,7 +27,7 @@ fun MainNavHost(
             HomeScreen()
         }
         composable(NavigationItem.Accounts.route) {
-            AccountsRoute()
+            AccountsRoute(mainNavController)
         }
         composable(NavigationItem.Statistics.route) {
             StatisticsScreen()
