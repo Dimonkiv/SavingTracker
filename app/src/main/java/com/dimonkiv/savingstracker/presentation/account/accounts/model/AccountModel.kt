@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts.model
+package com.dimonkiv.savingstracker.presentation.account.accounts.model
 
 import androidx.compose.ui.graphics.Color
 import com.dimonkiv.savingstracker.R

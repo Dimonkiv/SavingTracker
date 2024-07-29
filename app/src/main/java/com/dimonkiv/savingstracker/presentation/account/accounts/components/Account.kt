@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts.components
+package com.dimonkiv.savingstracker.presentation.account.accounts.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.presentation.accounts.model.AccountModel
+import com.dimonkiv.savingstracker.presentation.account.accounts.model.AccountModel
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightDark
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
 import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.presentation.core.model.UiEffect
 import com.dimonkiv.savingstracker.presentation.core.model.UiEvent
 import com.dimonkiv.savingstracker.presentation.core.model.UiState
+import com.dimonkiv.savingstracker.presentation.select_icon.SelectIconContract
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,8 +29,8 @@ abstract class BaseViewModel<Event: UiEvent, State: UiState, Effect: UiEffect>: 
     private val _event : MutableSharedFlow<Event> = MutableSharedFlow()
     val event = _event.asSharedFlow()
 
-    private val _effect : Channel<Effect> = Channel()
-    val effect = _effect.receiveAsFlow()
+    private val _effect : MutableSharedFlow<Effect> = MutableSharedFlow()
+    val effect = _effect.asSharedFlow()
 
     init {
         subscribeEvents()
@@ -55,9 +56,9 @@ abstract class BaseViewModel<Event: UiEvent, State: UiState, Effect: UiEffect>: 
     /**
      * Set new Effect
      */
-    protected fun setEffect(builder: () -> Effect) {
-        val effectValue = builder()
-        viewModelScope.launch { _effect.send(effectValue) }
+    protected fun setEffect(effect: Effect) {
+        val newEffect = effect
+        viewModelScope.launch { _effect.emit(newEffect) }
     }
 
     /**

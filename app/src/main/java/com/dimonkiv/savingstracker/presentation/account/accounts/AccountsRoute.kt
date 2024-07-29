@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts
+package com.dimonkiv.savingstracker.presentation.account.accounts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

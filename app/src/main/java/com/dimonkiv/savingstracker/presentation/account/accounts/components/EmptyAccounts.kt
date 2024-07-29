@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts.components
+package com.dimonkiv.savingstracker.presentation.account.accounts.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

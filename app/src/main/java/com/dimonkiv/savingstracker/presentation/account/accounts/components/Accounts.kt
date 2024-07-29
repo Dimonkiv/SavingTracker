@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts.components
+package com.dimonkiv.savingstracker.presentation.account.accounts.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.presentation.accounts.model.AccountsModel
+import com.dimonkiv.savingstracker.presentation.account.accounts.model.AccountsModel
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
 import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 

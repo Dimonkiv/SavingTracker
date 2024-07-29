@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts
+package com.dimonkiv.savingstracker.presentation.account.accounts
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -15,8 +15,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,8 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.presentation.accounts.components.Accounts
-import com.dimonkiv.savingstracker.presentation.accounts.components.EmptyAccounts
+import com.dimonkiv.savingstracker.presentation.account.accounts.components.Accounts
+import com.dimonkiv.savingstracker.presentation.account.accounts.components.EmptyAccounts
 import com.dimonkiv.savingstracker.presentation.core.design_system.Dark
 import com.dimonkiv.savingstracker.presentation.core.design_system.ErrorDialog
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray

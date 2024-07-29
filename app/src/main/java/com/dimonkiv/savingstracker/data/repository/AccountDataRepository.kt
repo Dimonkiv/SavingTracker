@@ -2,6 +2,7 @@ package com.dimonkiv.savingstracker.data.repository
 
 import com.dimonkiv.savingstracker.data.local.dao.AccountDao
 import com.dimonkiv.savingstracker.data.local.dto.asDomain
+import com.dimonkiv.savingstracker.di.IO
 import com.dimonkiv.savingstracker.domain.repository.AccountRepository
 import com.dimonkiv.savingstracker.domain.model.Account
 import kotlinx.coroutines.CoroutineDispatcher
@@ -10,6 +11,7 @@ import javax.inject.Inject
 
 class AccountDataRepository @Inject constructor(
     private val accountDao: AccountDao,
+    @IO
     private val dispatcher: CoroutineDispatcher
 ): AccountRepository {
 

@@ -1,6 +1,6 @@
-package com.dimonkiv.savingstracker.presentation.accounts
+package com.dimonkiv.savingstracker.presentation.account.accounts
 
-import com.dimonkiv.savingstracker.presentation.accounts.model.AccountsModel
+import com.dimonkiv.savingstracker.presentation.account.accounts.model.AccountsModel
 import com.dimonkiv.savingstracker.presentation.core.model.UiEffect
 import com.dimonkiv.savingstracker.presentation.core.model.UiEvent
 import com.dimonkiv.savingstracker.presentation.core.model.UiState

@@ -1,9 +1,9 @@
-package com.dimonkiv.savingstracker.presentation.accounts
+package com.dimonkiv.savingstracker.presentation.account.accounts
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.domain.use_cases.GetAccountUseCase
-import com.dimonkiv.savingstracker.presentation.accounts.AccountContract.*
+import com.dimonkiv.savingstracker.presentation.account.accounts.AccountContract.*
 import com.dimonkiv.savingstracker.presentation.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

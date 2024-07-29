@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.accounts.model
+package com.dimonkiv.savingstracker.presentation.account.accounts.model
 
 import com.dimonkiv.savingstracker.presentation.core.design_system.Yellow
 

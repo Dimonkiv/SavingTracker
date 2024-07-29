@@ -18,7 +18,7 @@ object RepositoryModule {
     @Singleton
     fun provideAccountRepository(
         accountDao: AccountDao,
-        dispatcher: CoroutineDispatcher
+        @IO dispatcher: CoroutineDispatcher
     ): AccountRepository {
         return AccountDataRepository(accountDao, dispatcher)
     }

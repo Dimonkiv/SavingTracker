@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.dimonkiv.savingstracker.presentation.NavigationItem
-import com.dimonkiv.savingstracker.presentation.accounts.AccountsRoute
+import com.dimonkiv.savingstracker.presentation.account.accounts.AccountsRoute
 import com.dimonkiv.savingstracker.presentation.home.HomeScreen
 import com.dimonkiv.savingstracker.presentation.profile.ProfileScreen
 import com.dimonkiv.savingstracker.presentation.statistics.StatisticsScreen
