@@ -1,8 +1,7 @@
 package com.dimonkiv.savingstracker.presentation
 
-import android.os.Parcelable
-import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -13,6 +12,7 @@ import com.dimonkiv.savingstracker.presentation.core.design_system.Dark
 import com.dimonkiv.savingstracker.presentation.main.MainRoute
 import com.dimonkiv.savingstracker.presentation.select_icon.SelectIconRoute
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
