@@ -9,6 +9,8 @@ import com.dimonkiv.savingstracker.domain.model.Account
 data class AccountDTO(
     @PrimaryKey(autoGenerate = true)
     var id: Long,
+    @ColumnInfo(name = "type_id")
+    val typeId: Long,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "balance")
@@ -21,6 +23,16 @@ data class AccountDTO(
 
 fun AccountDTO.asDomain() = Account(
     id = id,
+    typeId = typeId,
+    title = title,
+    balance = balance,
+    color = color,
+    icon = icon
+)
+
+fun Account.asDTO() = AccountDTO(
+    id = id,
+    typeId = typeId,
     title = title,
     balance = balance,
     color = color,

@@ -26,4 +26,14 @@ object IconMap {
         INVEST to R.drawable.ic_invest,
         MONEY to R.drawable.ic_money,
     )
+
+    fun getIconName(value: Int): String {
+        for (key in icons.keys) {
+            if (value == icons[key]) {
+                return key
+            }
+        }
+
+        return ""
+    }
 }

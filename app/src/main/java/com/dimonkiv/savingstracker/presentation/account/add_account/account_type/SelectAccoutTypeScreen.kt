@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.account.add_account.component
+package com.dimonkiv.savingstracker.presentation.account.add_account.account_type
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.presentation.account.add_account.model.AccountTypeModel
+import com.dimonkiv.savingstracker.presentation.account.add_account.account_type.component.AccountTypeScreen
+import com.dimonkiv.savingstracker.presentation.account.add_account.account_type.model.AccountTypeModel
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightDark
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
 

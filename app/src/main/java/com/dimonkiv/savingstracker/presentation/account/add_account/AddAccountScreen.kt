@@ -14,8 +14,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SheetState
@@ -26,17 +29,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.presentation.account.add_account.component.SelectAccountTypeScreen
-import com.dimonkiv.savingstracker.presentation.account.add_account.model.AccountTypeModel
+import com.dimonkiv.savingstracker.presentation.account.add_account.AddAccountContract.*
+import com.dimonkiv.savingstracker.presentation.account.add_account.account_type.SelectAccountTypeRoute
 import com.dimonkiv.savingstracker.presentation.account.add_account.model.AddAccountModel
 import com.dimonkiv.savingstracker.presentation.core.design_system.AppBar
 import com.dimonkiv.savingstracker.presentation.core.design_system.Dark
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightDark
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
+import com.dimonkiv.savingstracker.presentation.core.design_system.Purple
 import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,11 +51,7 @@ fun AddAccountScreen(
     model: AddAccountModel,
     sheetState: SheetState,
     showBottomSheet: Boolean,
-    onBackButtonClick: () -> Unit,
-    onSelectIconScreen: () -> Unit,
-    onTypeButtonClick: () -> Unit,
-    onDismissBottomSheet: () -> Unit,
-    onTypeSelect: (AccountTypeModel) -> Unit
+    onEventChanged: (Event) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -58,7 +60,7 @@ fun AddAccountScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AppBar(title = "Add account") {
-            onBackButtonClick()
+            onEventChanged(Event.OnBackButtonClicked)
         }
 
         Spacer(modifier = Modifier.size(Spacing.L))
@@ -69,7 +71,7 @@ fun AddAccountScreen(
                 .clip(CircleShape)
                 .background(Dark)
                 .clickable {
-                    onSelectIconScreen()
+                    onEventChanged(Event.OnSelectIconClicked)
                 },
             contentAlignment = Alignment.Center
 
@@ -127,8 +129,10 @@ fun AddAccountScreen(
 
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = "",
-            onValueChange = {},
+            value = model.title,
+            onValueChange = {
+                onEventChanged(Event.OnTitleTextChanged(it))
+            },
             label = {
                 Text(text = "Title")
             },
@@ -151,7 +155,7 @@ fun AddAccountScreen(
                 .background(LightDark)
                 .padding(15.dp)
                 .clickable {
-                    onTypeButtonClick()
+                    onEventChanged((Event.OnTypeClicked))
                 },
         ) {
             if (model.type.title.isNotEmpty()) {
@@ -174,11 +178,14 @@ fun AddAccountScreen(
 
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = "0",
-            onValueChange = {},
+            value = model.balance,
+            onValueChange = {
+                onEventChanged(Event.OnBalanceTextChanged(it))
+            },
             label = {
                 Text(text = "Balance")
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = LightDark,
@@ -190,17 +197,38 @@ fun AddAccountScreen(
             )
         )
 
+        Spacer(modifier = Modifier.weight(1f))
+
+        Button(
+            modifier = Modifier.fillMaxWidth()
+                .padding(bottom = 60.dp),
+            enabled = model.isButtonEnabled,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Purple,
+                disabledContainerColor = Purple.copy(alpha = 0.4f),
+                contentColor = Color.White,
+                disabledContentColor = Color.White.copy(0.4f)
+            ),
+            onClick = {
+                onEventChanged(Event.OnCreateButtonClicked)
+            }
+        ) {
+            Text(
+                text = "Create account",
+                fontSize = 20.sp
+            )
+        }
+
     }
 
     if (showBottomSheet) {
-        SelectAccountTypeScreen(
+        SelectAccountTypeRoute(
             sheetState = sheetState,
-            types = model.types,
             onTypeSelect = {
-                onTypeSelect(it)
+                onEventChanged(Event.OnTypeSelected(it))
             },
             onDismissBottomSheet = {
-                onDismissBottomSheet()
+                onEventChanged(Event.OnDismissButtonClick)
             }
         )
     }

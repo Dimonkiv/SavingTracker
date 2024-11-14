@@ -1,6 +1,7 @@
 package com.dimonkiv.savingstracker.data.repository
 
 import com.dimonkiv.savingstracker.data.local.dao.AccountDao
+import com.dimonkiv.savingstracker.data.local.dto.asDTO
 import com.dimonkiv.savingstracker.data.local.dto.asDomain
 import com.dimonkiv.savingstracker.di.IO
 import com.dimonkiv.savingstracker.domain.repository.AccountRepository
@@ -14,6 +15,10 @@ class AccountDataRepository @Inject constructor(
     @IO
     private val dispatcher: CoroutineDispatcher
 ): AccountRepository {
+
+    override suspend fun createAccount(account: Account) = withContext(dispatcher) {
+        accountDao.insertAccount(account.asDTO())
+    }
 
     override suspend fun fetchAccounts(): List<Account> = withContext(dispatcher) {
         accountDao.getAllAccounts().asDomain()

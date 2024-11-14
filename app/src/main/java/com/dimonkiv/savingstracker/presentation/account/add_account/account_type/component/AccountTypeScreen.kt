@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.presentation.account.add_account.component
+package com.dimonkiv.savingstracker.presentation.account.add_account.account_type.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.dimonkiv.savingstracker.presentation.account.add_account.model.AccountTypeModel
+import com.dimonkiv.savingstracker.presentation.account.add_account.account_type.model.AccountTypeModel
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
 import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 

@@ -8,9 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.presentation.NavigationItem
+import com.dimonkiv.savingstracker.presentation.account.add_account.AddAccountContract.*
 
 @ExperimentalMaterial3Api
 @Composable
@@ -18,43 +20,41 @@ fun AddAccountRoute(
     colorName: String?,
     iconRes: Int?,
     navController: NavHostController,
-    viewModel: AddAccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    viewModel: AddAccountViewModel = hiltViewModel()
 ) {
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     val bottomSheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
-    viewModel.setEvent(AddAccountContract.Event.OnDataReceived(colorName, iconRes))
+    viewModel.setEvent(Event.OnDataReceived(colorName, iconRes))
 
     LaunchedEffect(key1 = Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                is AddAccountContract.Effect.ShowSelectTypeScreen -> {
+                is Effect.ShowSelectTypeSheet -> {
                     showBottomSheet = true
+                }
+
+                is Effect.HideSelectTypeSheet -> {
+                    showBottomSheet = false
+                }
+
+                is Effect.OpenPreviousScreen -> {
+                    openPreviousScreen(navController)
+                }
+
+                is Effect.OpenSelectIconScreen -> {
+                    openSelectIconScreen(navController)
                 }
             }
         }
     }
 
     AddAccountScreen(
-        model = state.value.model,
+        model = state.value,
         bottomSheetState,
         showBottomSheet,
-        onBackButtonClick = {
-            openPreviousScreen(navController)
-        },
-
-        onSelectIconScreen = {
-            openSelectIconScreen(navController)
-        },
-        onTypeButtonClick = {
-            viewModel.setEvent(AddAccountContract.Event.OnTypeClicked)
-        },
-        onDismissBottomSheet = {
-            showBottomSheet = false
-        },
-        onTypeSelect = {
-            showBottomSheet = false
-            viewModel.setEvent(AddAccountContract.Event.OnTypeSelect(it))
+        onEventChanged = {
+            viewModel.setEvent(it)
         }
     )
 }
