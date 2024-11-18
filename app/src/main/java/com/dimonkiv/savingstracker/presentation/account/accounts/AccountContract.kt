@@ -12,13 +12,9 @@ class AccountContract {
         data object OnErrorDialogClick: Event()
     }
 
-    data class State(
-        val state: AccountState
-    ): UiState
-
     sealed class Effect: UiEffect
 
-    sealed class AccountState {
+    sealed class AccountState: UiState {
         data object Idle: AccountState()
         data object Loading: AccountState()
         data class Success(val model: AccountsModel): AccountState()

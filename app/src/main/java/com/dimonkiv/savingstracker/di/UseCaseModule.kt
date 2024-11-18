@@ -1,7 +1,8 @@
 package com.dimonkiv.savingstracker.di
 
 import com.dimonkiv.savingstracker.domain.repository.AccountRepository
-import com.dimonkiv.savingstracker.domain.use_cases.GetAccountUseCase
+import com.dimonkiv.savingstracker.domain.repository.AccountTypeRepository
+import com.dimonkiv.savingstracker.domain.use_cases.GetAccountsUseCase
 import com.dimonkiv.savingstracker.domain.use_cases.GetSelectedIconUseCase
 import dagger.Module
 import dagger.Provides
@@ -15,9 +16,10 @@ object UseCaseModule {
 
     @Provides
     fun provideGetAccountUseCase(
-        accountRepository: AccountRepository
-    ): GetAccountUseCase {
-        return GetAccountUseCase(accountRepository)
+        accountRepository: AccountRepository,
+        typesRepository: AccountTypeRepository
+    ): GetAccountsUseCase {
+        return GetAccountsUseCase(accountRepository, typesRepository)
     }
 
     @Provides

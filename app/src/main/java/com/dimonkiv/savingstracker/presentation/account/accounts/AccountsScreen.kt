@@ -32,7 +32,7 @@ import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @Composable
 fun AccountsScreen(
-    state: AccountContract.State,
+    state: AccountContract.AccountState,
     onOkErrorClick: () -> Unit,
     onAddClick: () -> Unit
 ) {
@@ -67,13 +67,13 @@ fun AccountsScreen(
                 }
             }
 
-            when (state.state) {
-                is AccountContract.AccountState.Idle -> EmptyAccounts()
+            when (state) {
+                is AccountContract.AccountState.Idle -> EmptyAccounts(onAddClick)
                 is AccountContract.AccountState.Loading -> ProgressBar()
-                is AccountContract.AccountState.Success -> Accounts(state.state.model)
+                is AccountContract.AccountState.Success -> Accounts(state.model)
                 is AccountContract.AccountState.Error -> {
                     Log.d("Test", "Again error")
-                    ErrorDialog(message = state.state.message) {
+                    ErrorDialog(message = state.message) {
                         onOkErrorClick()
                     }
                 }

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.presentation.account.accounts.model.AccountModel
-import com.dimonkiv.savingstracker.presentation.core.design_system.LightDark
 import com.dimonkiv.savingstracker.presentation.core.design_system.LightGray
 import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
@@ -30,12 +28,9 @@ fun Account(
     account: AccountModel
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(10.dp))
-            .background(LightDark)
-            .padding(Spacing.L),
-        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+            .padding(Spacing.M),
+        contentAlignment = Alignment.Center
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -52,7 +47,7 @@ fun Account(
                         .background(account.color),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
+                     Icon(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(id = account.iconRes),
                         contentDescription = null,

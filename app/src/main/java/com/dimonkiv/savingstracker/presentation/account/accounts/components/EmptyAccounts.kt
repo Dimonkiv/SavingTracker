@@ -21,7 +21,7 @@ import com.dimonkiv.savingstracker.presentation.core.design_system.Purple
 import com.dimonkiv.savingstracker.presentation.core.design_system.Spacing
 
 @Composable
-fun EmptyAccounts() {
+fun EmptyAccounts(onAddClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -45,7 +45,10 @@ fun EmptyAccounts() {
             Spacer(modifier = Modifier.size(Spacing.SM))
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = Purple),
-                onClick = { }) {
+                onClick = {
+                    onAddClick()
+                }
+            ) {
                 Text(
                     text = "Add account",
                     fontSize = 20.sp

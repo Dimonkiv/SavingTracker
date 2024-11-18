@@ -8,6 +8,7 @@ import com.dimonkiv.savingstracker.presentation.select_icon.model.IconMap
 
 data class  AccountModel(
     val id: Long,
+    val typeId: Long,
     val title: String,
     val balance: String,
     val color: Color,
@@ -16,8 +17,9 @@ data class  AccountModel(
 
 fun Account.asPresentation() = AccountModel(
     id = id,
+    typeId = typeId,
     title = title,
-    balance = balance.toString(),
+    balance = "$$balance",
     color = ColorMap.colors.getOrDefault(color, Color.White),
     iconRes = IconMap.icons.getOrDefault(icon, R.drawable.ic_money_bag)
 )
