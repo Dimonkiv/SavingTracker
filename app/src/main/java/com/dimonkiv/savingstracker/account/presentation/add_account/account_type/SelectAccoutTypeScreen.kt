@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.component.AccountTypeScreen
 import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.core.design_system.LightDark
-import com.dimonkiv.savingstracker.core.design_system.LightGray
+import com.dimonkiv.savingstracker.designsystem.theme.LightDark
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 
 @ExperimentalMaterial3Api
 @Composable

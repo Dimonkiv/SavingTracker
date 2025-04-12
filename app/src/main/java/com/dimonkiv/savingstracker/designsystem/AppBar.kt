@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.design_system
+package com.dimonkiv.savingstracker.designsystem
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 
 @Composable
 fun AppBar(

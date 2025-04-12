@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.AccountModel
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
 fun Account(

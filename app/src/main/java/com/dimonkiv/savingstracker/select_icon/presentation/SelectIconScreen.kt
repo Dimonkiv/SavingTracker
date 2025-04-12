@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.core.design_system.AppBar
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.ProgressBar
-import com.dimonkiv.savingstracker.core.design_system.Purple
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.AppBar
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
+import com.dimonkiv.savingstracker.designsystem.ProgressBar
+import com.dimonkiv.savingstracker.designsystem.theme.Purple
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 import com.dimonkiv.savingstracker.select_icon.presentation.component.SelectIconContent
 
 @Composable

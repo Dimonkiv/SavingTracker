@@ -1,14 +1,14 @@
 package com.dimonkiv.savingstracker.select_icon.presentation.model
 
 import androidx.compose.ui.graphics.Color
-import com.dimonkiv.savingstracker.core.design_system.Blue
-import com.dimonkiv.savingstracker.core.design_system.Brown
-import com.dimonkiv.savingstracker.core.design_system.DarkGreen
-import com.dimonkiv.savingstracker.core.design_system.LightGreen
-import com.dimonkiv.savingstracker.core.design_system.LightPurple
-import com.dimonkiv.savingstracker.core.design_system.Orange
-import com.dimonkiv.savingstracker.core.design_system.Pink
-import com.dimonkiv.savingstracker.core.design_system.Scorpion
+import com.dimonkiv.savingstracker.designsystem.theme.Blue
+import com.dimonkiv.savingstracker.designsystem.theme.Brown
+import com.dimonkiv.savingstracker.designsystem.theme.DarkGreen
+import com.dimonkiv.savingstracker.designsystem.theme.LightGreen
+import com.dimonkiv.savingstracker.designsystem.theme.LightPurple
+import com.dimonkiv.savingstracker.designsystem.theme.Orange
+import com.dimonkiv.savingstracker.designsystem.theme.Pink
+import com.dimonkiv.savingstracker.designsystem.theme.Scorpion
 
 object ColorMap {
     private var LIGHT_PURPLE = "lightPurple"

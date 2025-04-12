@@ -2,7 +2,7 @@ package com.dimonkiv.savingstracker.select_icon.presentation.model
 
 import androidx.compose.ui.graphics.Color
 import com.dimonkiv.savingstracker.select_icon.domain.model.Colors
-import com.dimonkiv.savingstracker.core.design_system.LightPurple
+import com.dimonkiv.savingstracker.designsystem.theme.LightPurple
 
 data class ColorModel(
     val color: Color,

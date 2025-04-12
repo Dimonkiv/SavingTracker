@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.design_system
+package com.dimonkiv.savingstracker.designsystem
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build

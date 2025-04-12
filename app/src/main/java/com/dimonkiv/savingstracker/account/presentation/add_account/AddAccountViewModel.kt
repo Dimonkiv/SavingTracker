@@ -8,7 +8,7 @@ import com.dimonkiv.savingstracker.account.presentation.add_account.model.AddAcc
 import com.dimonkiv.savingstracker.account.presentation.add_account.model.asDomain
 import com.dimonkiv.savingstracker.account.presentation.add_account.model.isNotEmpty
 import com.dimonkiv.savingstracker.core.BaseViewModel
-import com.dimonkiv.savingstracker.core.design_system.Dark
+import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

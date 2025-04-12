@@ -24,11 +24,11 @@ import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.account.presentation.accounts.components.Accounts
 import com.dimonkiv.savingstracker.account.presentation.accounts.components.EmptyAccounts
-import com.dimonkiv.savingstracker.core.design_system.Dark
-import com.dimonkiv.savingstracker.core.design_system.ErrorDialog
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.ProgressBar
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.theme.Dark
+import com.dimonkiv.savingstracker.designsystem.ErrorDialog
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
+import com.dimonkiv.savingstracker.designsystem.ProgressBar
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
 fun AccountsScreen(

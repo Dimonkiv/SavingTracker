@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
 fun AccountTypeScreen(

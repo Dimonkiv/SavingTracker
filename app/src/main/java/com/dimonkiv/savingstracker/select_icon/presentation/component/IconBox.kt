@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
-import com.dimonkiv.savingstracker.core.design_system.LightGray
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 
 @Composable
 fun IconBox(

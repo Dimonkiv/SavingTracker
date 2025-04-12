@@ -20,9 +20,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.core.design_system.LightDark
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.theme.LightDark
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 import com.dimonkiv.savingstracker.select_icon.presentation.model.SelectedIconModel
 
 @Composable

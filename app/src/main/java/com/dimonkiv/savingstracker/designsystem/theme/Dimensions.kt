@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.design_system
+package com.dimonkiv.savingstracker.designsystem.theme
 
 import androidx.compose.ui.unit.dp
 

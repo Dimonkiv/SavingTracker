@@ -19,9 +19,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.TypesModel
-import com.dimonkiv.savingstracker.core.design_system.Gray
-import com.dimonkiv.savingstracker.core.design_system.LightDark
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.theme.Gray
+import com.dimonkiv.savingstracker.designsystem.theme.LightDark
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
 fun AccountGroup(
