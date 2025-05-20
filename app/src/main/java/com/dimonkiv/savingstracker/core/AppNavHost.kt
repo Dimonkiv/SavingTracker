@@ -7,9 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.dimonkiv.savingstracker.account.presentation.add_account.AddAccountRoute
+import com.dimonkiv.savingstracker.account.presentation.addaccount.AddAccountRoute
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
-import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.main.MainRoute
 import com.dimonkiv.savingstracker.select_icon.presentation.SelectIconRoute
 

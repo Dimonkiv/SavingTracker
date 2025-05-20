@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model
+package com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model
 
 import com.dimonkiv.savingstracker.core.model.UiState
 

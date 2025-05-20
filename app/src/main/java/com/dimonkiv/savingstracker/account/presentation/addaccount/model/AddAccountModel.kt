@@ -1,8 +1,8 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account.model
+package com.dimonkiv.savingstracker.account.presentation.addaccount.model
 
 import androidx.compose.ui.graphics.Color
 import com.dimonkiv.savingstracker.account.domain.model.Account
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
 import com.dimonkiv.savingstracker.core.model.UiState
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap
 import com.dimonkiv.savingstracker.select_icon.presentation.model.IconMap

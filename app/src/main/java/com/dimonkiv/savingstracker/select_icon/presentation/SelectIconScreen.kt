@@ -1,5 +1,6 @@
 package com.dimonkiv.savingstracker.select_icon.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,20 +10,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.designsystem.AppBar
+import com.dimonkiv.savingstracker.designsystem.AppButton
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.ProgressBar
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Purple
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 import com.dimonkiv.savingstracker.select_icon.presentation.component.SelectIconContent
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectIconScreen(
     state: SelectIconContract.State,
@@ -31,62 +42,83 @@ fun SelectIconScreen(
     onIconSelected: (Int) -> Unit,
     onSelectButtonClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 55.dp, start = Spacing.L, end = Spacing.L)
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AppBar(title = "Select icon") {
-                onBackButtonClick()
-            }
-            Spacer(modifier = Modifier.size(Spacing.L))
-
-            when (state.state) {
-                is SelectIconContract.SelectIconState.Loading -> ProgressBar()
-                is SelectIconContract.SelectIconState.Idle -> ProgressBar()
-                is SelectIconContract.SelectIconState.Success -> {
-                    SelectIconContent(
-                        item = state.state.state,
-                        onColorSelected = {
-                            onColorSelected(it)
-                        },
-                        onIconSelected = {
-                            onIconSelected(it)
-                        }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        modifier = Modifier.padding(start = Spacing.L),
+                        text = "Select icon",
+                        style = AppTheme.appTypography.heading
                     )
+                },
+                navigationIcon = {
+                    Icon(
+                        modifier = Modifier
+                            .padding(start = Spacing.L)
+                            .size(24.dp)
+                            .clickable {
+                                onBackButtonClick()
+                            },
+                        painter = painterResource(R.drawable.ic_back),
+                        contentDescription = "Back icon",
+                        tint = AppTheme.appColorScheme.textPrimary
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = AppTheme.appColorScheme.surface
+                )
+            )
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.size(Spacing.L))
+
+                when (state.state) {
+                    is SelectIconContract.SelectIconState.Loading -> ProgressBar()
+                    is SelectIconContract.SelectIconState.Idle -> ProgressBar()
+                    is SelectIconContract.SelectIconState.Success -> {
+                        SelectIconContent(
+                            item = state.state.state,
+                            onColorSelected = {
+                                onColorSelected(it)
+                            },
+                            onIconSelected = {
+                                onIconSelected(it)
+                            }
+                        )
+                    }
                 }
             }
-        }
 
-        val buttonEnabled = if (state.state is SelectIconContract.SelectIconState.Success) {
-            state.state.state.buttonEnabled
-        } else {
-            false
-        }
+            val buttonEnabled = if (state.state is SelectIconContract.SelectIconState.Success) {
+                state.state.state.buttonEnabled
+            } else {
+                false
+            }
 
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 40.dp),
-            enabled = buttonEnabled,
-            onClick = {
-                onSelectButtonClick()
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Purple,
-                disabledContainerColor = Purple.copy(0.6f),
-                disabledContentColor = LightGray.copy(0.6f)
-            )
-        ) {
-            Text(
-                text = "Select",
-                fontSize = 24.sp
+            AppButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .padding(
+                        start = Spacing.XL,
+                        end = Spacing.XL,
+                        bottom = 60.dp
+                    ),
+                enabled = buttonEnabled,
+                onClick = {
+                    onSelectButtonClick()
+                },
+                title = "Select"
             )
         }
     }
-
 }

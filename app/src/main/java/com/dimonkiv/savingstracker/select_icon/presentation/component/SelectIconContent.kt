@@ -20,13 +20,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightDark
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 import com.dimonkiv.savingstracker.select_icon.presentation.model.SelectedIconModel
 
 @Composable
-fun SelectIconContent(
+fun  SelectIconContent(
     item: SelectedIconModel,
     onColorSelected: (Color) -> Unit,
     onIconSelected: (Int) -> Unit
@@ -35,7 +36,7 @@ fun SelectIconContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         IconBox(
-            outlineContainerColor = LightDark,
+            outlineContainerColor = AppTheme.appColorScheme.surface,
             containerColor = item.selectedColor,
             outlineContainerSize = 140.dp,
             containerSize = 120.dp,
@@ -48,8 +49,9 @@ fun SelectIconContent(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(Spacing.L)
                 .clip(RoundedCornerShape(20.dp))
-                .background(LightDark)
+                .background(AppTheme.appColorScheme.surface)
                 .padding(Spacing.L)
         ) {
             Column(
@@ -57,8 +59,7 @@ fun SelectIconContent(
             ) {
                 Text(
                     text = "Color",
-                    fontSize = 18.sp,
-                    color = LightGray
+                    style = AppTheme.appTypography.subheading
                 )
                 Spacer(modifier = Modifier.size(Spacing.M))
 
@@ -72,7 +73,7 @@ fun SelectIconContent(
                         val color = item.colors[it]
 
                         IconBox(
-                            outlineContainerColor = if (color.selected) LightGray else LightDark,
+                            outlineContainerColor = if (color.selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.background,
                             containerColor = color.color,
                             outlineContainerSize = 50.dp,
                             containerSize = 40.dp,
@@ -89,15 +90,14 @@ fun SelectIconContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(1.dp)
-                        .background(LightGray)
+                        .background(AppTheme.appColorScheme.onBackground)
                 )
 
                 Spacer(modifier = Modifier.size(Spacing.M))
 
                 Text(
                     text = "Icon",
-                    fontSize = 18.sp,
-                    color = LightGray
+                    style = AppTheme.appTypography.subheading
                 )
                 Spacer(modifier = Modifier.size(Spacing.M))
 
@@ -111,7 +111,7 @@ fun SelectIconContent(
                         val icon = item.icons[it]
 
                         IconBox(
-                            outlineContainerColor = if (icon.selected) LightGray else LightDark,
+                            outlineContainerColor = if (icon.selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.background,
                             containerColor = item.selectedColor,
                             outlineContainerSize = 50.dp,
                             containerSize = 40.dp,
@@ -125,8 +125,6 @@ fun SelectIconContent(
                     }
                 }
             }
-
-
         }
     }
 }

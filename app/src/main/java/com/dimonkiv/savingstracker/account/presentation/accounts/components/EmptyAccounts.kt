@@ -16,12 +16,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.theme.Purple
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
-fun EmptyAccounts(onAddClick: () -> Unit) {
+fun EmptyAccounts() {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -34,26 +35,14 @@ fun EmptyAccounts(onAddClick: () -> Unit) {
                 modifier = Modifier.size(48.dp),
                 painter = painterResource(id = R.drawable.ic_money_bag),
                 contentDescription = null,
-                tint = LightGray
+                tint = AppTheme.appColorScheme.textPrimary
             )
             Spacer(modifier = Modifier.size(Spacing.S))
             Text(
                 text = "You don't have accounts",
-                color = LightGray,
+                color = AppTheme.appColorScheme.textPrimary,
                 fontSize = 20.sp
             )
-            Spacer(modifier = Modifier.size(Spacing.SM))
-            Button(
-                colors = ButtonDefaults.buttonColors(containerColor = Purple),
-                onClick = {
-                    onAddClick()
-                }
-            ) {
-                Text(
-                    text = "Add account",
-                    fontSize = 20.sp
-                )
-            }
         }
     }
 }

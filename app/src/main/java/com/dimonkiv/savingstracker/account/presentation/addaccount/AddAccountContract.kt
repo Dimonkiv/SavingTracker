@@ -1,6 +1,6 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account
+package com.dimonkiv.savingstracker.account.presentation.addaccount
 
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
 import com.dimonkiv.savingstracker.core.model.UiEffect
 import com.dimonkiv.savingstracker.core.model.UiEvent
 

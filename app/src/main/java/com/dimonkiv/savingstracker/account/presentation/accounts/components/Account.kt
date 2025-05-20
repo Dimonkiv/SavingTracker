@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.AccountModel
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
@@ -59,16 +60,13 @@ fun Account(
 
                 Text(
                     text = account.title,
-                    color = LightGray,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
+                    style = AppTheme.appTypography.heading
                 )
             }
 
             Text(
                 text = account.balance,
-                color = LightGray,
-                fontSize = 18.sp
+                style = AppTheme.appTypography.subheading
             )
 
         }

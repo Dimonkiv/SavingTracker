@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account
+package com.dimonkiv.savingstracker.account.presentation.addaccount
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState

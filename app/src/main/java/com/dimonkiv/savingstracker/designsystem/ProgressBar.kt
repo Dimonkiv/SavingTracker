@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dimonkiv.savingstracker.designsystem.theme.Purple
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 
 @Composable
 fun ProgressBar() {
@@ -18,7 +18,7 @@ fun ProgressBar() {
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(75.dp),
-            color = Purple,
+            color = AppTheme.appColorScheme.primary,
             strokeWidth = 5.dp
         )
     }

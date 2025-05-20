@@ -1,8 +1,8 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account.account_type
+package com.dimonkiv.savingstracker.account.presentation.addaccount.account_type
 
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.account.domain.repository.AccountTypeRepository
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeState
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeState
 import com.dimonkiv.savingstracker.core.BaseViewModel
 import com.dimonkiv.savingstracker.core.model.UiEffect
 import com.dimonkiv.savingstracker.core.model.UiEvent

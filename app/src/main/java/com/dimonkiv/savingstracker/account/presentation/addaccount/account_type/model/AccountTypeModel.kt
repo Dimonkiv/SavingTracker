@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model
+package com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model
 
 import androidx.compose.ui.graphics.Color
 import com.dimonkiv.savingstracker.account.data.local.dto.AccountTypeDTO

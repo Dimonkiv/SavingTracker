@@ -1,12 +1,12 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account
+package com.dimonkiv.savingstracker.account.presentation.addaccount
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.account.domain.repository.AccountRepository
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.account.presentation.add_account.model.AddAccountModel
-import com.dimonkiv.savingstracker.account.presentation.add_account.model.asDomain
-import com.dimonkiv.savingstracker.account.presentation.add_account.model.isNotEmpty
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
+import com.dimonkiv.savingstracker.account.presentation.addaccount.model.AddAccountModel
+import com.dimonkiv.savingstracker.account.presentation.addaccount.model.asDomain
+import com.dimonkiv.savingstracker.account.presentation.addaccount.model.isNotEmpty
 import com.dimonkiv.savingstracker.core.BaseViewModel
 import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap

@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.account.presentation.add_account.account_type
+package com.dimonkiv.savingstracker.account.presentation.addaccount.account_type
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,9 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.component.AccountTypeScreen
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.designsystem.theme.LightDark
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.component.AccountTypeScreen
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 
 @ExperimentalMaterial3Api
@@ -27,8 +27,8 @@ fun SelectAccountTypeScreen(
     onDismissBottomSheet: () -> Unit
 ) {
     ModalBottomSheet(
-        containerColor = LightDark,
-        contentColor = LightGray,
+        containerColor = AppTheme.appColorScheme.surface,
+        contentColor = AppTheme.appColorScheme.textPrimary,
         modifier = Modifier.fillMaxWidth(),
         onDismissRequest = {
             onDismissBottomSheet()

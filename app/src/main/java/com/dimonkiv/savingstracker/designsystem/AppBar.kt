@@ -1,5 +1,6 @@
 package com.dimonkiv.savingstracker.designsystem
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 
 @Composable
@@ -25,7 +27,8 @@ fun AppBar(
     onBackButtonClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .background(AppTheme.appColorScheme.surface),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -38,15 +41,13 @@ fun AppBar(
                 modifier = Modifier.size(32.dp),
                 painter = painterResource(id = iconRes),
                 contentDescription = "Back",
-                tint = LightGray
+                tint = AppTheme.appColorScheme.textPrimary
             )
         }
 
         Text(
             text = title,
-            color = LightGray,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold
+            style = AppTheme.appTypography.heading
         )
 
         Spacer(modifier = Modifier.size(32.dp))

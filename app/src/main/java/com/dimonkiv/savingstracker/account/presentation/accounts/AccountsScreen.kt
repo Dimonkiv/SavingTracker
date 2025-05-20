@@ -6,28 +6,27 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.account.presentation.accounts.components.Accounts
 import com.dimonkiv.savingstracker.account.presentation.accounts.components.EmptyAccounts
-import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.designsystem.ErrorDialog
-import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.ProgressBar
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
@@ -40,7 +39,7 @@ fun AccountsScreen(
         modifier = Modifier
             .padding(Spacing.SM)
             .fillMaxSize()
-            .background(Dark)
+            .background(AppTheme.appColorScheme.background)
     ) {
         Column {
             Row(
@@ -48,27 +47,31 @@ fun AccountsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.size(48.dp))
                 Text(
-                    text = "Accounts",
-                    color = LightGray,
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
+                    text = "My accounts",
+                    style = AppTheme.appTypography.heading
                 )
                 IconButton(
-                    modifier = Modifier.size(48.dp),
-                    onClick = { onAddClick() }
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_square_add),
-                        contentDescription = "Add",
-                        tint = LightGray
-                    )
-                }
+                    modifier = Modifier.size(36.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(AppTheme.appColorScheme.primary),
+                    onClick = {
+                        onAddClick()
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        contentColor = AppTheme.appColorScheme.onPrimary
+                    ),
+                    content = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_add),
+                            contentDescription = "Add accounts"
+                        )
+                    }
+                )
             }
 
             when (state) {
-                is AccountState.Idle -> EmptyAccounts(onAddClick)
+                is AccountState.Idle -> EmptyAccounts()
                 is AccountState.Loading -> ProgressBar()
                 is AccountState.Success -> Accounts(state.model)
                 is AccountState.Error -> {
@@ -78,8 +81,6 @@ fun AccountsScreen(
                     }
                 }
             }
-
-
         }
     }
 }

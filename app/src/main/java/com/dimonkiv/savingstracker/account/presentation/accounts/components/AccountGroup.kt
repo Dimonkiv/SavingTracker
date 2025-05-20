@@ -15,12 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.TypesModel
-import com.dimonkiv.savingstracker.designsystem.theme.Gray
-import com.dimonkiv.savingstracker.designsystem.theme.LightDark
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
@@ -30,12 +28,11 @@ fun AccountGroup(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(20.dp))
-            .background(LightDark)
+            .clip(RoundedCornerShape(10.dp))
+            .background(AppTheme.appColorScheme.surface)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth()
-                .background(Color.Black.copy(alpha = 0.4f))
                 .padding(Spacing.M),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -51,9 +48,16 @@ fun AccountGroup(
 
             Text(
                 text = model.title,
-                color = Gray
+                style = AppTheme.appTypography.subheading
             )
         }
+
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = Spacing.M, end = Spacing.M)
+            .height(1.dp)
+            .background(AppTheme.appColorScheme.divider)
+        )
 
         Column {
             model.accounts.forEach {

@@ -3,7 +3,7 @@ package com.dimonkiv.savingstracker.core
 import android.app.Application
 import android.util.Log
 import com.dimonkiv.savingstracker.account.domain.repository.AccountTypeRepository
-import com.dimonkiv.savingstracker.account.presentation.add_account.account_type.model.AccountTypeModel
+import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
 import com.dimonkiv.savingstracker.designsystem.theme.Blue
 import com.dimonkiv.savingstracker.designsystem.theme.Green
 import com.dimonkiv.savingstracker.designsystem.theme.Orange
