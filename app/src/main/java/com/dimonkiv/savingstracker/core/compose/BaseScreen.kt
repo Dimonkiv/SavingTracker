@@ -16,7 +16,7 @@ fun BaseScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            toolbar?.invoke()
+            toolbar.invoke()
         }
     ) { innerPadding ->
         Box(

@@ -13,7 +13,6 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.dimonkiv.savingstracker.designsystem.AppButton
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
