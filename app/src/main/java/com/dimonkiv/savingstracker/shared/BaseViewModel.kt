@@ -1,10 +1,10 @@
-package com.dimonkiv.savingstracker.core
+package com.dimonkiv.savingstracker.shared
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dimonkiv.savingstracker.core.model.UiEffect
-import com.dimonkiv.savingstracker.core.model.UiEvent
-import com.dimonkiv.savingstracker.core.model.UiState
+import com.dimonkiv.savingstracker.shared.model.UiEffect
+import com.dimonkiv.savingstracker.shared.model.UiEvent
+import com.dimonkiv.savingstracker.shared.model.UiState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow

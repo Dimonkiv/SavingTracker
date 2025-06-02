@@ -2,10 +2,11 @@ package com.dimonkiv.savingstracker.account.presentation.accounts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.core.NavigationItem
 
@@ -14,19 +15,28 @@ fun AccountsRoute(
     navController: NavHostController,
     viewModel: AccountsViewModel = hiltViewModel()
 ) {
-    val state by viewModel.uiState.collectAsState()
-    val navBackStackEntry = remember { navController.getBackStackEntry(NavigationItem.Main.route) }
-    LaunchedEffect(navBackStackEntry) {
-        viewModel.setEvent(Event.LoadAccounts)
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    LaunchedEffect(navController) {
+        navController.currentBackStackEntryFlow.collect { backStackEntry ->
+            val isResumed = backStackEntry.destination.route == NavigationItem.Main.route
+            val resumedState = lifecycleOwner.lifecycle.currentState == Lifecycle.State.RESUMED
+
+            if (isResumed && resumedState) {
+                viewModel.setEvent(Event.LoadAccounts)
+            }
+        }
     }
 
-    AccountsScreen(
-        state = state,
-        onOkErrorClick = {
-            viewModel.setEvent(Event.OnErrorDialogClick)
-        },
-        onAddClick = {
-            navController.navigate(NavigationItem.Add.route)
-        }
-    )
+        AccountsScreen(
+            state = state,
+            onOkErrorClick = {
+                viewModel.setEvent(Event.OnErrorDialogClick)
+            },
+            onAddClick = {
+                navController.navigate(NavigationItem.Add.route)
+            }
+        )
+
 }

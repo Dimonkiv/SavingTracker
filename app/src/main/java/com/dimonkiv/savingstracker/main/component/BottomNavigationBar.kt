@@ -109,7 +109,7 @@ fun BottomNavigationBar(
             fabColor = AppTheme.appColorScheme.primary,
             iconRes = fabIconRes
         ) {
-            onItemClick(Screen.ADD)
+            onItemClick(Screen.ADD_TRANSACTION)
         }
     }
 }

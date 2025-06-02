@@ -11,6 +11,7 @@ import com.dimonkiv.savingstracker.account.presentation.addaccount.AddAccountRou
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.main.MainRoute
 import com.dimonkiv.savingstracker.select_icon.presentation.SelectIconRoute
+import com.dimonkiv.savingstracker.transaction.AddTransactionRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,6 +37,10 @@ fun AppNavHost(
         }
         composable(NavigationItem.SelectIcon.route) {
             SelectIconRoute(navController)
+        }
+
+        composable(NavigationItem.AddTransaction.route) {
+            AddTransactionRoute(navController)
         }
 
     }

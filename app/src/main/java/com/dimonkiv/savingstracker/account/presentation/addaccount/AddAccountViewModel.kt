@@ -7,7 +7,7 @@ import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.AddAccountModel
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.asDomain
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.isNotEmpty
-import com.dimonkiv.savingstracker.core.BaseViewModel
+import com.dimonkiv.savingstracker.shared.BaseViewModel
 import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap
 import dagger.hilt.android.lifecycle.HiltViewModel

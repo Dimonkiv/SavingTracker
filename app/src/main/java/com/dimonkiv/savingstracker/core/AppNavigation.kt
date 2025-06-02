@@ -2,7 +2,7 @@ package com.dimonkiv.savingstracker.core
 
 enum class Screen {
     MAIN, HOME, ACCOUNTS, STATISTICS, PROFILE, ADD,
-    SELECT_ICON
+    SELECT_ICON, ADD_TRANSACTION
 }
 
 sealed class NavigationItem(val route: String) {
@@ -13,4 +13,5 @@ sealed class NavigationItem(val route: String) {
     data object Profile: NavigationItem(Screen.PROFILE.name)
     data object Add: NavigationItem(Screen.ADD.name)
     data object SelectIcon: NavigationItem(Screen.SELECT_ICON.name)
+    data object AddTransaction: NavigationItem(Screen.ADD_TRANSACTION.name)
 }

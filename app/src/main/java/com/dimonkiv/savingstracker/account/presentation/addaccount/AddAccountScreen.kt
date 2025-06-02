@@ -3,7 +3,6 @@ package com.dimonkiv.savingstracker.account.presentation.addaccount
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,13 +21,9 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,12 +32,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.SelectAccountTypeRoute
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.AddAccountModel
 import com.dimonkiv.savingstracker.designsystem.AppButton
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
-import com.dimonkiv.savingstracker.designsystem.theme.LightDark
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
@@ -54,185 +47,156 @@ fun AddAccountScreen(
     showBottomSheet: Boolean,
     onEventChanged: (Event) -> Unit
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        modifier = Modifier.padding(start = Spacing.L),
-                        text = "Add account",
-                        style = AppTheme.appTypography.heading
-                    )
-                },
-                navigationIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .padding(start = Spacing.L)
-                            .size(24.dp)
-                            .clickable {
-                                onEventChanged(Event.OnBackButtonClicked)
-                            },
-                        painter = painterResource(R.drawable.ic_back),
-                        contentDescription = "Back icon",
-                        tint = AppTheme.appColorScheme.textPrimary
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = AppTheme.appColorScheme.surface
-                )
-            )
-        }
-    ) { innerPadding ->
-        Column(
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.size(Spacing.L))
+
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .size(150.dp)
+                .clip(CircleShape)
+                .clickable {
+                    onEventChanged(Event.OnSelectIconClicked)
+                },
+            contentAlignment = Alignment.Center
+
         ) {
-            Spacer(modifier = Modifier.size(Spacing.L))
+            Box(
+                modifier = Modifier
+                    .size(140.dp)
+                    .clip(CircleShape)
+                    .background(AppTheme.appColorScheme.primary),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(130.dp)
+                        .clip(CircleShape)
+                        .background(model.color),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (model.iconRes != -1) {
+                        Icon(
+                            modifier = Modifier.size(32.dp),
+                            painter = painterResource(id = model.iconRes),
+                            contentDescription = null,
+                            tint = LightGray
+                        )
+                    } else {
+                        Text(
+                            text = "Add icon",
+                            color = AppTheme.appColorScheme.onPrimary,
+                            style = AppTheme.appTypography.caption,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
 
             Box(
                 modifier = Modifier
-                    .size(150.dp)
+                    .padding(bottom = 15.dp, end = 15.dp)
+                    .size(40.dp)
                     .clip(CircleShape)
-                    .clickable {
-                        onEventChanged(Event.OnSelectIconClicked)
-                    },
+                    .background(AppTheme.appColorScheme.primary)
+                    .align(Alignment.BottomEnd),
                 contentAlignment = Alignment.Center
-
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(140.dp)
-                        .clip(CircleShape)
-                        .background(AppTheme.appColorScheme.primary),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(130.dp)
-                            .clip(CircleShape)
-                            .background(model.color),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if (model.iconRes != -1) {
-                            Icon(
-                                modifier = Modifier.size(32.dp),
-                                painter = painterResource(id = model.iconRes),
-                                contentDescription = null,
-                                tint = LightGray
-                            )
-                        } else {
-                            Text(
-                                text = "Add icon",
-                                color = AppTheme.appColorScheme.onPrimary,
-                                style = AppTheme.appTypography.caption,
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-                }
-
-                Box(
-                    modifier = Modifier
-                        .padding(bottom = 15.dp, end = 15.dp)
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(AppTheme.appColorScheme.primary)
-                        .align(Alignment.BottomEnd),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = "Edit",
-                        tint = AppTheme.appColorScheme.onPrimary
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.size(Spacing.L))
-
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.L),
-                value = model.title,
-                onValueChange = {
-                    onEventChanged(Event.OnTitleTextChanged(it))
-                },
-                label = {
-                    Text(text = "Title")
-                },
-                singleLine = true,
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = AppTheme.appColorScheme.surface,
-                    unfocusedContainerColor = AppTheme.appColorScheme.surface
-                )
-            )
-
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.L)
-                    .background(AppTheme.appColorScheme.surface)
-                    .border(1.dp, AppTheme.appColorScheme.textPrimary)
-                    .padding(15.dp)
-                    .clickable {
-                        onEventChanged((Event.OnTypeClicked))
-                    },
-            ) {
-                if (model.type.title.isNotEmpty()) {
-                    Box(
-                        modifier = Modifier
-                            .width(40.dp)
-                            .height(25.dp)
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(model.type.color)
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
-                }
-                Text(
-                    text = model.type.title.ifEmpty { "Type" },
-                    color = AppTheme.appColorScheme.textPrimary
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit",
+                    tint = AppTheme.appColorScheme.onPrimary
                 )
             }
+        }
 
+        Spacer(modifier = Modifier.size(Spacing.L))
 
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.XL),
-                value = model.balance,
-                onValueChange = {
-                    onEventChanged(Event.OnBalanceTextChanged(it))
-                },
-                label = {
-                    Text(text = "Balance")
-                },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                singleLine = true,
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = AppTheme.appColorScheme.surface,
-                    unfocusedContainerColor = AppTheme.appColorScheme.surface
-                )
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.L),
+            value = model.title,
+            onValueChange = {
+                onEventChanged(Event.OnTitleTextChanged(it))
+            },
+            label = {
+                Text(text = "Title")
+            },
+            singleLine = true,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = AppTheme.appColorScheme.surface,
+                unfocusedContainerColor = AppTheme.appColorScheme.surface
             )
+        )
 
-            Spacer(modifier = Modifier.weight(1f))
 
-            AppButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = Spacing.XL,
-                        end = Spacing.XL,
-                        bottom = 60.dp
-                    ),
-                enabled = model.isButtonEnabled,
-                title = "Create account",
-                onClick = {
-                    onEventChanged(Event.OnCreateButtonClicked)
-                }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.L)
+                .background(AppTheme.appColorScheme.surface)
+                .border(1.dp, AppTheme.appColorScheme.textPrimary)
+                .padding(15.dp)
+                .clickable {
+                    onEventChanged((Event.OnTypeClicked))
+                },
+        ) {
+            if (model.type.title.isNotEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .width(40.dp)
+                        .height(25.dp)
+                        .clip(RoundedCornerShape(5.dp))
+                        .background(model.type.color)
+                )
+                Spacer(modifier = Modifier.size(10.dp))
+            }
+            Text(
+                text = model.type.title.ifEmpty { "Type" },
+                color = AppTheme.appColorScheme.textPrimary
             )
         }
+
+
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.XL),
+            value = model.balance,
+            onValueChange = {
+                onEventChanged(Event.OnBalanceTextChanged(it))
+            },
+            label = {
+                Text(text = "Balance")
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            singleLine = true,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = AppTheme.appColorScheme.surface,
+                unfocusedContainerColor = AppTheme.appColorScheme.surface
+            )
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        AppButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = Spacing.XL,
+                    end = Spacing.XL,
+                    bottom = 60.dp
+                ),
+            enabled = model.isButtonEnabled,
+            title = "Create account",
+            onClick = {
+                onEventChanged(Event.OnCreateButtonClicked)
+            }
+        )
     }
 
     if (showBottomSheet) {
@@ -246,5 +210,4 @@ fun AddAccountScreen(
             }
         )
     }
-
 }

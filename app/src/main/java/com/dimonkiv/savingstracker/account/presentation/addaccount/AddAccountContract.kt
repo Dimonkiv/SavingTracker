@@ -1,8 +1,8 @@
 package com.dimonkiv.savingstracker.account.presentation.addaccount
 
 import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.core.model.UiEffect
-import com.dimonkiv.savingstracker.core.model.UiEvent
+import com.dimonkiv.savingstracker.shared.model.UiEffect
+import com.dimonkiv.savingstracker.shared.model.UiEvent
 
 sealed class Event : UiEvent {
     data class OnDataReceived(val colorName: String?, val iconRes: Int?) : Event()

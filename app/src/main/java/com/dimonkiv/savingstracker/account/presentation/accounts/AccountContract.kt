@@ -1,9 +1,9 @@
 package com.dimonkiv.savingstracker.account.presentation.accounts
 
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.AccountsModel
-import com.dimonkiv.savingstracker.core.model.UiEffect
-import com.dimonkiv.savingstracker.core.model.UiEvent
-import com.dimonkiv.savingstracker.core.model.UiState
+import com.dimonkiv.savingstracker.shared.model.UiEffect
+import com.dimonkiv.savingstracker.shared.model.UiEvent
+import com.dimonkiv.savingstracker.shared.model.UiState
 
 sealed class Event : UiEvent {
     data object LoadAccounts : Event()

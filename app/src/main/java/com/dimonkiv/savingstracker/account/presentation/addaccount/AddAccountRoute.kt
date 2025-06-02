@@ -9,9 +9,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.core.NavigationItem
+import com.dimonkiv.savingstracker.core.compose.AppToolbar
+import com.dimonkiv.savingstracker.core.compose.BaseScreen
+import com.dimonkiv.savingstracker.shared.ConsumeUiEffects
 
 @ExperimentalMaterial3Api
 @Composable
@@ -24,38 +28,50 @@ fun AddAccountRoute(
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     val bottomSheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
-    viewModel.setEvent(Event.OnDataReceived(colorName, iconRes))
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.effect.collect { effect ->
-            when (effect) {
-                is Effect.ShowSelectTypeSheet -> {
-                    showBottomSheet = true
-                }
+    LaunchedEffect(Unit) {
+        viewModel.setEvent(Event.OnDataReceived(colorName, iconRes))
+    }
 
-                is Effect.HideSelectTypeSheet -> {
-                    showBottomSheet = false
-                }
+    ConsumeUiEffects(viewModel.effect) { effect ->
+        when (effect) {
+            is Effect.ShowSelectTypeSheet -> {
+                showBottomSheet = true
+            }
 
-                is Effect.OpenPreviousScreen -> {
-                    openPreviousScreen(navController)
-                }
+            is Effect.HideSelectTypeSheet -> {
+                showBottomSheet = false
+            }
 
-                is Effect.OpenSelectIconScreen -> {
-                    openSelectIconScreen(navController)
-                }
+            is Effect.OpenPreviousScreen -> {
+                openPreviousScreen(navController)
+            }
+
+            is Effect.OpenSelectIconScreen -> {
+                openSelectIconScreen(navController)
             }
         }
     }
 
-    AddAccountScreen(
-        model = state.value,
-        bottomSheetState,
-        showBottomSheet,
-        onEventChanged = {
-            viewModel.setEvent(it)
+    BaseScreen(
+        toolbar = {
+            AppToolbar(
+                title = "Add account",
+                onNavigationIconClicked = {
+                    viewModel.setEvent(Event.OnBackButtonClicked)
+                }
+            )
         }
-    )
+    ) {
+        AddAccountScreen(
+            model = state.value,
+            bottomSheetState,
+            showBottomSheet,
+            onEventChanged = {
+                viewModel.setEvent(it)
+            }
+        )
+    }
 }
 
 private fun openPreviousScreen(navController: NavHostController) {

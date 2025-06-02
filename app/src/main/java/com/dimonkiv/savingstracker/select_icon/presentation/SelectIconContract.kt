@@ -1,9 +1,9 @@
 package com.dimonkiv.savingstracker.select_icon.presentation
 
 import androidx.compose.ui.graphics.Color
-import com.dimonkiv.savingstracker.core.model.UiEffect
-import com.dimonkiv.savingstracker.core.model.UiEvent
-import com.dimonkiv.savingstracker.core.model.UiState
+import com.dimonkiv.savingstracker.shared.model.UiEffect
+import com.dimonkiv.savingstracker.shared.model.UiEvent
+import com.dimonkiv.savingstracker.shared.model.UiState
 import com.dimonkiv.savingstracker.select_icon.presentation.model.SelectedIconModel
 
 class SelectIconContract {
