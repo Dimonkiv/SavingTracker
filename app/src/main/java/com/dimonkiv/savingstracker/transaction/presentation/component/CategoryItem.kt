@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.transaction.component
+package com.dimonkiv.savingstracker.transaction.presentation.component
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
