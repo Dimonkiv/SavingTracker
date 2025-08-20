@@ -4,11 +4,12 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.detekt.plugin)
 }
 
 android {
     namespace = "com.dimonkiv.savingstracker"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.dimonkiv.savingstracker"
@@ -44,6 +45,13 @@ android {
     }
 }
 
+detekt {
+    toolVersion = "1.23.8"
+    config.setFrom(file("../config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
+    autoCorrect = true
+}
+
 dependencies {
     // Android
     implementation(libs.androidx.core.ktx)
@@ -76,4 +84,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    detektPlugins(libs.detekt.compose.rules)
 }
