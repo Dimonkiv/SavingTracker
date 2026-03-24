@@ -1,12 +1,12 @@
 package com.dimonkiv.savingstracker.designsystem
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
+import com.dimonkiv.savingstracker.R
 
 @Composable
 fun ErrorDialog(
@@ -16,7 +16,7 @@ fun ErrorDialog(
     AlertDialog(
         icon = {
             Icon(
-                imageVector = Icons.Default.Build,
+                painter = painterResource(R.drawable.ic_error),
                 contentDescription = null
             )
         },

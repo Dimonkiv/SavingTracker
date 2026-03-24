@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -32,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.SelectAccountTypeRoute
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.AddAccountModel
 import com.dimonkiv.savingstracker.designsystem.AppButton
@@ -106,7 +105,7 @@ fun AddAccountScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Default.Edit,
+                    painter = painterResource(R.drawable.ic_edit),
                     contentDescription = "Edit",
                     tint = AppTheme.appColorScheme.onPrimary
                 )
