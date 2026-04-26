@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class AccountTypeDataRepository@Inject constructor(
     private val dao: AccountTypeDao,
-    @IO
+    @param:IO
     private val dispatcher: CoroutineDispatcher
 ): AccountTypeRepository {
     override suspend fun createAccountType(type: AccountTypeModel) = withContext(dispatcher) {
