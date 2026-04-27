@@ -8,12 +8,13 @@ plugins {
 
 android {
     namespace = "com.dimonkiv.savingstracker"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.dimonkiv.savingstracker"
         minSdk = 27
-        targetSdk = 35
+        //noinspection OldTargetApi
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
