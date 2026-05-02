@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
-import com.dimonkiv.savingstracker.core.design_system.SavingsTrackingTheme
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SavingsTrackingTheme {
+            AppTheme {
                 val navController = rememberNavController()
 
                 AppNavHost(navController = navController)

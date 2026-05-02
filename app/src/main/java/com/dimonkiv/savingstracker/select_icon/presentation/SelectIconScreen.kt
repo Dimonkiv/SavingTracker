@@ -7,41 +7,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.dimonkiv.savingstracker.core.design_system.AppBar
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.ProgressBar
-import com.dimonkiv.savingstracker.core.design_system.Purple
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.AppButton
+import com.dimonkiv.savingstracker.designsystem.ProgressBar
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
+import com.dimonkiv.savingstracker.select_icon.presentation.SelectIconContract.Event
 import com.dimonkiv.savingstracker.select_icon.presentation.component.SelectIconContent
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectIconScreen(
     state: SelectIconContract.State,
-    onBackButtonClick: () -> Unit,
-    onColorSelected: (Color) -> Unit,
-    onIconSelected: (Int) -> Unit,
-    onSelectButtonClick: () -> Unit
+    onEventChanged: (Event) -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 55.dp, start = Spacing.L, end = Spacing.L)
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppBar(title = "Select icon") {
-                onBackButtonClick()
-            }
             Spacer(modifier = Modifier.size(Spacing.L))
 
             when (state.state) {
@@ -51,10 +37,10 @@ fun SelectIconScreen(
                     SelectIconContent(
                         item = state.state.state,
                         onColorSelected = {
-                            onColorSelected(it)
+                            onEventChanged(Event.OnColorSelected(it))
                         },
                         onIconSelected = {
-                            onIconSelected(it)
+                            onEventChanged(Event.OnIconSelected(it))
                         }
                     )
                 }
@@ -67,26 +53,20 @@ fun SelectIconScreen(
             false
         }
 
-        Button(
+        AppButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 40.dp),
+                .padding(
+                    start = Spacing.XL,
+                    end = Spacing.XL,
+                    bottom = 60.dp
+                ),
             enabled = buttonEnabled,
             onClick = {
-                onSelectButtonClick()
+                onEventChanged(Event.OnSelectButtonClick)
             },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Purple,
-                disabledContainerColor = Purple.copy(0.6f),
-                disabledContentColor = LightGray.copy(0.6f)
-            )
-        ) {
-            Text(
-                text = "Select",
-                fontSize = 24.sp
-            )
-        }
+            title = "Select"
+        )
     }
-
 }

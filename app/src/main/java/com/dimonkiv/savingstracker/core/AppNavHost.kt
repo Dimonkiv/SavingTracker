@@ -7,10 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.dimonkiv.savingstracker.account.presentation.add_account.AddAccountRoute
-import com.dimonkiv.savingstracker.core.design_system.Dark
+import com.dimonkiv.savingstracker.account.presentation.addaccount.AddAccountRoute
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.main.MainRoute
 import com.dimonkiv.savingstracker.select_icon.presentation.SelectIconRoute
+import com.dimonkiv.savingstracker.transaction.presentation.AddTransactionRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,7 +21,7 @@ fun AppNavHost(
     startDestination: String = NavigationItem.Main.route
 ) {
     NavHost(
-        modifier = modifier.background(Dark),
+        modifier = modifier.background(AppTheme.appColorScheme.background),
         navController = navController,
         startDestination = startDestination
     ) {
@@ -36,6 +37,10 @@ fun AppNavHost(
         }
         composable(NavigationItem.SelectIcon.route) {
             SelectIconRoute(navController)
+        }
+
+        composable(NavigationItem.AddTransaction.route) {
+            AddTransactionRoute(navController)
         }
 
     }

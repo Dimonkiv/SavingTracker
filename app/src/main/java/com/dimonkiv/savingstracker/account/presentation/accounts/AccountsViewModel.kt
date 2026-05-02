@@ -3,7 +3,7 @@ package com.dimonkiv.savingstracker.account.presentation.accounts
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.account.domain.use_cases.GetAccountsUseCase
-import com.dimonkiv.savingstracker.core.BaseViewModel
+import com.dimonkiv.savingstracker.shared.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

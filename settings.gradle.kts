@@ -18,3 +18,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Savings Tracker"
 include(":app")
+include(":designsystem")

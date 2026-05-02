@@ -1,19 +1,20 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.detekt.plugin)
 }
 
 android {
     namespace = "com.dimonkiv.savingstracker"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.dimonkiv.savingstracker"
         minSdk = 27
-        targetSdk = 35
+        //noinspection OldTargetApi
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -36,12 +37,21 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
+}
+
+detekt {
+    toolVersion = "1.23.8"
+    config.setFrom(file("../config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
+    autoCorrect = true
 }
 
 dependencies {
@@ -57,6 +67,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(project(":designsystem"))
 
     // Dagger hilt
     implementation(libs.hilt.android)
@@ -76,4 +87,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    detektPlugins(libs.detekt.compose.rules)
 }

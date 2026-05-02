@@ -3,7 +3,7 @@ package com.dimonkiv.savingstracker.select_icon.presentation
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.select_icon.domain.GetSelectedIconUseCase
-import com.dimonkiv.savingstracker.core.BaseViewModel
+import com.dimonkiv.savingstracker.shared.BaseViewModel
 import com.dimonkiv.savingstracker.select_icon.presentation.SelectIconContract.*
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorModel

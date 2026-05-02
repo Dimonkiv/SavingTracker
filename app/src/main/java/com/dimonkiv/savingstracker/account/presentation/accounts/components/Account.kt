@@ -1,6 +1,7 @@
 package com.dimonkiv.savingstracker.account.presentation.accounts.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -16,20 +17,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.AccountModel
-import com.dimonkiv.savingstracker.core.design_system.LightGray
-import com.dimonkiv.savingstracker.core.design_system.Spacing
+import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
+import com.dimonkiv.savingstracker.designsystem.theme.LightGray
+import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 
 @Composable
 fun Account(
-    account: AccountModel
+    account: AccountModel,
+    isClickable: Boolean = false,
+    onAccountSelected: (AccountModel) -> Unit = {}
 ) {
     Box(
         modifier = Modifier.fillMaxWidth()
-            .padding(Spacing.M),
+            .padding(Spacing.M)
+            .clickable(isClickable) {
+                onAccountSelected(account)
+            },
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -59,16 +64,13 @@ fun Account(
 
                 Text(
                     text = account.title,
-                    color = LightGray,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
+                    style = AppTheme.appTypography.heading
                 )
             }
 
             Text(
                 text = account.balance,
-                color = LightGray,
-                fontSize = 18.sp
+                style = AppTheme.appTypography.subheading
             )
 
         }

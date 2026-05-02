@@ -12,20 +12,24 @@ class MainViewModel : ViewModel() {
         BottomItemModel(
             iconRes = R.drawable.ic_home,
             route = Screen.HOME,
+            title = "Home",
             selected = true
         ),
         BottomItemModel(
             iconRes = R.drawable.ic_wallet,
+            title = "Accounts",
             route = Screen.ACCOUNTS,
             selected = false
         ),
         BottomItemModel(
             iconRes = R.drawable.ic_chart,
+            title = "Analytics",
             route = Screen.STATISTICS,
             selected = false
         ),
         BottomItemModel(
             iconRes = R.drawable.ic_account,
+            title = "Settings",
             route = Screen.PROFILE,
             selected = false
         )
