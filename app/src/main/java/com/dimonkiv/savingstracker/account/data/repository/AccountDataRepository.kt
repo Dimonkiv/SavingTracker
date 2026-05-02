@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class AccountDataRepository @Inject constructor(
     private val accountDao: AccountDao,
-    @IO
+    @param:IO
     private val dispatcher: CoroutineDispatcher
 ): AccountRepository {
 

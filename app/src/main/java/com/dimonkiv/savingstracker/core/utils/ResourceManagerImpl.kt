@@ -5,7 +5,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class ResourceManagerImpl @Inject constructor(
-    @ApplicationContext
+    @param:ApplicationContext
     private val context: Context
 ): ResourceManager {
     override fun getString(resId: Int): String {
