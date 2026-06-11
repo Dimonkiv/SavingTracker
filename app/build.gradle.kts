@@ -67,7 +67,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(project(":designsystem"))
 
     // Dagger hilt
     implementation(libs.hilt.android)
