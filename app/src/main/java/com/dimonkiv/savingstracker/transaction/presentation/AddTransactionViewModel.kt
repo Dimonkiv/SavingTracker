@@ -8,12 +8,8 @@ import com.dimonkiv.savingstracker.shared.BaseViewModel
 import com.dimonkiv.savingstracker.transaction.domain.GetAddTransactionUseCase
 import com.dimonkiv.savingstracker.transaction.presentation.model.AddTransactionUiModel
 import com.dimonkiv.savingstracker.transaction.presentation.model.asPresentation
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-
-@HiltViewModel
-class AddTransactionViewModel @Inject constructor(
+class AddTransactionViewModel(
     private val reducer: AddTransactionReducer,
     private val getAddTransactionUseCase: GetAddTransactionUseCase,
     private val resourceManager: ResourceManager

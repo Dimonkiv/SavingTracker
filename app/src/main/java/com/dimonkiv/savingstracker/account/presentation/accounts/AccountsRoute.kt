@@ -3,17 +3,17 @@ package com.dimonkiv.savingstracker.account.presentation.accounts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.core.NavigationItem
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun AccountsRoute(
     navController: NavHostController,
-    viewModel: AccountsViewModel = hiltViewModel()
+    viewModel: AccountsViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current

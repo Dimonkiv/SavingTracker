@@ -4,12 +4,9 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.account.domain.use_cases.GetAccountsUseCase
 import com.dimonkiv.savingstracker.shared.BaseViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class AccountsViewModel @Inject constructor(
+class AccountsViewModel(
     private val useCase: GetAccountsUseCase
 ) : BaseViewModel<Event, AccountState, Effect>() {
 

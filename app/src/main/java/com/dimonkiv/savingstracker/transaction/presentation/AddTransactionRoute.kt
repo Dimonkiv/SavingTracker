@@ -3,17 +3,17 @@ package com.dimonkiv.savingstracker.transaction.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.core.compose.AppToolbar
 import com.dimonkiv.savingstracker.core.compose.BaseScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun AddTransactionRoute(
     navController: NavHostController,
-    viewModel: AddTransactionViewModel = hiltViewModel()
+    viewModel: AddTransactionViewModel = koinViewModel()
 ) {
     val state = viewModel.uiState.collectAsStateWithLifecycle()
 

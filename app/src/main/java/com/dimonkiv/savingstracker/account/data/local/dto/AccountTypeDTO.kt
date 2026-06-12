@@ -11,6 +11,8 @@ data class AccountTypeDTO(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "color")
-    val color: String
+    val color: String,
+    @ColumnInfo(name = "is_default")
+    val isDefault: Boolean = false
 )
 

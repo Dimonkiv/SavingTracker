@@ -4,15 +4,15 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import org.koin.compose.viewmodel.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainRoute(
     mainController: NavHostController,
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
     val bottomNavController = rememberNavController()

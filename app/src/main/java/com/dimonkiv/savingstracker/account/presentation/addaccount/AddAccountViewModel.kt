@@ -2,7 +2,7 @@ package com.dimonkiv.savingstracker.account.presentation.addaccount
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.dimonkiv.savingstracker.account.domain.repository.AccountRepository
+import com.dimonkiv.savingstracker.account.domain.use_cases.CreateAccountUseCase
 import com.dimonkiv.savingstracker.account.presentation.addaccount.account_type.model.AccountTypeModel
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.AddAccountModel
 import com.dimonkiv.savingstracker.account.presentation.addaccount.model.asDomain
@@ -10,14 +10,11 @@ import com.dimonkiv.savingstracker.account.presentation.addaccount.model.isNotEm
 import com.dimonkiv.savingstracker.shared.BaseViewModel
 import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
-@HiltViewModel
-class AddAccountViewModel @Inject constructor(
-    private val repository: AccountRepository
+class AddAccountViewModel(
+    private val useCase: CreateAccountUseCase
 ) : BaseViewModel<Event, AddAccountModel, Effect>() {
 
     override fun createInitialState(): AddAccountModel {
@@ -97,7 +94,7 @@ class AddAccountViewModel @Inject constructor(
     private fun createAccount() {
         viewModelScope.launch {
             runCatching {
-                repository.createAccount(currentState.asDomain())
+                useCase.invoke(currentState.asDomain())
             }.onSuccess {
                setEffect(Effect.OpenPreviousScreen)
             }.onFailure {

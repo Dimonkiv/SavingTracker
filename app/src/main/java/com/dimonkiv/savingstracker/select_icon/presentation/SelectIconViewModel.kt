@@ -9,12 +9,9 @@ import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorMap
 import com.dimonkiv.savingstracker.select_icon.presentation.model.ColorModel
 import com.dimonkiv.savingstracker.select_icon.presentation.model.IconModel
 import com.dimonkiv.savingstracker.select_icon.presentation.model.SelectedIconModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SelectIconViewModel @Inject constructor(
+class SelectIconViewModel(
     private val useCase: GetSelectedIconUseCase
 ) : BaseViewModel<Event, State, Effect>() {
 

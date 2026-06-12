@@ -1,11 +1,8 @@
 package com.dimonkiv.savingstracker.core.utils
 
 import android.content.Context
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
-class ResourceManagerImpl @Inject constructor(
-    @param:ApplicationContext
+class ResourceManagerImpl(
     private val context: Context
 ): ResourceManager {
     override fun getString(resId: Int): String {

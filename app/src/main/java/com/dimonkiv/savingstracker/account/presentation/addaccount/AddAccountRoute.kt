@@ -8,13 +8,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.core.NavigationItem
 import com.dimonkiv.savingstracker.core.compose.AppToolbar
 import com.dimonkiv.savingstracker.core.compose.BaseScreen
 import com.dimonkiv.savingstracker.shared.ConsumeUiEffects
+import org.koin.compose.viewmodel.koinViewModel
 
 @ExperimentalMaterial3Api
 @Composable
@@ -22,7 +22,7 @@ fun AddAccountRoute(
     colorName: String?,
     iconRes: Int?,
     navController: NavHostController,
-    viewModel: AddAccountViewModel = hiltViewModel()
+    viewModel: AddAccountViewModel = koinViewModel()
 ) {
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     val bottomSheetState = rememberModalBottomSheetState()

@@ -2,9 +2,8 @@ package com.dimonkiv.savingstracker.transaction.presentation
 
 import com.dimonkiv.savingstracker.core.utils.DateUtils
 import com.dimonkiv.savingstracker.transaction.presentation.model.AddTransactionUiModel
-import javax.inject.Inject
 
-class AddTransactionReducerImpl @Inject constructor(): AddTransactionReducer {
+class AddTransactionReducerImpl: AddTransactionReducer {
     override fun reduce(
         state: AddTransactionUiModel,
         event: Event

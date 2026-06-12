@@ -6,14 +6,17 @@ import com.dimonkiv.savingstracker.account.presentation.accounts.model.AccountMo
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.AccountsModel
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.TypesModel
 import com.dimonkiv.savingstracker.account.presentation.accounts.model.asPresentation
-import javax.inject.Inject
 
-class GetAccountsUseCase @Inject constructor(
+interface GetAccountsUseCase {
+    suspend fun invoke(): AccountsModel
+}
+
+class GetAccountsUseCaseImpl(
     private val accountRepository: AccountRepository,
     private val typesRepository: AccountTypeRepository
-) {
+) : GetAccountsUseCase {
 
-    suspend fun invoke(): AccountsModel {
+    override suspend fun invoke(): AccountsModel {
         val accounts = accountRepository.fetchAccounts()
         val totalBalance = accounts.sumOf { it.balance }
 
