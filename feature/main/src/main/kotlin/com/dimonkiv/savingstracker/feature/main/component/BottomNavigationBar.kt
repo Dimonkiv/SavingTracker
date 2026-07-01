@@ -23,22 +23,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation3.runtime.NavKey
 import com.dimonkiv.savingstracker.core.designsystem.R
-import com.dimonkiv.savingstracker.core.navigation.Screen
+import com.dimonkiv.savingstracker.core.navigation.routes.AddTransaction
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.feature.main.model.BottomItemModel
 
 @Composable
 fun BottomNavigationBar(
     items: List<BottomItemModel>,
-    currentDestination: NavDestination?,
+    currentTopLevelKey: NavKey,
     barHeight: Dp = 80.dp,
     fabSize: Dp = 64.dp,
     fabIconRes: Int = R.drawable.ic_add,
     cardElevation: Dp = 10.dp,
-    onItemClick: (Screen) -> Unit
+    onItemClick: (NavKey) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -62,9 +61,7 @@ fun BottomNavigationBar(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 items.forEachIndexed { index, item ->
-                    val isSelected = currentDestination
-                        ?.hierarchy
-                        ?.any { it.route == item.route.name } == true
+                    val isSelected = currentTopLevelKey == item.route
 
                     NavigationBarItem(
                         onClick = { onItemClick(item.route) },
@@ -109,7 +106,7 @@ fun BottomNavigationBar(
             fabColor = AppTheme.appColorScheme.primary,
             iconRes = fabIconRes
         ) {
-            onItemClick(Screen.ADD_TRANSACTION)
+            onItemClick(AddTransaction)
         }
     }
 }

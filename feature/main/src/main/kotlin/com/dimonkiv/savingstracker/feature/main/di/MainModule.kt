@@ -7,3 +7,5 @@ import org.koin.dsl.module
 val mainModule = module {
     viewModel { MainViewModel() }
 }
+
+val mainModules = listOf(mainModule, mainNavigationModule)

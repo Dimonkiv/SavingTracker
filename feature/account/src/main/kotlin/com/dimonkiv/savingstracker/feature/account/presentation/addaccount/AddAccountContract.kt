@@ -10,7 +10,6 @@ sealed class AddAccountIntent : UiIntent {
     data class OnTypeSelected(val type: AccountTypeModel) : AddAccountIntent()
     data class OnTitleTextChanged(val title: String) : AddAccountIntent()
     data class OnBalanceTextChanged(val balance: String) : AddAccountIntent()
-    data object OnDismissButtonClick : AddAccountIntent()
     data object OnSelectIconClicked : AddAccountIntent()
     data object OnBackButtonClicked : AddAccountIntent()
     data object OnCreateButtonClicked : AddAccountIntent()
@@ -22,7 +21,6 @@ sealed class AddAccountEffect : UiEffect {
     data object OpenSelectIconScreen : AddAccountEffect()
     data object OpenPreviousScreen : AddAccountEffect()
     data object ShowSelectTypeSheet : AddAccountEffect()
-    data object HideSelectTypeSheet : AddAccountEffect()
     data class ShowError(val message: String) : AddAccountEffect()
 }
 

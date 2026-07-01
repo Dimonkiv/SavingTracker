@@ -46,6 +46,6 @@ val accountUiModule = module {
     viewModel { SelectAccountTypeViewModel(get(), get()) }
 }
 
-val accountModules = listOf(accountDataModule, accountDomainModule, accountUiModule)
+val accountModules = listOf(accountDataModule, accountDomainModule, accountUiModule, accountNavigationModule)
 
 

@@ -4,16 +4,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.core.designsystem.R
+import com.dimonkiv.savingstracker.core.navigation.Navigator
+import com.dimonkiv.savingstracker.core.navigation.routes.IconColorResult
+import com.dimonkiv.savingstracker.core.navigation.routes.IconColorResultBus
 import com.dimonkiv.savingstracker.designsystem.AppToolbar
 import com.dimonkiv.savingstracker.designsystem.BaseScreen
 import com.dimonkiv.savingstracker.core.mvi.ConsumeUiEffects
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SelectIconRoute(
-    navController: NavHostController,
+    navigator: Navigator,
+    iconColorResult: IconColorResultBus = koinInject(),
     viewModel: SelectIconViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -21,11 +25,8 @@ fun SelectIconRoute(
     ConsumeUiEffects(viewModel.effect) { effect ->
         when (effect) {
             is SelectIconEffect.OpenPreviousScreenWithArgs -> {
-                val savedState = navController.previousBackStackEntry?.savedStateHandle
-                savedState?.set("color", effect.color)
-                savedState?.set("icon", effect.iconRes)
-
-                navController.navigateUp()
+                iconColorResult.send(IconColorResult(iconRes = effect.iconRes, colorName = effect.color))
+                navigator.goBack()
             }
         }
     }
@@ -35,7 +36,7 @@ fun SelectIconRoute(
             AppToolbar(
                 title = stringResource(R.string.select_icon),
                 onNavigationIconClicked = {
-                    navController.navigateUp()
+                    navigator.goBack()
                 }
             )
         },

@@ -10,4 +10,4 @@ val selectIconUiModule = module {
     viewModel { SelectIconViewModel(get()) }
 }
 
-val selectIconModules = listOf(selectIconUiModule)
+val selectIconModules = listOf(selectIconUiModule, selectIconNavigationModule)

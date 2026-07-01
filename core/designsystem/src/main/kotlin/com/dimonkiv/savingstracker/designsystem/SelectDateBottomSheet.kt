@@ -35,48 +35,68 @@ fun SelectDateBottomSheet(
 ) {
     if (!isVisible) return
 
-    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialDateMillis)
-    val confirmEnabled = datePickerState.selectedDateMillis != null
-
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         modifier = Modifier.fillMaxWidth()
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .navigationBarsPadding()
+        SelectDateContent(
+            initialDateMillis = initialDateMillis,
+            onDateSelected = {
+                onDateSelected(it)
+                onDismissRequest()
+            },
+            onCancel = onDismissRequest,
+            confirmButtonText = confirmButtonText,
+            cancelButtonText = cancelButtonText
+        )
+    }
+}
+
+/** Nav-agnostic content of [SelectDateBottomSheet], reusable outside a `ModalBottomSheet`. */
+@Composable
+fun SelectDateContent(
+    onDateSelected: (Long) -> Unit,
+    onCancel: () -> Unit,
+    initialDateMillis: Long? = null,
+    confirmButtonText: String = "OK",
+    cancelButtonText: String = "Cancel"
+) {
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialDateMillis)
+    val confirmEnabled = datePickerState.selectedDateMillis != null
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .navigationBarsPadding()
+    ) {
+        Text(
+            text = stringResource(R.string.select_date),
+            style = AppTheme.appTypography.heading,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        DatePicker(state = datePickerState)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
         ) {
-            Text(
-                text = stringResource(R.string.select_date),
-                style = AppTheme.appTypography.heading,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            DatePicker(state = datePickerState)
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+            TextButton(onClick = onCancel) {
+                Text(cancelButtonText)
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            TextButton(
+                onClick = {
+                    datePickerState.selectedDateMillis?.let {
+                        onDateSelected(it)
+                    }
+                },
+                enabled = confirmEnabled
             ) {
-                TextButton(onClick = onDismissRequest) {
-                    Text(cancelButtonText)
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                TextButton(
-                    onClick = {
-                        datePickerState.selectedDateMillis?.let {
-                            onDateSelected(it)
-                        }
-                        onDismissRequest()
-                    },
-                    enabled = confirmEnabled
-                ) {
-                    Text(confirmButtonText)
-                }
+                Text(confirmButtonText)
             }
         }
     }

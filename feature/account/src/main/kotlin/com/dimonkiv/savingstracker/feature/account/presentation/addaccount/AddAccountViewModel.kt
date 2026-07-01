@@ -28,13 +28,9 @@ class AddAccountViewModel(
         when (intent) {
             is AddAccountIntent.OnBackButtonClicked -> sendEffect(AddAccountEffect.OpenPreviousScreen)
             is AddAccountIntent.OnSelectIconClicked -> sendEffect(AddAccountEffect.OpenSelectIconScreen)
-            is AddAccountIntent.OnDismissButtonClick -> sendEffect(AddAccountEffect.HideSelectTypeSheet)
             is AddAccountIntent.OnTypeClicked -> sendEffect(AddAccountEffect.ShowSelectTypeSheet)
             is AddAccountIntent.OnCreateButtonClicked -> createAccount()
-            is AddAccountIntent.OnTypeSelected -> {
-                sendEffect(AddAccountEffect.HideSelectTypeSheet)
-                reduce(AddAccountAction.SetType(intent.type))
-            }
+            is AddAccountIntent.OnTypeSelected -> reduce(AddAccountAction.SetType(intent.type))
             is AddAccountIntent.OnTitleTextChanged -> reduce(AddAccountAction.SetTitle(intent.title))
             is AddAccountIntent.OnBalanceTextChanged -> reduce(AddAccountAction.SetBalance(intent.balance))
             is AddAccountIntent.OnIconAndColorResult -> reduce(

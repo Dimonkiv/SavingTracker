@@ -1,10 +1,10 @@
 package com.dimonkiv.savingstracker.feature.main.model
 
-import com.dimonkiv.savingstracker.core.navigation.Screen
+import androidx.navigation3.runtime.NavKey
 
 data class BottomItemModel(
     val iconRes: Int,
     val title: String,
-    val route: Screen,
+    val route: NavKey,
     val selected: Boolean
 )

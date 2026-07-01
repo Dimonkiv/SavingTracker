@@ -19,7 +19,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -36,15 +35,12 @@ import com.dimonkiv.savingstracker.designsystem.AppButton
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
-import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.SelectAccountTypeRoute
 import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.model.AddAccountModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddAccountScreen(
     model: AddAccountModel,
-    sheetState: SheetState,
-    showBottomSheet: Boolean,
     onIntent: (AddAccountIntent) -> Unit
 ) {
     Column(
@@ -195,18 +191,6 @@ fun AddAccountScreen(
             title = stringResource(R.string.create_account),
             onClick = {
                 onIntent(AddAccountIntent.OnCreateButtonClicked)
-            }
-        )
-    }
-
-    if (showBottomSheet) {
-        SelectAccountTypeRoute(
-            sheetState = sheetState,
-            onTypeSelect = {
-                onIntent(AddAccountIntent.OnTypeSelected(it))
-            },
-            onDismissBottomSheet = {
-                onIntent(AddAccountIntent.OnDismissButtonClick)
             }
         )
     }

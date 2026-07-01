@@ -16,4 +16,4 @@ val transactionUiModule = module {
     viewModel { AddTransactionViewModel(get(), get(), get()) }
 }
 
-val transactionModules = listOf(transactionDomainModule, transactionUiModule)
+val transactionModules = listOf(transactionDomainModule, transactionUiModule, transactionNavigationModule)

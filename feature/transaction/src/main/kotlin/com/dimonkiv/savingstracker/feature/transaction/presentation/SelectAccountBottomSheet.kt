@@ -15,11 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,38 +30,27 @@ import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 import com.dimonkiv.savingstracker.feature.transaction.presentation.model.TransactionAccountModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectAccountBottomSheet(
-    isVisible: Boolean,
+fun SelectAccountBottomSheetContent(
     accounts: List<TransactionAccountModel>,
-    onDismissRequest: () -> Unit,
     onAccountSelected: (TransactionAccountModel) -> Unit
 ) {
-    if (!isVisible) return
-
-    ModalBottomSheet(
-        onDismissRequest = onDismissRequest,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        modifier = Modifier.fillMaxWidth()
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .navigationBarsPadding()
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .navigationBarsPadding()
-        ) {
-            Text(
-                text = stringResource(R.string.select_account),
-                style = AppTheme.appTypography.heading,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
+        Text(
+            text = stringResource(R.string.select_account),
+            style = AppTheme.appTypography.heading,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
 
-            Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-            LazyColumn {
-                items(accounts, key = { it.id }) { account ->
-                    AccountRow(account = account, onClick = { onAccountSelected(account) })
-                }
+        LazyColumn {
+            items(accounts, key = { it.id }) { account ->
+                AccountRow(account = account, onClick = { onAccountSelected(account) })
             }
         }
     }
