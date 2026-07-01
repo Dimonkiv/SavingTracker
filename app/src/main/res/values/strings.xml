@@ -24,4 +24,17 @@
     <string name="select_date">Select date</string>
     <string name="note_hint">Note</string>
     <string name="select_account">Select Account</string>
+    <string name="my_accounts">My accounts</string>
+    <string name="add_account">Add account</string>
+    <string name="select_icon">Select icon</string>
+    <string name="select_account_type">Select account type</string>
+    <string name="create_account">Create account</string>
+    <string name="add_icon">Add icon</string>
+    <string name="type">Type</string>
+    <string name="you_dont_have_accounts">You don\'t have accounts</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="color">Color</string>
+    <string name="icon">Icon</string>
+    <string name="select_category">Select category</string>
 </resources>

@@ -12,8 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.dimonkiv.savingstracker"
         minSdk = 27
-        //noinspection OldTargetApi
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -33,6 +32,10 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+    }
+
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
     }
 
     compileOptions {
@@ -76,6 +79,9 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
+
+    implementation(libs.kotlin.immutable.collections)
 
     // Testing dependencies
     testImplementation(libs.junit)

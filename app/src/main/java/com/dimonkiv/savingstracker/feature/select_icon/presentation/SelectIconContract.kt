@@ -1,31 +1,26 @@
 package com.dimonkiv.savingstracker.feature.select_icon.presentation
 
 import androidx.compose.ui.graphics.Color
+import com.dimonkiv.savingstracker.core.mvi.model.UiAction
 import com.dimonkiv.savingstracker.core.mvi.model.UiEffect
-import com.dimonkiv.savingstracker.core.mvi.model.UiEvent
-import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.SelectedIconModel
+import com.dimonkiv.savingstracker.core.mvi.model.UiIntent
+import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.ColorModel
+import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.IconModel
 
 class SelectIconContract {
 
-    sealed class Event: UiEvent {
-        data object LoadData: Event()
-        data object OnSelectButtonClick: Event()
-        data class OnColorSelected(val color: Color): Event()
-        data class OnIconSelected(val icon: Int): Event()
+    sealed class Intent: UiIntent {
+        data object OnSelectButtonClick: Intent()
+        data class OnColorSelected(val color: Color): Intent()
+        data class OnIconSelected(val icon: Int): Intent()
     }
-
-    data class State(
-        val state: SelectIconState
-    ): UiState
 
     sealed class Effect: UiEffect {
         data class OpenPreviousScreenWithArgs(val iconRes: Int, val color: String): Effect()
     }
 
-    sealed class SelectIconState {
-        data object Idle: SelectIconState()
-        data object Loading: SelectIconState()
-        data class Success(val state: SelectedIconModel): SelectIconState()
+    sealed interface SelectIconAction: UiAction {
+        data class SetColor(val color: Color): SelectIconAction
+        data class SetIcon(val iconRes: Int): SelectIconAction
     }
 }

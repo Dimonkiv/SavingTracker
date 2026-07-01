@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.ui
+package com.dimonkiv.savingstracker.designsystem
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable

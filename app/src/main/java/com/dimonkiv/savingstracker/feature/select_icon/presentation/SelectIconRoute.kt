@@ -2,10 +2,12 @@ package com.dimonkiv.savingstracker.feature.select_icon.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import com.dimonkiv.savingstracker.core.ui.AppToolbar
-import com.dimonkiv.savingstracker.core.ui.BaseScreen
+import com.dimonkiv.savingstracker.R
+import com.dimonkiv.savingstracker.designsystem.AppToolbar
+import com.dimonkiv.savingstracker.designsystem.BaseScreen
 import com.dimonkiv.savingstracker.core.mvi.ConsumeUiEffects
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -31,7 +33,7 @@ fun SelectIconRoute(
     BaseScreen(
         toolbar = {
             AppToolbar(
-                title = "Select icon",
+                title = stringResource(R.string.select_icon),
                 onNavigationIconClicked = {
                     navController.navigateUp()
                 }
@@ -40,8 +42,8 @@ fun SelectIconRoute(
         content = {
             SelectIconScreen(
                 state = state,
-                onEventChanged = { event ->
-                    viewModel.setEvent(event)
+                onIntent = { event ->
+                    viewModel.handleIntent(event)
                 }
             )
         }

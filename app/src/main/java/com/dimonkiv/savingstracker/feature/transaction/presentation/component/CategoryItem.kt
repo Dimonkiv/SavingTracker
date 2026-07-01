@@ -61,7 +61,7 @@ fun CategoryItem(
                     modifier = Modifier.size(24.dp),
                     painter = painterResource(iconRes),
                     tint = tint,
-                    contentDescription = "icon"
+                    contentDescription = null
                 )
             }
         }
@@ -79,7 +79,7 @@ fun CategoryItem(
             modifier = Modifier.size(12.dp),
             painter = painterResource(R.drawable.ic_arrow),
             tint = AppTheme.appColorScheme.onSurface,
-            contentDescription = "arrow"
+            contentDescription = null
         )
     }
 }

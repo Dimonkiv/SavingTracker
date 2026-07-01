@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
 import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.SelectedIconModel
@@ -55,7 +58,7 @@ fun  SelectIconContent(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Color",
+                    text = stringResource(R.string.color),
                     style = AppTheme.appTypography.subheading
                 )
                 Spacer(modifier = Modifier.size(Spacing.M))
@@ -66,9 +69,7 @@ fun  SelectIconContent(
                     verticalArrangement = Arrangement.spacedBy(Spacing.S),
                     horizontalArrangement = Arrangement.spacedBy(Spacing.S)
                 ) {
-                    items(item.colors.size) {
-                        val color = item.colors[it]
-
+                    items(item.colors, key = { it.color.value.toLong() }) { color ->
                         IconBox(
                             outlineContainerColor = if (color.selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.background,
                             containerColor = color.color,
@@ -76,9 +77,7 @@ fun  SelectIconContent(
                             containerSize = 40.dp,
                             iconSize = 50.dp,
                             clickable = true,
-                            onIconClick = {
-                                onColorSelected(color.color)
-                            }
+                            onIconClick = { onColorSelected(color.color) }
                         )
                     }
                 }
@@ -93,7 +92,7 @@ fun  SelectIconContent(
                 Spacer(modifier = Modifier.size(Spacing.M))
 
                 Text(
-                    text = "Icon",
+                    text = stringResource(R.string.icon),
                     style = AppTheme.appTypography.subheading
                 )
                 Spacer(modifier = Modifier.size(Spacing.M))
@@ -104,9 +103,7 @@ fun  SelectIconContent(
                     verticalArrangement = Arrangement.spacedBy(Spacing.S),
                     horizontalArrangement = Arrangement.spacedBy(Spacing.S)
                 ) {
-                    items(item.icons.size) {
-                        val icon = item.icons[it]
-
+                    items(item.icons, key = { it.iconRes }) { icon ->
                         IconBox(
                             outlineContainerColor = if (icon.selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.background,
                             containerColor = item.selectedColor,
@@ -115,9 +112,7 @@ fun  SelectIconContent(
                             iconSize = 24.dp,
                             iconRes = icon.iconRes,
                             clickable = true,
-                            onIconClick = {
-                                onIconSelected(icon.iconRes)
-                            }
+                            onIconClick = { onIconSelected(icon.iconRes) }
                         )
                     }
                 }

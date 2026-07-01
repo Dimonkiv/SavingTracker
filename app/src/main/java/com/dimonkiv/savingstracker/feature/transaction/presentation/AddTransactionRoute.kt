@@ -1,13 +1,16 @@
 package com.dimonkiv.savingstracker.feature.transaction.presentation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.core.ui.AppToolbar
-import com.dimonkiv.savingstracker.core.ui.BaseScreen
+import com.dimonkiv.savingstracker.core.mvi.ConsumeUiEffects
+import com.dimonkiv.savingstracker.designsystem.AppToolbar
+import com.dimonkiv.savingstracker.designsystem.BaseScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -15,27 +18,30 @@ fun AddTransactionRoute(
     navController: NavHostController,
     viewModel: AddTransactionViewModel = koinViewModel()
 ) {
-    val state = viewModel.uiState.collectAsStateWithLifecycle()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(Unit) {
-        viewModel.setEvent(Event.LoadData)
+    ConsumeUiEffects(viewModel.effect) { effect ->
+        when (effect) {
+            is Effect.NavigateBack -> navController.navigateUp()
+            is Effect.ShowError -> snackbarHostState.showSnackbar(effect.message)
+        }
     }
 
     BaseScreen(
+        snackbarHostState = snackbarHostState,
         toolbar = {
             AppToolbar(
                 title = stringResource(R.string.new_transaction),
                 onNavigationIconClicked = {
-                    navController.navigateUp()
+                    viewModel.handleIntent(Intent.OnBackClicked)
                 }
             )
         },
         content = {
             AddTransactionScreen(
-                state = state.value,
-                onEventChanged = { event ->
-                    viewModel.setEvent(event)
-                }
+                state = state,
+                onIntent = { viewModel.handleIntent(it) }
             )
         }
     )

@@ -6,6 +6,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.dimonkiv.savingstracker.R
 
 @Composable
@@ -21,21 +22,15 @@ fun ErrorDialog(
             )
         },
         title = {
-            Text(text = "Error")
+            Text(text = stringResource(R.string.error))
         },
         text = {
             Text(text = message)
         },
-        onDismissRequest = {
-           onClick()
-        },
+        onDismissRequest = { onClick() },
         confirmButton = {
-            Button(
-                onClick = {
-                    onClick()
-                }
-            ) {
-                Text(text = "Ok")
+            Button(onClick = { onClick() }) {
+                Text(text = stringResource(R.string.ok))
             }
         }
     )

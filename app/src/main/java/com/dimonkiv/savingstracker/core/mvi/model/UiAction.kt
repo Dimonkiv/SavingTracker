@@ -1,3 +1,3 @@
 package com.dimonkiv.savingstracker.core.mvi.model
 
-interface UiEvent
+interface UiAction

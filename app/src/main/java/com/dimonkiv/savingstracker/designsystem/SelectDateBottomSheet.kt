@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.ui
+package com.dimonkiv.savingstracker.designsystem
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

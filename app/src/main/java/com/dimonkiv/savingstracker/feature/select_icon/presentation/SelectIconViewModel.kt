@@ -1,111 +1,52 @@
 package com.dimonkiv.savingstracker.feature.select_icon.presentation
 
-import androidx.compose.ui.graphics.Color
-import androidx.lifecycle.viewModelScope
 import com.dimonkiv.savingstracker.core.mvi.BaseViewModel
-import com.dimonkiv.savingstracker.feature.select_icon.domain.GetSelectedIconUseCase
 import com.dimonkiv.savingstracker.feature.select_icon.presentation.SelectIconContract.*
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.ColorMap
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.ColorModel
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.IconModel
+import com.dimonkiv.savingstracker.designsystem.theme.ColorMap
+import com.dimonkiv.savingstracker.designsystem.theme.IconMap
 import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.SelectedIconModel
-import kotlinx.coroutines.launch
+import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.toColorModels
+import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.toIconModels
+import kotlinx.collections.immutable.toImmutableList
 
 class SelectIconViewModel(
-    private val useCase: GetSelectedIconUseCase
-) : BaseViewModel<Event, State, Effect>() {
+    reducer: SelectIconReducer
+) : BaseViewModel<Intent, SelectedIconModel, Effect, SelectIconAction>(
+    initialState = SelectedIconModel(
+        icons = IconMap.icons.toIconModels().toImmutableList(),
+        colors = ColorMap.colors.toColorModels().toImmutableList()
+    ),
+    reducer = reducer
+) {
 
     init {
-        setEvent(Event.LoadData)
+        getSelectedIcon()
     }
 
-    override fun createInitialState(): State {
-        return State(state = SelectIconState.Idle)
-    }
-
-    override fun handleEvent(event: Event) {
-        when (event) {
-            is Event.LoadData -> {
-                generateIcons()
+    override fun handleIntent(intent: Intent) {
+        when (intent) {
+            is Intent.OnColorSelected -> {
+                reduce(SelectIconAction.SetColor(intent.color))
             }
 
-            is Event.OnColorSelected -> {
-                onColorSelected(event.color)
+            is Intent.OnIconSelected -> {
+                reduce(SelectIconAction.SetIcon(intent.icon))
             }
 
-            is Event.OnIconSelected -> {
-                onIconSelected(event.icon)
-            }
-
-            is Event.OnSelectButtonClick -> {
-                val state = (currentState.state as SelectIconState.Success).state
-                setEffect(
+            is Intent.OnSelectButtonClick -> {
+                sendEffect(
                     Effect.OpenPreviousScreenWithArgs(
-                        state.selectedIcon,
-                        ColorMap.getColorName(state.selectedColor)
+                        iconRes = currentState.selectedIcon,
+                        color = ColorMap.getColorName(currentState.selectedColor)
                     )
                 )
             }
         }
     }
 
-    private fun generateIcons() {
-        setState { copy(state = SelectIconState.Loading) }
-        viewModelScope.launch {
-            val iconState = useCase.invoke()
-            setState { copy(state = SelectIconState.Success(iconState)) }
-        }
-    }
 
-    private fun onColorSelected(color: Color) {
-        val state = (currentState.state as SelectIconState.Success).state
-        setState {
-            copy(
-                state = SelectIconState.Success(
-                    SelectedIconModel(
-                        selectedIcon = state.selectedIcon,
-                        selectedColor = color,
-                        colors = updateSelectedColor(state, color),
-                        icons = state.icons,
-                        buttonEnabled = state.selectedIcon != -1
-                    )
-                )
-            )
-        }
-    }
-
-    private fun updateSelectedColor(state: SelectedIconModel, color: Color): List<ColorModel> {
-        return state.colors
-            .map {
-                it.selected = it.color == color
-                it
-            }
-            .toList()
-    }
-
-    private fun onIconSelected(icon: Int) {
-        val state = (currentState.state as SelectIconState.Success).state
-        setState {
-            copy(
-                state = SelectIconState.Success(
-                    SelectedIconModel(
-                        selectedIcon = icon,
-                        selectedColor = state.selectedColor,
-                        colors = state.colors,
-                        icons = updateSelectedIcon(state, icon),
-                        buttonEnabled = state.selectedIcon != -1
-                    )
-                )
-            )
-        }
-    }
-
-    private fun updateSelectedIcon(state: SelectedIconModel, icon: Int): List<IconModel> {
-        return state.icons
-            .map {
-                it.selected = it.iconRes == icon
-                it
-            }
-            .toList()
+    private fun getSelectedIcon() {
+        reduce(SelectIconAction.SetIcon(-1))
+        reduce(SelectIconAction.SetColor(ColorMap.colors.values.first()))
     }
 }

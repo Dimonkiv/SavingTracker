@@ -1,26 +1,29 @@
 package com.dimonkiv.savingstracker.feature.account.data.repository
 
 import com.dimonkiv.savingstracker.feature.account.data.local.dao.AccountTypeDao
+import com.dimonkiv.savingstracker.feature.account.data.local.dto.asDomain
+import com.dimonkiv.savingstracker.feature.account.data.local.dto.asDto
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountType
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountTypeWithAccounts
 import com.dimonkiv.savingstracker.feature.account.domain.repository.AccountTypeRepository
-import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.asDTO
-import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.asPresentation
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 
 class AccountTypeRepositoryImpl(
-    private val dao: AccountTypeDao,
-    private val ioDispatcher: CoroutineDispatcher
+    private val dao: AccountTypeDao
 ): AccountTypeRepository {
-    override suspend fun createAccountType(type: AccountTypeModel) = withContext(ioDispatcher) {
-        dao.insertType(type.asDTO())
-    }
+    override suspend fun createAccountType(type: AccountType) =
+        dao.insertType(type.asDto())
 
-    override suspend fun fetchAccountTypes() = withContext(ioDispatcher) {
-        dao.getAllTypes().asPresentation()
-    }
+    override suspend fun fetchAccountTypes() =
+        dao.getAllTypes().asDomain()
 
-    override suspend fun fetchAccountTypeById(id: Long) = withContext(ioDispatcher) {
-        dao.getTypeById(id).asPresentation()
-    }
+    override suspend fun fetchAccountTypeById(id: Long) =
+        dao.getTypeById(id).asDomain()
+
+    override fun getTypesWithAccounts(): Flow<List<AccountTypeWithAccounts>> =
+        dao.getTypesWithAccounts()
+            .map { it.asDomain() }
+            .catch { emit(emptyList()) }
 }

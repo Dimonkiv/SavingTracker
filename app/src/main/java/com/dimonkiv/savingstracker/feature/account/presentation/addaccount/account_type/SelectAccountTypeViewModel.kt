@@ -1,31 +1,37 @@
 package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type
 
 import androidx.lifecycle.viewModelScope
+import com.dimonkiv.savingstracker.core.coroutine.runCoroutineCatching
 import com.dimonkiv.savingstracker.core.mvi.BaseViewModel
-import com.dimonkiv.savingstracker.core.mvi.model.UiEffect
-import com.dimonkiv.savingstracker.core.mvi.model.UiEvent
-import com.dimonkiv.savingstracker.feature.account.domain.use_cases.GetAccountTypesUseCase
+import com.dimonkiv.savingstracker.feature.account.domain.usecase.GetAccountTypesUseCase
 import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.AccountTypeState
+import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.asPresentation
 import kotlinx.coroutines.launch
 
 class SelectAccountTypeViewModel(
-    private val useCase: GetAccountTypesUseCase
-): BaseViewModel<UiEvent, AccountTypeState, UiEffect>() {
+    private val useCase: GetAccountTypesUseCase,
+    reducer: SelectAccountTypeReducer
+) : BaseViewModel<SelectAccountTypeIntent, AccountTypeState, SelectAccountTypeEffect, SelectAccountTypeAction>(
+    initialState = AccountTypeState(),
+    reducer = reducer
+) {
 
     init {
         fetchTypes()
     }
 
-    override fun createInitialState(): AccountTypeState = AccountTypeState()
-
-    override fun handleEvent(event: UiEvent) = Unit
+    override fun handleIntent(intent: SelectAccountTypeIntent) {
+        // no intents yet
+    }
 
     private fun fetchTypes() {
         viewModelScope.launch {
-            runCatching {
+            runCoroutineCatching {
                 useCase.invoke()
             }.onSuccess { items ->
-                setState { currentState.copy(types = items) }
+                reduce(SelectAccountTypeAction.TypesLoaded(items.asPresentation()))
+            }.onFailure {
+                reduce(SelectAccountTypeAction.Error("Failed to load account types"))
             }
         }
     }

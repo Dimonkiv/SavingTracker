@@ -6,16 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.dimonkiv.savingstracker.core.navigation.NavigationItem
-import com.dimonkiv.savingstracker.feature.account.presentation.accounts.AccountsRoute
-import com.dimonkiv.savingstracker.feature.home.HomeScreen
-import com.dimonkiv.savingstracker.feature.profile.ProfileScreen
-import com.dimonkiv.savingstracker.feature.statistics.StatisticsScreen
 
 @Composable
 fun MainNavHost(
     modifier: Modifier,
     navController: NavHostController,
-    mainNavController: NavHostController,
+    homeContent: @Composable () -> Unit,
+    accountsContent: @Composable () -> Unit,
+    statisticsContent: @Composable () -> Unit,
+    profileContent: @Composable () -> Unit,
     startDestination: String = NavigationItem.Home.route
 ) {
     NavHost(
@@ -23,19 +22,9 @@ fun MainNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(NavigationItem.Home.route) {
-            HomeScreen()
-        }
-        composable(NavigationItem.Accounts.route) {
-            AccountsRoute(mainNavController)
-        }
-        composable(NavigationItem.Statistics.route) {
-            StatisticsScreen()
-        }
-        composable(NavigationItem.Profile.route) {
-            ProfileScreen()
-        }
-
+        composable(NavigationItem.Home.route) { homeContent() }
+        composable(NavigationItem.Accounts.route) { accountsContent() }
+        composable(NavigationItem.Statistics.route) { statisticsContent() }
+        composable(NavigationItem.Profile.route) { profileContent() }
     }
-
 }

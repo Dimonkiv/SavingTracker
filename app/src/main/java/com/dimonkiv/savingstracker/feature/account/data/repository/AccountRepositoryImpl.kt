@@ -5,27 +5,20 @@ import com.dimonkiv.savingstracker.feature.account.data.local.dto.asDTO
 import com.dimonkiv.savingstracker.feature.account.data.local.dto.asDomain
 import com.dimonkiv.savingstracker.feature.account.domain.model.Account
 import com.dimonkiv.savingstracker.feature.account.domain.repository.AccountRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 
 class AccountRepositoryImpl(
-    private val accountDao: AccountDao,
-    private val ioDispatcher: CoroutineDispatcher
+    private val accountDao: AccountDao
 ): AccountRepository {
 
-    override suspend fun createAccount(account: Account) = withContext(ioDispatcher) {
+    override suspend fun createAccount(account: Account) =
         accountDao.insertAccount(account.asDTO())
-    }
 
-    override suspend fun fetchAccounts(): List<Account> = withContext(ioDispatcher) {
+    override suspend fun fetchAccounts(): List<Account> =
         accountDao.getAllAccounts().asDomain()
-    }
 
-    override suspend fun fetchAccountById(accountId: Long): Account = withContext(ioDispatcher) {
-        accountDao.getAccountById(accountId).asDomain()
-    }
+    override suspend fun fetchAccountById(accountId: Long): Account? =
+        runCatching { accountDao.getAccountById(accountId).asDomain() }.getOrNull()
 
-    override suspend fun deleteAccount(id: Long) = withContext(ioDispatcher) {
+    override suspend fun deleteAccount(id: Long) =
         accountDao.deleteAccount(id)
-    }
 }

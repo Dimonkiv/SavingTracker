@@ -2,19 +2,30 @@ package com.dimonkiv.savingstracker.feature.account.data.local.dto
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.dimonkiv.savingstracker.feature.account.domain.model.Account
 
-@Entity(tableName = "account")
+@Entity(
+    tableName = "account",
+    foreignKeys = [
+        ForeignKey(
+            entity = AccountTypeDTO::class,
+            parentColumns = ["id"],
+            childColumns = ["type_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class AccountDTO(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
-    @ColumnInfo(name = "type_id")
+    val id: Long = 0,
+    @ColumnInfo(name = "type_id", index = true)
     val typeId: Long,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "balance")
-    val balance: Int,
+    val balance: Long,
     @ColumnInfo(name = "color")
     val color: String,
     @ColumnInfo(name = "icon")
@@ -31,7 +42,6 @@ fun AccountDTO.asDomain() = Account(
 )
 
 fun Account.asDTO() = AccountDTO(
-    id = id,
     typeId = typeId,
     title = title,
     balance = balance,

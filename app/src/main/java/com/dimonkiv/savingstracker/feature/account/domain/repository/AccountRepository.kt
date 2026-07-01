@@ -8,7 +8,7 @@ interface AccountRepository {
 
     suspend fun fetchAccounts(): List<Account>
 
-    suspend fun fetchAccountById(accountId: Long): Account
+    suspend fun fetchAccountById(accountId: Long): Account?
 
     suspend fun deleteAccount(id: Long)
 }

@@ -19,11 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
-import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.TypesModel
+import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.TypesWithAccountsModel
 
 @Composable
 fun AccountGroup(
-    model: TypesModel
+    model: TypesWithAccountsModel
 ) {
     Column(
         modifier = Modifier

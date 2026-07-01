@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.feature.select_icon.presentation.model
+package com.dimonkiv.savingstracker.designsystem.theme
 
 import com.dimonkiv.savingstracker.R
 

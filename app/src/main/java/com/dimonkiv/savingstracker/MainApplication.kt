@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core
+package com.dimonkiv.savingstracker
 
 import android.app.Application
 import com.dimonkiv.savingstracker.core.di.coreModules

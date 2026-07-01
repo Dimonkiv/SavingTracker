@@ -3,5 +3,6 @@ package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.acco
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
 
 data class AccountTypeState(
-    val types: List<AccountTypeModel> = emptyList()
+    val types: List<AccountTypeModel> = emptyList(),
+    val error: String? = null
 ): UiState

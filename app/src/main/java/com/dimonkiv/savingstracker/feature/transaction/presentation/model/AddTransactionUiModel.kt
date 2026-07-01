@@ -5,9 +5,10 @@ import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.core.utils.DateUtils
 import com.dimonkiv.savingstracker.core.utils.ResourceManager
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.AccountModel
-import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.asPresentation
+import com.dimonkiv.savingstracker.feature.transaction.presentation.model.toTransactionModel
+import com.dimonkiv.savingstracker.feature.transaction.presentation.model.toTransactionModels
 import com.dimonkiv.savingstracker.feature.transaction.domain.AddTransactionModel
+import com.dimonkiv.savingstracker.feature.transaction.domain.TransactionType
 
 @Immutable
 data class AddTransactionUiModel(
@@ -16,10 +17,10 @@ data class AddTransactionUiModel(
     val note: String = "",
     val date: String = "",
     val timestamp: Long = 0,
-    val selectedType: AddTransactionType = AddTransactionType.EXPENSE,
-    val types: List<AddTransactionTypeUiModel> = mutableListOf(),
-    val accounts: List<AccountModel> = mutableListOf(),
-    val selectedAccount: AccountModel? = null
+    val selectedType: TransactionType = TransactionType.EXPENSE,
+    val types: List<AddTransactionTypeUiModel> = emptyList(),
+    val accounts: List<TransactionAccountModel> = emptyList(),
+    val selectedAccount: TransactionAccountModel? = null
 ) : UiState
 
 fun AddTransactionModel.asPresentation(resourceManager: ResourceManager) = AddTransactionUiModel(
@@ -33,6 +34,6 @@ fun AddTransactionModel.asPresentation(resourceManager: ResourceManager) = AddTr
         DateUtils.parseDate(this.timestamp),
     selectedType = this.selectedType,
     types = this.types.asPresentation(),
-    accounts = accounts.asPresentation(),
-    selectedAccount = selectedAccount?.asPresentation()
+    accounts = accounts.toTransactionModels(),
+    selectedAccount = selectedAccount?.toTransactionModel()
 )

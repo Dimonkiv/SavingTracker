@@ -14,7 +14,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
-import com.dimonkiv.savingstracker.feature.transaction.presentation.Event
+import com.dimonkiv.savingstracker.feature.transaction.presentation.Intent
 import com.dimonkiv.savingstracker.feature.transaction.presentation.model.AddTransactionUiModel
 
 @Composable
@@ -22,7 +22,7 @@ fun AddTransfer(
     state: AddTransactionUiModel,
     onSelectDateClicked: () -> Unit,
     onSelectAccountClicked: () -> Unit,
-    onEventChanged: (Event) -> Unit
+    onEventChanged: (Intent) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -35,7 +35,7 @@ fun AddTransfer(
                 .padding(bottom = Spacing.XL),
             value = state.balance,
             onValueChange = {
-                onEventChanged(Event.OnBalanceTextChanged(it))
+                onEventChanged(Intent.OnBalanceTextChanged(it))
             },
             label = {
                 Text(text = stringResource(R.string.balance_hint))
@@ -65,7 +65,7 @@ fun AddTransfer(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = Spacing.XL),
-            text = "Select account",
+            text = stringResource(R.string.select_account),
             onCategoryClicked = {
                 onSelectAccountClicked()
             }
@@ -75,7 +75,7 @@ fun AddTransfer(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = Spacing.XL),
-            text = "Select category",
+            text = stringResource(R.string.select_category),
             onCategoryClicked = {
 
             }
@@ -87,7 +87,7 @@ fun AddTransfer(
                 .padding(bottom = Spacing.XL),
             value = state.note,
             onValueChange = {
-                onEventChanged(Event.OnNoteTextChanged(it))
+                onEventChanged(Intent.OnNoteTextChanged(it))
             },
             label = {
                 Text(text = stringResource(R.string.note_hint))

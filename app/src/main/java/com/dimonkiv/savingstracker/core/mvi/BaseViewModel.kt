@@ -2,75 +2,54 @@ package com.dimonkiv.savingstracker.core.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dimonkiv.savingstracker.core.mvi.model.UiAction
 import com.dimonkiv.savingstracker.core.mvi.model.UiEffect
-import com.dimonkiv.savingstracker.core.mvi.model.UiEvent
+import com.dimonkiv.savingstracker.core.mvi.model.UiIntent
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<Event: UiEvent, State: UiState, Effect: UiEffect>: ViewModel() {
-    // Create Initial State of View
-    private val initialState : State by lazy { createInitialState() }
-    abstract fun createInitialState() : State
+abstract class BaseViewModel<I: UiIntent, S: UiState, E: UiEffect, A: UiAction>(
+    initialState: S,
+    private val reducer: Reducer<S, A>
+): ViewModel() {
 
     // Get Current State
-    val currentState: State
+    val currentState: S
         get() = uiState.value
 
-    private val _uiState : MutableStateFlow<State> = MutableStateFlow(initialState)
+    private val _uiState: MutableStateFlow<S> = MutableStateFlow(initialState)
     val uiState = _uiState.asStateFlow()
-
-    private val _event : MutableSharedFlow<Event> = MutableSharedFlow()
-    val event = _event.asSharedFlow()
-
-    private val _effect : MutableSharedFlow<Effect> = MutableSharedFlow()
-    val effect = _effect.asSharedFlow()
-
-    init {
-        subscribeEvents()
-    }
-
-    /**
-     * Set new Event
-     */
-    fun setEvent(event : Event) {
-        val newEvent = event
-        viewModelScope.launch { _event.emit(newEvent) }
-    }
+    private val _effect = Channel<E>()
+    val effect = _effect.receiveAsFlow()
 
 
     /**
      * Set new Ui State
      */
-    protected fun setState(reduce: State.() -> State) {
-        val newState = currentState.reduce()
-        _uiState.value = newState
+    protected fun updateState(reducer: (S) -> S) {
+        _uiState.update { reducer(it) }
+    }
+
+    protected open fun reduce(action: A) {
+        _uiState.update { current ->
+            reducer.reduce(current, action)
+        }
     }
 
     /**
      * Set new Effect
      */
-    protected fun setEffect(effect: Effect) {
-        val newEffect = effect
-        viewModelScope.launch { _effect.emit(newEffect) }
-    }
-
-    /**
-     * Start listening to Event
-     */
-    private fun subscribeEvents() {
+    protected fun sendEffect(effect: E) {
         viewModelScope.launch {
-            event.collect {
-                handleEvent(it)
-            }
+            _effect.send(effect)
         }
     }
 
-    /**
-     * Handle each event
-     */
-    abstract fun handleEvent(event : Event)
+    abstract fun handleIntent(intent: I)
 }

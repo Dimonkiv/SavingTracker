@@ -2,19 +2,20 @@ package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.mode
 
 import androidx.compose.ui.graphics.Color
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
+import com.dimonkiv.savingstracker.designsystem.theme.Dark
 import com.dimonkiv.savingstracker.feature.account.domain.model.Account
 import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.AccountTypeModel
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.ColorMap
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.IconMap
+import com.dimonkiv.savingstracker.designsystem.theme.ColorMap
+import com.dimonkiv.savingstracker.designsystem.theme.IconMap
 
 data class AddAccountModel(
-    val color: Color,
-    val iconRes: Int,
-    val type: AccountTypeModel,
-    val title: String,
-    val balance: String,
-    val showBottomSheet: Boolean,
-    val isButtonEnabled: Boolean
+    val color: Color = Dark,
+    val iconRes: Int = -1,
+    val type: AccountTypeModel = AccountTypeModel(),
+    val title: String = "",
+    val balance: String = "",
+    val showBottomSheet: Boolean = false,
+    val isButtonEnabled: Boolean = false
 ) : UiState
 
 val AddAccountModel.isNotEmpty
@@ -27,7 +28,7 @@ fun AddAccountModel.asDomain() = Account(
     id = 0L,
     typeId = type.id,
     title = title,
-    balance = balance.toIntOrNull() ?: 0,
+    balance = balance.toLongOrNull() ?: 0L,
     color = ColorMap.getColorName(color),
     icon = IconMap.getIconName(iconRes)
 )

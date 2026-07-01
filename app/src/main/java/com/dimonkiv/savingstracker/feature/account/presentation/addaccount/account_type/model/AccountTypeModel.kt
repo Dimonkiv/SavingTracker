@@ -1,24 +1,25 @@
 package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model
 
 import androidx.compose.ui.graphics.Color
-import com.dimonkiv.savingstracker.feature.account.data.local.dto.AccountTypeDTO
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.ColorMap
+import com.dimonkiv.savingstracker.designsystem.theme.Dark
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountType
+import com.dimonkiv.savingstracker.designsystem.theme.ColorMap
 
 data class AccountTypeModel(
-    val id: Long,
-    val title: String,
-    val color: Color
+    val id: Long = 0,
+    val title: String = "",
+    val color: Color = Dark
 )
 
-fun AccountTypeDTO.asPresentation() = AccountTypeModel(
+fun AccountType.asPresentation() = AccountTypeModel(
     id = id,
     title = title,
     color = ColorMap.colors.getOrDefault(color, Color.White)
 )
 
-fun List<AccountTypeDTO>.asPresentation() = map { it.asPresentation() }
+fun List<AccountType>.asPresentation() = map { it.asPresentation() }
 
-fun AccountTypeModel.asDTO() = AccountTypeDTO(
+fun AccountTypeModel.asDomain() = AccountType(
     id = id,
     title = title,
     color = ColorMap.getColorName(color)

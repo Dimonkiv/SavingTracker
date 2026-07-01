@@ -1,11 +1,10 @@
-package com.dimonkiv.savingstracker.core
+package com.dimonkiv.savingstracker
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
-import com.dimonkiv.savingstracker.core.navigation.AppNavHost
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,6 +19,5 @@ class MainActivity : ComponentActivity() {
                 AppNavHost(navController = navController)
             }
         }
-
     }
 }

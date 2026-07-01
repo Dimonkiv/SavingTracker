@@ -7,9 +7,8 @@ import com.dimonkiv.savingstracker.feature.account.data.local.dao.AccountTypeDao
 import com.dimonkiv.savingstracker.feature.account.data.local.dto.AccountDTO
 import com.dimonkiv.savingstracker.feature.account.data.local.dto.AccountTypeDTO
 
-@Database(entities = [AccountDTO::class, AccountTypeDTO::class], version = 1)
+@Database(entities = [AccountDTO::class, AccountTypeDTO::class], version = 2)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun accountDao(): AccountDao
     abstract fun accountTypeDao(): AccountTypeDao
-
 }

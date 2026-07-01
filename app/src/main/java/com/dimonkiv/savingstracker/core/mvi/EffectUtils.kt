@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun <T>ConsumeUiEffects(
     uiEffect: Flow<T>,
-    consumer: (T) -> Unit
+    consumer: suspend (T) -> Unit
 ) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 

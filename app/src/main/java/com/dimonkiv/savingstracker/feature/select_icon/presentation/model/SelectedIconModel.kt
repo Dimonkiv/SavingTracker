@@ -1,22 +1,14 @@
 package com.dimonkiv.savingstracker.feature.select_icon.presentation.model
 
 import androidx.compose.ui.graphics.Color
-import com.dimonkiv.savingstracker.feature.select_icon.domain.model.Colors
-import com.dimonkiv.savingstracker.feature.select_icon.domain.model.Icon
-import com.dimonkiv.savingstracker.feature.select_icon.domain.model.SelectedIcon
+import com.dimonkiv.savingstracker.core.mvi.model.UiState
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 data class SelectedIconModel(
-    val selectedColor: Color,
-    val selectedIcon: Int,
-    val buttonEnabled: Boolean,
-    val colors: List<ColorModel>,
-    val icons: List<IconModel>
-)
-
-fun SelectedIcon.asPresentation(colors: List<Colors>, icons: List<Icon>) = SelectedIconModel(
-    selectedColor = color.asPresentation().color,
-    selectedIcon = icon.asPresentation().iconRes,
-    buttonEnabled = false,
-    colors = colors.asPresentation(),
-    icons = icons.asPresentation()
-)
+    val selectedColor: Color = Color.Black,
+    val selectedIcon: Int = -1,
+    val buttonEnabled: Boolean = false,
+    val colors: ImmutableList<ColorModel> = persistentListOf(),
+    val icons: ImmutableList<IconModel> = persistentListOf()
+): UiState

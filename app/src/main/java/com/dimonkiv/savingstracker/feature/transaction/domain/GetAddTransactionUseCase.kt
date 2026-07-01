@@ -1,7 +1,6 @@
 package com.dimonkiv.savingstracker.feature.transaction.domain
 
 import com.dimonkiv.savingstracker.feature.account.domain.repository.AccountRepository
-import com.dimonkiv.savingstracker.feature.transaction.presentation.model.AddTransactionType
 
 interface GetAddTransactionUseCase {
     suspend fun invoke(): AddTransactionModel
@@ -16,12 +15,11 @@ class GetAddTransactionUseCaseImpl(
 
         return AddTransactionModel(
             types = listOf(
-                AddTransactionType.EXPENSE,
-                AddTransactionType.INCOME,
-                AddTransactionType.TRANSFER
+                TransactionType.EXPENSE,
+                TransactionType.INCOME,
+                TransactionType.TRANSFER
             ),
             accounts = accounts
         )
     }
-
 }

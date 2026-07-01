@@ -13,43 +13,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.dimonkiv.savingstracker.designsystem.AppButton
-import com.dimonkiv.savingstracker.designsystem.ProgressBar
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
+import com.dimonkiv.savingstracker.feature.select_icon.presentation.SelectIconContract.Intent
 import com.dimonkiv.savingstracker.feature.select_icon.presentation.component.SelectIconContent
+import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.SelectedIconModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectIconScreen(
-    state: SelectIconContract.State,
-    onEventChanged: (SelectIconContract.Event) -> Unit
+    state: SelectedIconModel,
+    onIntent: (Intent) -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.size(Spacing.L))
 
-            when (state.state) {
-                is SelectIconContract.SelectIconState.Loading -> ProgressBar()
-                is SelectIconContract.SelectIconState.Idle -> ProgressBar()
-                is SelectIconContract.SelectIconState.Success -> {
-                    SelectIconContent(
-                        item = state.state.state,
-                        onColorSelected = {
-                            onEventChanged(SelectIconContract.Event.OnColorSelected(it))
-                        },
-                        onIconSelected = {
-                            onEventChanged(SelectIconContract.Event.OnIconSelected(it))
-                        }
-                    )
+            SelectIconContent(
+                item = state,
+                onColorSelected = {
+                    onIntent(Intent.OnColorSelected(it))
+                },
+                onIconSelected = {
+                    onIntent(Intent.OnIconSelected(it))
                 }
-            }
-        }
-
-        val buttonEnabled = if (state.state is SelectIconContract.SelectIconState.Success) {
-            state.state.state.buttonEnabled
-        } else {
-            false
+            )
         }
 
         AppButton(
@@ -61,9 +52,9 @@ fun SelectIconScreen(
                     end = Spacing.XL,
                     bottom = 60.dp
                 ),
-            enabled = buttonEnabled,
+            enabled = state.buttonEnabled,
             onClick = {
-                onEventChanged(SelectIconContract.Event.OnSelectButtonClick)
+                onIntent(Intent.OnSelectButtonClick)
             },
             title = "Select"
         )

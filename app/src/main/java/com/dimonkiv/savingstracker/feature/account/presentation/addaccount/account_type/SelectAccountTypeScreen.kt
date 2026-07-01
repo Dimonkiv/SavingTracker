@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -11,8 +12,10 @@ import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.LightGray
 import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.component.AccountTypeScreen
@@ -41,16 +44,14 @@ fun SelectAccountTypeScreen(
         Column {
             Text(
                 modifier = Modifier.padding(20.dp),
-                text = "Select account type",
+                text = stringResource(R.string.select_account_type),
                 fontSize = 20.sp
             )
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(types.size) {
-                    AccountTypeScreen(types[it]) { type ->
-                        onTypeSelect(type)
-                    }
+                items(types, key = { it.id }) { type ->
+                    AccountTypeScreen(type) { onTypeSelect(type) }
                 }
             }
         }

@@ -1,10 +1,10 @@
-package com.dimonkiv.savingstracker.feature.account.domain.use_cases
+package com.dimonkiv.savingstracker.feature.account.domain.usecase
 
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountType
 import com.dimonkiv.savingstracker.feature.account.domain.repository.AccountTypeRepository
-import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.AccountTypeModel
 
 interface GetAccountTypesUseCase {
-    suspend fun invoke(): List<AccountTypeModel>
+    suspend fun invoke(): List<AccountType>
 }
 
 class GetAccountTypesUseCaseImpl(

@@ -18,7 +18,11 @@ import com.dimonkiv.savingstracker.feature.main.model.BottomItemModel
 fun MainScreen(
     mainNavController: NavHostController,
     navController: NavHostController,
-    items: List<BottomItemModel>
+    items: List<BottomItemModel>,
+    homeContent: @Composable () -> Unit,
+    accountsContent: @Composable () -> Unit,
+    statisticsContent: @Composable () -> Unit,
+    profileContent: @Composable () -> Unit
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -35,16 +39,10 @@ fun MainScreen(
                     mainNavController.navigate(screen.name)
                 } else {
                     navController.navigate(screen.name) {
-                        // Pop up to the start destination of the graph to
-                        // avoid building up a large stack of destinations
-                        // on the back stack as users select items
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
-                        // Avoid multiple copies of the same destination when
-                        // reselecting the same item
                         launchSingleTop = true
-                        // Restore state when reselecting a previously selected item
                         restoreState = true
                     }
                 }
@@ -54,7 +52,10 @@ fun MainScreen(
         MainNavHost(
             modifier = Modifier.padding(innerPadding),
             navController = navController,
-            mainNavController = mainNavController
+            homeContent = homeContent,
+            accountsContent = accountsContent,
+            statisticsContent = statisticsContent,
+            profileContent = profileContent
         )
     }
 }

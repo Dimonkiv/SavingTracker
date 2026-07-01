@@ -3,8 +3,8 @@ package com.dimonkiv.savingstracker.feature.account.presentation.accounts.model
 import androidx.compose.ui.graphics.Color
 import com.dimonkiv.savingstracker.R
 import com.dimonkiv.savingstracker.feature.account.domain.model.Account
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.ColorMap
-import com.dimonkiv.savingstracker.feature.select_icon.presentation.model.IconMap
+import com.dimonkiv.savingstracker.designsystem.theme.ColorMap
+import com.dimonkiv.savingstracker.designsystem.theme.IconMap
 
 data class  AccountModel(
     val id: Long,

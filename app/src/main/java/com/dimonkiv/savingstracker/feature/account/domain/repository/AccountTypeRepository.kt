@@ -1,11 +1,15 @@
 package com.dimonkiv.savingstracker.feature.account.domain.repository
 
-import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model.AccountTypeModel
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountType
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountTypeWithAccounts
+import kotlinx.coroutines.flow.Flow
 
 interface AccountTypeRepository {
-    suspend fun createAccountType(type: AccountTypeModel)
+    suspend fun createAccountType(type: AccountType)
 
-    suspend fun fetchAccountTypes(): List<AccountTypeModel>
+    suspend fun fetchAccountTypes(): List<AccountType>
 
-    suspend fun fetchAccountTypeById(id: Long): AccountTypeModel
+    suspend fun fetchAccountTypeById(id: Long): AccountType
+
+    fun getTypesWithAccounts(): Flow<List<AccountTypeWithAccounts>>
 }

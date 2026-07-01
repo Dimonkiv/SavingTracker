@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,7 @@ fun AddAccountScreen(
     model: AddAccountModel,
     sheetState: SheetState,
     showBottomSheet: Boolean,
-    onEventChanged: (Event) -> Unit
+    onEventChanged: (Intent) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -58,7 +59,7 @@ fun AddAccountScreen(
                 .size(150.dp)
                 .clip(CircleShape)
                 .clickable {
-                    onEventChanged(Event.OnSelectIconClicked)
+                    onEventChanged(Intent.OnSelectIconClicked)
                 },
             contentAlignment = Alignment.Center
 
@@ -86,7 +87,7 @@ fun AddAccountScreen(
                         )
                     } else {
                         Text(
-                            text = "Add icon",
+                            text = stringResource(R.string.add_icon),
                             color = AppTheme.appColorScheme.onPrimary,
                             style = AppTheme.appTypography.caption,
                             textAlign = TextAlign.Center
@@ -106,7 +107,7 @@ fun AddAccountScreen(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_edit),
-                    contentDescription = "Edit",
+                    contentDescription = stringResource(R.string.edit),
                     tint = AppTheme.appColorScheme.onPrimary
                 )
             }
@@ -120,10 +121,10 @@ fun AddAccountScreen(
                 .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.L),
             value = model.title,
             onValueChange = {
-                onEventChanged(Event.OnTitleTextChanged(it))
+                onEventChanged(Intent.OnTitleTextChanged(it))
             },
             label = {
-                Text(text = "Title")
+                Text(text = stringResource(R.string.title))
             },
             singleLine = true,
             colors = TextFieldDefaults.colors(
@@ -141,7 +142,7 @@ fun AddAccountScreen(
                 .border(1.dp, AppTheme.appColorScheme.textPrimary)
                 .padding(15.dp)
                 .clickable {
-                    onEventChanged((Event.OnTypeClicked))
+                    onEventChanged((Intent.OnTypeClicked))
                 },
         ) {
             if (model.type.title.isNotEmpty()) {
@@ -155,7 +156,7 @@ fun AddAccountScreen(
                 Spacer(modifier = Modifier.size(10.dp))
             }
             Text(
-                text = model.type.title.ifEmpty { "Type" },
+                text = model.type.title.ifEmpty { stringResource(R.string.type) },
                 color = AppTheme.appColorScheme.textPrimary
             )
         }
@@ -167,10 +168,10 @@ fun AddAccountScreen(
                 .padding(start = Spacing.XL, end = Spacing.XL, bottom = Spacing.XL),
             value = model.balance,
             onValueChange = {
-                onEventChanged(Event.OnBalanceTextChanged(it))
+                onEventChanged(Intent.OnBalanceTextChanged(it))
             },
             label = {
-                Text(text = "Balance")
+                Text(text = stringResource(R.string.balance_hint))
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
@@ -191,9 +192,9 @@ fun AddAccountScreen(
                     bottom = 60.dp
                 ),
             enabled = model.isButtonEnabled,
-            title = "Create account",
+            title = stringResource(R.string.create_account),
             onClick = {
-                onEventChanged(Event.OnCreateButtonClicked)
+                onEventChanged(Intent.OnCreateButtonClicked)
             }
         )
     }
@@ -202,10 +203,10 @@ fun AddAccountScreen(
         SelectAccountTypeRoute(
             sheetState = sheetState,
             onTypeSelect = {
-                onEventChanged(Event.OnTypeSelected(it))
+                onEventChanged(Intent.OnTypeSelected(it))
             },
             onDismissBottomSheet = {
-                onEventChanged(Event.OnDismissButtonClick)
+                onEventChanged(Intent.OnDismissButtonClick)
             }
         )
     }

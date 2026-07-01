@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.core.navigation
+package com.dimonkiv.savingstracker
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -7,10 +7,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.dimonkiv.savingstracker.core.navigation.NavigationItem
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
+import com.dimonkiv.savingstracker.feature.account.presentation.accounts.AccountsRoute
 import com.dimonkiv.savingstracker.feature.account.presentation.addaccount.AddAccountRoute
+import com.dimonkiv.savingstracker.feature.home.HomeScreen
 import com.dimonkiv.savingstracker.feature.main.MainRoute
+import com.dimonkiv.savingstracker.feature.profile.ProfileScreen
 import com.dimonkiv.savingstracker.feature.select_icon.presentation.SelectIconRoute
+import com.dimonkiv.savingstracker.feature.statistics.StatisticsScreen
 import com.dimonkiv.savingstracker.feature.transaction.presentation.AddTransactionRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,22 +31,22 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(NavigationItem.Main.route) {
-            MainRoute(navController)
-        }
-        composable(NavigationItem.Add.route) { entry ->
-            AddAccountRoute(
-                colorName = entry.savedStateHandle["color"],
-                iconRes = entry.savedStateHandle["icon"],
-                navController = navController
+            MainRoute(
+                mainController = navController,
+                homeContent = { HomeScreen() },
+                accountsContent = { AccountsRoute(navController) },
+                statisticsContent = { StatisticsScreen() },
+                profileContent = { ProfileScreen() }
             )
+        }
+        composable(NavigationItem.Add.route) {
+            AddAccountRoute(navController = navController)
         }
         composable(NavigationItem.SelectIcon.route) {
             SelectIconRoute(navController)
         }
-
         composable(NavigationItem.AddTransaction.route) {
             AddTransactionRoute(navController)
         }
-
     }
 }

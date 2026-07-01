@@ -2,20 +2,21 @@ package com.dimonkiv.savingstracker.feature.transaction.presentation.model
 
 import androidx.compose.runtime.Immutable
 import com.dimonkiv.savingstracker.R
+import com.dimonkiv.savingstracker.feature.transaction.domain.TransactionType
 
 @Immutable
 data class AddTransactionTypeUiModel(
     val stringRes: Int,
-    val type: AddTransactionType
+    val type: TransactionType
 )
 
-fun AddTransactionType.asPresentation() = AddTransactionTypeUiModel(
+fun TransactionType.asPresentation() = AddTransactionTypeUiModel(
     stringRes = when (this) {
-        AddTransactionType.EXPENSE -> R.string.expense
-        AddTransactionType.INCOME -> R.string.income
-        AddTransactionType.TRANSFER -> R.string.transfer
+        TransactionType.EXPENSE -> R.string.expense
+        TransactionType.INCOME -> R.string.income
+        TransactionType.TRANSFER -> R.string.transfer
     },
     type = this
 )
 
-fun List<AddTransactionType>.asPresentation() = map { it.asPresentation() }
+fun List<TransactionType>.asPresentation() = map { it.asPresentation() }

@@ -1,20 +1,35 @@
 package com.dimonkiv.savingstracker.feature.account.presentation.accounts
 
+import androidx.compose.runtime.Immutable
+import com.dimonkiv.savingstracker.core.mvi.model.UiAction
 import com.dimonkiv.savingstracker.core.mvi.model.UiEffect
-import com.dimonkiv.savingstracker.core.mvi.model.UiEvent
+import com.dimonkiv.savingstracker.core.mvi.model.UiIntent
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.AccountsModel
+import com.dimonkiv.savingstracker.feature.account.domain.model.AccountTypeWithAccounts
+import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.TypesWithAccountsModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
-sealed class Event : UiEvent {
-    data object LoadAccounts : Event()
-    data object OnErrorDialogClick : Event()
+sealed interface AccountsIntent : UiIntent {
+    data object OnErrorDialogClick : AccountsIntent
 }
 
-sealed class Effect : UiEffect
+sealed class AccountsEffect : UiEffect
 
-sealed class AccountState : UiState {
-    data object Idle : AccountState()
-    data object Loading : AccountState()
-    data class Success(val model: AccountsModel) : AccountState()
-    data class Error(val message: String) : AccountState()
+@Immutable
+data class AccountsState(
+    val totalBalance: String = "",
+    val types: ImmutableList<TypesWithAccountsModel> = persistentListOf(),
+    val isLoading: Boolean = false,
+    val error: String? = null
+): UiState
+
+sealed interface AccountsAction: UiAction {
+    data object Loading: AccountsAction
+    data class Loaded(
+        val totalBalance: String,
+        val types: List<TypesWithAccountsModel>
+    ): AccountsAction
+    data class Error(val error: String): AccountsAction
+    data object ClearError: AccountsAction
 }

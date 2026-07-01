@@ -20,7 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.dimonkiv.savingstracker.R
-import com.dimonkiv.savingstracker.core.ui.SelectDateBottomSheet
+import com.dimonkiv.savingstracker.designsystem.SelectDateBottomSheet
 import com.dimonkiv.savingstracker.designsystem.AppButton
 import com.dimonkiv.savingstracker.designsystem.theme.AppTheme
 import com.dimonkiv.savingstracker.designsystem.theme.Spacing
@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun AddTransactionScreen(
     state: AddTransactionUiModel,
-    onEventChanged: (Event) -> Unit
+    onIntent: (Intent) -> Unit
 ) {
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.types.size })
     val coroutineScope = rememberCoroutineScope()
@@ -68,41 +68,17 @@ fun AddTransactionScreen(
                     .fillMaxWidth()
             ) { page ->
                 when (page) {
-                    0 -> AddTransaction(
+                    0, 1 -> AddTransaction(
                         state = state,
-                        onSelectDateClicked = {
-                            showCalendarSheet = true
-                        },
-                        onSelectAccountClicked = {
-                            showSelectAccountSheet = true
-                        },
-                        onEventChanged = { event ->
-                            onEventChanged(event)
-                        }
-                    )
-                    1 -> AddTransaction(
-                        state = state,
-                        onSelectDateClicked = {
-                            showCalendarSheet = true
-                        },
-                        onSelectAccountClicked = {
-                            showSelectAccountSheet = true
-                        },
-                        onEventChanged = { event ->
-                            onEventChanged(event)
-                        }
+                        onSelectDateClicked = { showCalendarSheet = true },
+                        onSelectAccountClicked = { showSelectAccountSheet = true },
+                        onEventChanged = { event -> onIntent(event) }
                     )
                     2 -> AddTransfer(
                         state = state,
-                        onSelectDateClicked = {
-                            showCalendarSheet = true
-                        },
-                        onSelectAccountClicked = {
-                            showSelectAccountSheet = true
-                        },
-                        onEventChanged = { event ->
-                            onEventChanged(event)
-                        }
+                        onSelectDateClicked = { showCalendarSheet = true },
+                        onSelectAccountClicked = { showSelectAccountSheet = true },
+                        onEventChanged = { event -> onIntent(event) }
                     )
                 }
             }
@@ -115,7 +91,7 @@ fun AddTransactionScreen(
                     .padding(Spacing.XL),
                 title = stringResource(R.string.save),
                 onClick = {
-
+                    onIntent(Intent.OnSaveClicked)
                 }
             )
         }
@@ -126,7 +102,7 @@ fun AddTransactionScreen(
         initialDateMillis = state.timestamp,
         onDismissRequest = { showCalendarSheet = false },
         onDateSelected = { dateMillis ->
-            onEventChanged(Event.OnDateChanged(dateMillis))
+            onIntent(Intent.OnDateChanged(dateMillis))
         }
     )
 
@@ -134,8 +110,9 @@ fun AddTransactionScreen(
         isVisible = showSelectAccountSheet,
         accounts = state.accounts,
         onDismissRequest = { showSelectAccountSheet = false },
-        onAccountSelected = {
-
+        onAccountSelected = { account ->
+            showSelectAccountSheet = false
+            onIntent(Intent.OnAccountSelected(account))
         }
     )
 }

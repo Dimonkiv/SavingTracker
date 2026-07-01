@@ -1,4 +1,4 @@
-package com.dimonkiv.savingstracker.feature.account.domain.use_cases
+package com.dimonkiv.savingstracker.feature.account.domain.usecase
 
 import com.dimonkiv.savingstracker.feature.account.domain.model.Account
 import com.dimonkiv.savingstracker.feature.account.domain.repository.AccountRepository
