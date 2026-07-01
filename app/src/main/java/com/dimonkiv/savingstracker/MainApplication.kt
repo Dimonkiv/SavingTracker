@@ -1,7 +1,8 @@
 package com.dimonkiv.savingstracker
 
 import android.app.Application
-import com.dimonkiv.savingstracker.core.di.coreModules
+import com.dimonkiv.savingstracker.core.common.di.commonModules
+import com.dimonkiv.savingstracker.core.database.di.databaseModules
 import com.dimonkiv.savingstracker.feature.account.di.accountModules
 import com.dimonkiv.savingstracker.feature.main.di.mainModule
 import com.dimonkiv.savingstracker.feature.select_icon.di.selectIconModules
@@ -16,7 +17,8 @@ class MainApplication : Application() {
         startKoin {
             androidContext(this@MainApplication)
             modules(
-                coreModules +
+                databaseModules +
+                    commonModules +
                     accountModules +
                     selectIconModules +
                     transactionModules +

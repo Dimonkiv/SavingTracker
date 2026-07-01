@@ -18,3 +18,13 @@ dependencyResolutionManagement {
 
 rootProject.name = "Savings Tracker"
 include(":app")
+include(":core:navigation")
+include(":core:mvi")
+include(":core:common")
+include(":core:designsystem")
+include(":core:database")
+include(":core:data:account-api")
+include(":feature:select-icon")
+include(":feature:account")
+include(":feature:transaction")
+include(":feature:main")
