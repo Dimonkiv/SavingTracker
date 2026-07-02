@@ -3,7 +3,6 @@ package com.dimonkiv.savingstracker.feature.account.domain.usecase
 import com.dimonkiv.savingstracker.core.data.accountapi.model.AccountsResult
 import com.dimonkiv.savingstracker.core.data.accountapi.repository.AccountTypeRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 
 interface GetAccountsUseCase {

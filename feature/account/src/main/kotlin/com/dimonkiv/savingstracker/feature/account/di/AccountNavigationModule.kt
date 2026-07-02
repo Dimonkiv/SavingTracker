@@ -3,7 +3,6 @@ package com.dimonkiv.savingstracker.feature.account.di
 import androidx.compose.material3.ExperimentalMaterial3Api
 import com.dimonkiv.savingstracker.core.navigation.BottomSheetConfig
 import com.dimonkiv.savingstracker.core.navigation.BottomSheetSceneStrategy
-import com.dimonkiv.savingstracker.core.navigation.Navigator
 import com.dimonkiv.savingstracker.core.navigation.routes.AddAccount
 import com.dimonkiv.savingstracker.core.navigation.routes.Accounts
 import com.dimonkiv.savingstracker.core.navigation.routes.SelectAccountType

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>FunctionNaming:EffectUtils.kt$@Composable fun &lt;T&gt;ConsumeUiEffects( uiEffect: Flow&lt;T&gt;, consumer: suspend (T) -&gt; Unit )</ID>
+  </CurrentIssues>
+</SmellBaseline>

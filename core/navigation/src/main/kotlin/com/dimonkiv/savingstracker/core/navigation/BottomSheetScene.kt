@@ -75,6 +75,7 @@ internal data class BottomSheetScene<T : Any>(
 @OptIn(ExperimentalMaterial3Api::class)
 class BottomSheetSceneStrategy<T : Any> : SceneStrategy<T> {
 
+    @Suppress("UNCHECKED_CAST")
     override fun SceneStrategyScope<T>.calculateScene(entries: List<NavEntry<T>>): Scene<T>? {
         val lastEntry = entries.lastOrNull() ?: return null
         val config = lastEntry.metadata[BottomSheetKey] ?: return null

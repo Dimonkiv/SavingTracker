@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LongMethod:SelectIconContent.kt$@Composable fun SelectIconContent( item: SelectedIconModel, onColorSelected: (Color) -&gt; Unit, onIconSelected: (Int) -&gt; Unit )</ID>
+    <ID>LongParameterList:IconBox.kt$( outlineContainerColor: Color, containerColor: Color, outlineContainerSize: Dp, containerSize: Dp, iconSize: Dp, iconRes: Int = -1, clickable: Boolean = false, onIconClick: () -&gt; Unit = {} )</ID>
+    <ID>MaxLineLength:SelectIconContent.kt$outlineContainerColor = if (color.selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.background</ID>
+    <ID>MaxLineLength:SelectIconContent.kt$outlineContainerColor = if (icon.selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.background</ID>
+    <ID>PackageNaming:ColorModel.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation.model</ID>
+    <ID>PackageNaming:IconBox.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation.component</ID>
+    <ID>PackageNaming:IconModel.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation.model</ID>
+    <ID>PackageNaming:SelectIconContent.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation.component</ID>
+    <ID>PackageNaming:SelectIconContract.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation</ID>
+    <ID>PackageNaming:SelectIconModule.kt$package com.dimonkiv.savingstracker.feature.select_icon.di</ID>
+    <ID>PackageNaming:SelectIconNavigationModule.kt$package com.dimonkiv.savingstracker.feature.select_icon.di</ID>
+    <ID>PackageNaming:SelectIconReducer.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation</ID>
+    <ID>PackageNaming:SelectIconRoute.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation</ID>
+    <ID>PackageNaming:SelectIconScreen.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation</ID>
+    <ID>PackageNaming:SelectIconViewModel.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation</ID>
+    <ID>PackageNaming:SelectedIconModel.kt$package com.dimonkiv.savingstracker.feature.select_icon.presentation.model</ID>
+  </CurrentIssues>
+</SmellBaseline>

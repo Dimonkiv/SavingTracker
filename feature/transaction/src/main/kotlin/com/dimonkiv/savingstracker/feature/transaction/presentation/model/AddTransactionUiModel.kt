@@ -5,8 +5,6 @@ import com.dimonkiv.savingstracker.core.designsystem.R
 import com.dimonkiv.savingstracker.core.utils.DateUtils
 import com.dimonkiv.savingstracker.core.utils.ResourceManager
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import com.dimonkiv.savingstracker.feature.transaction.presentation.model.toTransactionModel
-import com.dimonkiv.savingstracker.feature.transaction.presentation.model.toTransactionModels
 import com.dimonkiv.savingstracker.feature.transaction.domain.AddTransactionModel
 import com.dimonkiv.savingstracker.feature.transaction.domain.TransactionType
 

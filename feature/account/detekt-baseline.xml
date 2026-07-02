@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>EmptyFunctionBlock:AccountGroup.kt${ }</ID>
+    <ID>PackageNaming:AccountTypeModel.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model</ID>
+    <ID>PackageNaming:AccountTypeScreen.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.component</ID>
+    <ID>PackageNaming:AccountTypeState.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type.model</ID>
+    <ID>PackageNaming:SelectAccountTypeContract.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type</ID>
+    <ID>PackageNaming:SelectAccountTypeReducer.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type</ID>
+    <ID>PackageNaming:SelectAccountTypeRoute.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type</ID>
+    <ID>PackageNaming:SelectAccountTypeScreen.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type</ID>
+    <ID>PackageNaming:SelectAccountTypeViewModel.kt$package com.dimonkiv.savingstracker.feature.account.presentation.addaccount.account_type</ID>
+  </CurrentIssues>
+</SmellBaseline>

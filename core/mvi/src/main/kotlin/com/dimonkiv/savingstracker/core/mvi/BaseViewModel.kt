@@ -6,7 +6,6 @@ import com.dimonkiv.savingstracker.core.mvi.model.UiAction
 import com.dimonkiv.savingstracker.core.mvi.model.UiEffect
 import com.dimonkiv.savingstracker.core.mvi.model.UiIntent
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

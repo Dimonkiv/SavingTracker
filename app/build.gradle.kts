@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.detekt.plugin)
 }
 
 android {
@@ -44,13 +43,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
-}
-
-detekt {
-    toolVersion = "1.23.8"
-    config.setFrom(file("../config/detekt/detekt.yml"))
-    buildUponDefaultConfig = true
-    autoCorrect = true
 }
 
 dependencies {
@@ -95,6 +87,4 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    detektPlugins(libs.detekt.compose.rules)
 }

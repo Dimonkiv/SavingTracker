@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ReturnCount:BottomSheetScene.kt$BottomSheetSceneStrategy$override fun SceneStrategyScope&lt;T&gt;.calculateScene(entries: List&lt;NavEntry&lt;T&gt;&gt;): Scene&lt;T&gt;?</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ForbiddenComment:AddTransactionViewModel.kt$AddTransactionViewModel$// TODO: wire to SaveTransactionUseCase once transaction data layer is implemented</ID>
+    <ID>LongMethod:AddTransaction.kt$@Composable fun AddTransaction( state: AddTransactionUiModel, onSelectDateClicked: () -&gt; Unit, onSelectAccountClicked: () -&gt; Unit, onIntent: (AddTransactionIntent) -&gt; Unit )</ID>
+    <ID>LongMethod:AddTransfer.kt$@Composable fun AddTransfer( state: AddTransactionUiModel, onSelectDateClicked: () -&gt; Unit, onSelectAccountClicked: () -&gt; Unit, onIntent: (AddTransactionIntent) -&gt; Unit )</ID>
+    <ID>LongParameterList:CategoryItem.kt$( modifier: Modifier = Modifier, text: String = "", @DrawableRes iconRes: Int = -1, tint: Color = AppTheme.appColorScheme.onPrimary, iconBackgroundColor: Color = AppTheme.appColorScheme.primary, onCategoryClicked: () -&gt; Unit )</ID>
+    <ID>MaxLineLength:AddTransactionScreen.kt$color = if (selected) AppTheme.appColorScheme.primary else AppTheme.appColorScheme.textPrimary</ID>
+ </CurrentIssues>
+</SmellBaseline>

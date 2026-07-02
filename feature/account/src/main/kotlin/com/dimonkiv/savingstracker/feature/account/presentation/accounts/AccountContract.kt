@@ -5,7 +5,6 @@ import com.dimonkiv.savingstracker.core.mvi.model.UiAction
 import com.dimonkiv.savingstracker.core.mvi.model.UiEffect
 import com.dimonkiv.savingstracker.core.mvi.model.UiIntent
 import com.dimonkiv.savingstracker.core.mvi.model.UiState
-import com.dimonkiv.savingstracker.core.data.accountapi.model.AccountTypeWithAccounts
 import com.dimonkiv.savingstracker.feature.account.presentation.accounts.model.TypesWithAccountsModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

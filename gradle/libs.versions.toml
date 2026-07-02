@@ -11,15 +11,15 @@ junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
-composeBom = "2026.06.00"
+composeBom = "2026.06.01"
 lifecycleViewmodelCompose = "2.11.0"
 lifecycleViewmodelNavigation3 = "2.11.0"
-navigation3Core = "1.1.3"
+navigation3Core = "1.1.4"
 detekt = "1.23.8"
 detektComposeRules = "0.6.2"
 koin= "4.2.2"
 kotlinxCoroutines = "1.11.0"
-kotlinxSerialization = "1.10.0"
+kotlinxSerialization = "1.11.0"
 
 
 [libraries]
